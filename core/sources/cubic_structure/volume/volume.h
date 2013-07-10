@@ -10,6 +10,7 @@ namespace cubic_structure_layer
     {
     public:
         Volume(unsigned width, unsigned height, unsigned depth);
+
         virtual ~Volume();
 
         Node* nodeAt(unsigned x, unsigned y, unsigned z) const;
@@ -33,6 +34,9 @@ namespace cubic_structure_layer
     private:
         class VolumePrivate;
         VolumePrivate* d;
+
+        Volume(const Volume& other);
+        const Volume& operator = (const Volume& vol) {return vol;}
     };
 }
 #endif // VOLUME_H

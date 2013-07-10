@@ -5,8 +5,6 @@
 
 #include "node.h"
 
-using namespace cubic_structure_layer;
-
 class NodeTest: public QObject
 {
     Q_OBJECT

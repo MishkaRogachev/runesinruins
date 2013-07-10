@@ -23,6 +23,7 @@ void VolumeTest::testLinkingVolumes()
     vol1.linkTo(&vol2, Node::directionForward);
 
     QVERIFY(vol1.hasLink(Node::directionForward) == true);
+    QVERIFY(vol2.hasLink(Node::directionBackward) == true);
 
     Node* node = vol1.begin().node();
     unsigned i = 1;
@@ -34,8 +35,10 @@ void VolumeTest::testLinkingVolumes()
     }
     QVERIFY(i == vol1.width() + vol2.width());
 
-    QVERIFY(vol1.nodeAt(7, 7, 7)->neighbour(Node::directionForward) ==
-            vol2.nodeAt(0, 7, 7));
+    vol1.breakLink(Node::directionForward);
+
+    QVERIFY(vol1.hasLink(Node::directionForward) == false);
+    QVERIFY(vol2.hasLink(Node::directionBackward) == false);
 }
 
 void VolumeTest::testVolume(int i, int j, int k)

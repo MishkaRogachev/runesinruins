@@ -6,20 +6,22 @@ project (${PROJECT})
 include_directories(
     cubic_structure/node
     cubic_structure/volume
+    cubic_structure/area
 )
 
 # Sources
 set(SOURCES
-  cubic_structure/node/node.cpp
-  cubic_structure/volume/volume.cpp
-  cubic_structure/volume/volume_iterator.cpp
+    cubic_structure/node/node.cpp
+    cubic_structure/volume/volume.cpp
+    cubic_structure/volume/volume_iterator.cpp
+    cubic_structure/area/area.cpp
 )
 
 # Library target
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
 # Use Qt5 modules
-qt5_use_modules(${PROJECT} Core)
+qt5_use_modules(${PROJECT} Core Network)
 
 # Libraries
 set (TEST_LIBRARIES ${QT_QTTEST_LIBRARY} ${QT_LIBRARIES})
