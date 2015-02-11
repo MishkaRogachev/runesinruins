@@ -15,7 +15,6 @@ set(SOURCES
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp
-    area/area.cpp
     space/abstract_space.cpp
 )
 

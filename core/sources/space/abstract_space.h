@@ -1,12 +1,17 @@
 #ifndef ABSTRACTSPACE_H
 #define ABSTRACTSPACE_H
 
-
-class AbstractSpace
+namespace core
 {
-public:
-    AbstractSpace();
-    ~AbstractSpace();
-};
+    class AbstractSpace
+    {
+    public:
+        AbstractSpace();
+        virtual ~AbstractSpace();
 
+    private:
+        class AbstractSpacePrivate;
+        AbstractSpacePrivate* d;
+    };
+}
 #endif // ABSTRACTSPACE_H

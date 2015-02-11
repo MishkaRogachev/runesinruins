@@ -1,12 +1,19 @@
 #include "abstract_space.h"
 
-AbstractSpace::AbstractSpace()
-{
+using namespace core;
 
-}
+class AbstractSpace::AbstractSpacePrivate
+{
+public:
+
+};
+
+AbstractSpace::AbstractSpace():
+    d(new AbstractSpacePrivate())
+{}
 
 AbstractSpace::~AbstractSpace()
 {
-
+    delete d;
 }
 

@@ -6,14 +6,13 @@ project (${PROJECT})
 include_directories(
     ../sources/node
     ../sources/volume
-    ../sources/area
+    ../sources/space
 )
 
 # Sources
 set(TEST_SOURCES
     unit_tests/node_test/node_test.cpp
     unit_tests/volume_test/volume_test.cpp
-    unit_tests/area_test/area_test.cpp
     unit_tests/unit_tests.cpp
 )
 
