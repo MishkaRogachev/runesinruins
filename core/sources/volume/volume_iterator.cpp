@@ -2,7 +2,7 @@
 
 #include "volume.h"
 
-using namespace cubic_structure_layer;
+using namespace core;
 
 class VolumeIterator::VolumeIteratorPrivate
 {

@@ -7,7 +7,7 @@
 #include <QPoint>
 #include <QSharedPointer>
 
-namespace cubic_structure_layer
+namespace core
 {
     typedef QSharedPointer<Volume> VolumePtr;
 

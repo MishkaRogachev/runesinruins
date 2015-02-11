@@ -6,7 +6,7 @@ namespace object_layer
     class ObjectInterface;
 }
 
-namespace cubic_structure_layer
+namespace core
 {
     class Node
     {
@@ -30,11 +30,11 @@ namespace cubic_structure_layer
         void setObject(object_layer::ObjectInterface* object);
         object_layer::ObjectInterface* object() const;
 
-        void linkTo(Node *other, Direction direction);
-        void breakLink(Direction direction);
+        void chainTo(Node *other, Direction direction);
+        void breakChain(Direction direction);
 
         static Direction invDirection(Direction direction);
-        static void link(Node* first, Node* second, Direction direction);
+        static void chain(Node* first, Node* second, Direction direction);
 
     private:
         void setNeighbour(Node* node, Direction direction);

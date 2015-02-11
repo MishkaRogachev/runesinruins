@@ -1,6 +1,6 @@
 #include "area_test.h"
 
-using namespace cubic_structure_layer;
+using namespace core;
 
 void AreaTest::creationAndLinking()
 {

@@ -3,7 +3,7 @@
 #include <memory>
 #include <array>
 
-using namespace cubic_structure_layer;
+using namespace core;
 using namespace object_layer;
 
 class Node::NodePrivate
@@ -34,7 +34,7 @@ Node::~Node()
     {
         if (this->neighbour(Direction(direction)) != nullptr)
         {
-           this->breakLink(Direction(direction));
+           this->breakChain(Direction(direction));
         }
     }
     delete d;
@@ -55,12 +55,12 @@ ObjectInterface* Node::object() const
     return d->object.get();
 }
 
-void Node::linkTo(Node* other, Direction direction)
+void Node::chainTo(Node* other, Direction direction)
 {
-    Node::link(this, other, direction);
+    Node::chain(this, other, direction);
 }
 
-void Node::breakLink(Direction direction)
+void Node::breakChain(Direction direction)
 {
     this->neighbour(direction)->setNeighbour(nullptr,
                                              Node::invDirection(direction));
@@ -72,7 +72,7 @@ Node::Direction Node::invDirection(Direction direction)
     return Direction(directionCount - direction - 1);
 }
 
-void Node::link(Node* first, Node* second, Direction direction)
+void Node::chain(Node* first, Node* second, Direction direction)
 {
     first->setNeighbour(second, direction);
     second->setNeighbour(first, Node::invDirection(direction));

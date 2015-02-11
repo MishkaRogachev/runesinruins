@@ -3,7 +3,7 @@
 
 #include "node.h"
 
-namespace cubic_structure_layer
+namespace core
 {
     class Volume;
 

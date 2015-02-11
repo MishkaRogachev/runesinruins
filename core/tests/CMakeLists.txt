@@ -4,16 +4,16 @@ project (${PROJECT})
 
 # Includes
 include_directories(
-    ../sources/cubic_structure/node
-    ../sources/cubic_structure/volume
-    ../sources/cubic_structure/area
+    ../sources/node
+    ../sources/volume
+    ../sources/area
 )
 
 # Sources
 set(TEST_SOURCES
-    unit_tests/cubic_structure/node_test/node_test.cpp
-    unit_tests/cubic_structure/volume_test/volume_test.cpp
-    unit_tests/cubic_structure/area_test/area_test.cpp
+    unit_tests/node_test/node_test.cpp
+    unit_tests/volume_test/volume_test.cpp
+    unit_tests/area_test/area_test.cpp
     unit_tests/unit_tests.cpp
 )
 

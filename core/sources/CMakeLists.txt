@@ -4,17 +4,19 @@ project (${PROJECT})
 
 # Includes
 include_directories(
-    cubic_structure/node
-    cubic_structure/volume
-    cubic_structure/area
+    node
+    volume
+    area
+    space
 )
 
 # Sources
 set(SOURCES
-    cubic_structure/node/node.cpp
-    cubic_structure/volume/volume.cpp
-    cubic_structure/volume/volume_iterator.cpp
-    cubic_structure/area/area.cpp
+    node/node.cpp
+    volume/volume.cpp
+    volume/volume_iterator.cpp
+    area/area.cpp
+    space/abstract_space.cpp
 )
 
 # Library target

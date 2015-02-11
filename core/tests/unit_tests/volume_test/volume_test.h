@@ -10,6 +10,7 @@ class VolumeTest: public QObject
 private slots:
     void testInnerLinking();
     void testLinkingVolumes();
+    void testLinkingVolumesWithDifferentSizes();
 
 private:
     void testVolume(int i, int j, int k);

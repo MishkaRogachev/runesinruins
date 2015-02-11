@@ -2,7 +2,7 @@
 
 #include "node.h"
 
-using namespace cubic_structure_layer;
+using namespace core;
 
 void NodeTest::directions()
 {
@@ -20,12 +20,12 @@ void NodeTest::linkAndBreak()
 
     for (int i = Node::directionForward; i < Node::directionCount; ++i)
     {
-        first.linkTo(&second, Node::Direction(i));
+        first.chainTo(&second, Node::Direction(i));
         QVERIFY(first.neighbour(Node::Direction(i)) == &second);
         QVERIFY(second.neighbour(Node::invDirection(Node::Direction(i))) ==
                  &first);
 
-        first.breakLink(Node::Direction(i));
+        first.breakChain(Node::Direction(i));
         QVERIFY(first.neighbour(Node::Direction(i)) == nullptr);
         QVERIFY(second.neighbour(Node::invDirection(Node::Direction(i))) ==
                  nullptr);
@@ -37,7 +37,7 @@ void NodeTest::autoCleaningLinks()
     Node* first = new Node();
     Node* second = new Node();
 
-    first->linkTo(second, Node::directionForward);
+    first->chainTo(second, Node::directionForward);
 
     delete second;
 

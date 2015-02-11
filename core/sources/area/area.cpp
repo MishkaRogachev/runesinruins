@@ -7,7 +7,7 @@ uint qHash(const QPoint& p)
     return qHash(p.x()) ^ qHash(p.y());
 }
 
-using namespace cubic_structure_layer;
+using namespace core;
 
 class Area::AreaPrivate
 {
@@ -28,9 +28,9 @@ private:
                        Node::Direction direction)
     {
         if (this->volumes.contains(rPos) &&
-            !this->volumes.value(pos)->hasLink(direction))
+            !this->volumes.value(pos)->hasChain(direction))
         {
-            this->volumes[pos]->linkTo(this->volumes[rPos].data(),
+            this->volumes[pos]->chainTo(this->volumes[rPos].data(),
                                             direction);
             this->linkVolumeRecursive(rPos);
         }

@@ -6,7 +6,7 @@
 
 #include <QDebug>
 
-using namespace cubic_structure_layer;
+using namespace core;
 
 class Volume::VolumePrivate
 {
@@ -30,7 +30,7 @@ Volume::Volume(unsigned width, unsigned height, unsigned depth):
     {
         d->nodes.push_back(new Node());
     }
-    this->linkInnerNodes();
+    this->chainInnerNodes();
 }
 
 Volume::~Volume()
@@ -62,30 +62,30 @@ unsigned Volume::depth() const
     return d->depth;
 }
 
-void Volume::linkTo(Volume* other, Node::Direction direction)
+void Volume::chainTo(Volume* other, Node::Direction direction)
 {
     for (VolumeIterator it = this->cornerBegin(direction);
          it != this->end();
          it.increasePositionPerpendicularDirection(direction))
     {
         const VolumeIterator& invIt = it.invIterator(direction);
-        it.node()->linkTo(other->nodeAt(invIt.x(),
+        it.node()->chainTo(other->nodeAt(invIt.x(),
                                         invIt.y(),
                                         invIt.z()), direction);
     }
 }
 
-void Volume::breakLink(Node::Direction direction)
+void Volume::breakChain(Node::Direction direction)
 {
     for (VolumeIterator it = this->cornerBegin(direction);
          it != this->end();
          it.increasePositionPerpendicularDirection(direction))
     {
-        it.node()->breakLink(direction);
+        it.node()->breakChain(direction);
     }
 }
 
-bool Volume::hasLink(Node::Direction direction) const
+bool Volume::hasChain(Node::Direction direction) const
 {
     return this->cornerBegin(direction).node()->neighbour(direction) != nullptr;
 }
@@ -108,9 +108,9 @@ VolumeIterator Volume::cornerBegin(Node::Direction direction) const
                          direction == Node::directionUp ? d->depth - 1 : 0);
 }
 
-void Volume::linkInnerNodes() const
+void Volume::chainInnerNodes() const
 {
-    for (VolumeIterator it: *this)
+    for (const VolumeIterator& it: *this)
     {
         const VolumeIterator& up = it.up();
         const VolumeIterator& right = it.right();
@@ -118,17 +118,17 @@ void Volume::linkInnerNodes() const
 
         if (up.z() < d->depth)
         {
-            it.node()->linkTo(up.node(), Node::directionUp);
+            it.node()->chainTo(up.node(), Node::directionUp);
         }
 
         if (right.y() < d->height)
         {
-            it.node()->linkTo(right.node(), Node::directionRight);
+            it.node()->chainTo(right.node(), Node::directionRight);
         }
 
         if (forward.x() < d->width )
         {
-            it.node()->linkTo(forward.node(), Node::directionForward);
+            it.node()->chainTo(forward.node(), Node::directionForward);
         }
     }
 }

@@ -4,13 +4,12 @@
 #include "node.h"
 #include "volume_iterator.h"
 
-namespace cubic_structure_layer
+namespace core
 {
     class Volume
     {
     public:
         Volume(unsigned width, unsigned height, unsigned depth);
-
         virtual ~Volume();
 
         Node* nodeAt(unsigned x, unsigned y, unsigned z) const;
@@ -19,16 +18,16 @@ namespace cubic_structure_layer
         unsigned height() const;
         unsigned depth() const;
 
-        void linkTo(Volume* other, Node::Direction direction);
-        void breakLink(Node::Direction direction);
-        bool hasLink(Node::Direction direction) const;
+        void chainTo(Volume* other, Node::Direction direction);
+        void breakChain(Node::Direction direction);
+        bool hasChain(Node::Direction direction) const;
 
         VolumeIterator begin() const;
         VolumeIterator end() const;
         VolumeIterator cornerBegin(Node::Direction direction) const;
 
     protected:
-        void linkInnerNodes() const;
+        void chainInnerNodes() const;
         unsigned indexFromPosition(unsigned x, unsigned y, unsigned z) const;
 
     private:

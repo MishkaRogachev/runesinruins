@@ -2,7 +2,7 @@
 
 #include "volume.h"
 
-using namespace cubic_structure_layer;
+using namespace core;
 
 void VolumeTest::testInnerLinking()
 {
@@ -15,15 +15,15 @@ void VolumeTest::testInnerLinking()
 
 void VolumeTest::testLinkingVolumes()
 {
-    Volume vol1(8,8,8);
-    Volume vol2(8,8,8);
+    Volume vol1(8, 8, 8);
+    Volume vol2(8, 8, 8);
 
-    QVERIFY(vol1.hasLink(Node::directionForward) == false);
+    QVERIFY(vol1.hasChain(Node::directionForward) == false);
 
-    vol1.linkTo(&vol2, Node::directionForward);
+    vol1.chainTo(&vol2, Node::directionForward);
 
-    QVERIFY(vol1.hasLink(Node::directionForward) == true);
-    QVERIFY(vol2.hasLink(Node::directionBackward) == true);
+    QVERIFY(vol1.hasChain(Node::directionForward) == true);
+    QVERIFY(vol2.hasChain(Node::directionBackward) == true);
 
     Node* node = vol1.begin().node();
     unsigned i = 1;
@@ -35,17 +35,38 @@ void VolumeTest::testLinkingVolumes()
     }
     QVERIFY(i == vol1.width() + vol2.width());
 
-    vol1.breakLink(Node::directionForward);
+    vol1.breakChain(Node::directionForward);
 
-    QVERIFY(vol1.hasLink(Node::directionForward) == false);
-    QVERIFY(vol2.hasLink(Node::directionBackward) == false);
+    QVERIFY(vol1.hasChain(Node::directionForward) == false);
+    QVERIFY(vol2.hasChain(Node::directionBackward) == false);
+}
+
+void VolumeTest::testLinkingVolumesWithDifferentSizes()
+{
+    Volume vol1(16, 32, 64);
+    Volume vol2(16, 32, 64);
+
+    vol1.chainTo(&vol2, Node::directionRight);
+
+    QVERIFY(vol1.hasChain(Node::directionRight) == true);
+    QVERIFY(vol2.hasChain(Node::directionLeft) == true);
+
+    Node* node = vol1.begin().node();
+    unsigned i = 1;
+
+    while (node->neighbour(Node::directionRight))
+    {
+        node = node->neighbour(Node::directionRight);
+        ++i;
+    }
+    QVERIFY(i == vol1.height() + vol2.height());
 }
 
 void VolumeTest::testVolume(int i, int j, int k)
 {
     Volume vol(i, j, k);
 
-    for (auto it: vol)
+    for (const auto& it: vol)
     {
         if (it.x() > 0)
         {
