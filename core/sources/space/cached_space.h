@@ -12,7 +12,7 @@ namespace core
         ~CachedSpace();
 
 //        virtual VolumePtr volumeAt(const SpacePoint& point) override;
-//        virtual bool hasVolume(const SpacePoint& point) override;
+        virtual bool hasVolume(const SpacePoint& point) const override;
 
     private:
         class CachedSpacePrivate;

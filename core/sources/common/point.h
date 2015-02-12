@@ -9,17 +9,20 @@ namespace core
     class Point
     {
     public:
-        Point();
-        Point(T x);
-        Point(T x, T y);
-        Point(T x, T y, T z);
+        Point() {}
+        Point(T x) : data( { x } ) {}
+        Point(T x, T y) : data( { x, y } ) {}
+        Point(T x, T y, T z) : data( { x, y, z } ) {}
 
-        T& operator[](int i);
-        const T& operator[](int i) const;
+        T& operator[](int i) { return data[i]; }
+        const T& operator[](int i) const  { return data[i]; }
 
-        const T& at(int i) const;
+        const T& at(int i) const { return data.at(i); }
 
-        bool operator==(const Point& other) const;
+        bool operator==(const Point<T, dim>& other) const
+        {
+            return data == other.data;
+        }
 
     private:
         std::array< T, dim > data;

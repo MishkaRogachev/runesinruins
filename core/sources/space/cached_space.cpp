@@ -20,10 +20,10 @@ CachedSpace::~CachedSpace()
     delete d;
 }
 
-//bool CachedSpace::hasVolume(const SpacePoint& point)
-//{
-//    return d->map.count(point) > 0;
-//}
+bool CachedSpace::hasVolume(const SpacePoint& point) const
+{
+    return d->map.count(point) > 0;
+}
 
 //VolumePtr CachedSpace::volumeAt(const SpacePoint& point)
 //{
