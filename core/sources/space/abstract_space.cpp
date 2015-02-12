@@ -16,4 +16,3 @@ AbstractSpace::~AbstractSpace()
 {
     delete d;
 }
-

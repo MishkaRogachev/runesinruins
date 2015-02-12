@@ -1,7 +1,7 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-#include "node.h"
+#include "../common/core_traits.h"
 #include "volume_iterator.h"
 
 namespace core

@@ -1,10 +1,9 @@
 #include "volume.h"
 
 #include <vector>
+#include <algorithm>
 
-#include "volume_iterator.h"
-
-#include <QDebug>
+#include "node.h"
 
 using namespace core;
 
@@ -19,17 +18,16 @@ public:
     VolumePrivate(unsigned width, unsigned height, unsigned depth):
         width(width),
         height(height),
-        depth(depth)
-    {}
+        depth(depth),
+        nodes(width * height * depth, nullptr)
+    {
+        std::generate(nodes.begin(), nodes.end(), [](){ return new Node(); });
+    }
 };
 
 Volume::Volume(unsigned width, unsigned height, unsigned depth):
     d(new VolumePrivate(width, height, depth))
 {
-    for (unsigned i = 0; i < width * height * depth; ++i)
-    {
-        d->nodes.push_back(new Node());
-    }
     this->chainInnerNodes();
 }
 

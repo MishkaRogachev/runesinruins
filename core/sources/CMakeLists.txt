@@ -4,18 +4,20 @@ project (${PROJECT})
 
 # Includes
 include_directories(
+    common
     node
     volume
-    area
     space
 )
 
 # Sources
 set(SOURCES
+    common/point.cpp
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp
     space/abstract_space.cpp
+    space/cached_space.cpp
 )
 
 # Library target

@@ -4,6 +4,7 @@ project (${PROJECT})
 
 # Includes
 include_directories(
+    ../sources/common
     ../sources/node
     ../sources/volume
     ../sources/space
