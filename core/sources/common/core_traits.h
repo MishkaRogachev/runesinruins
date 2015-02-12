@@ -12,8 +12,8 @@ namespace core
 
     typedef std::shared_ptr<Volume> VolumePtr;
 
-//    typedef Point<unsigned, 2> VolumePoint;
-//    typedef Point<int, 3> SpacePoint;
+//    typedef Point<unsigned, 3> VolumePoint;
+    typedef Point<int, 3> SpacePoint;
 }
 
 #endif // CORE_TRAITS

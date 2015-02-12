@@ -7,7 +7,7 @@ using namespace core;
 class CachedSpace::CachedSpacePrivate
 {
 public:
-//    std::unordered_map<SpacePoint, VolumePtr> map;
+    std::unordered_map<SpacePoint, VolumePtr> map;
 };
 
 CachedSpace::CachedSpace():

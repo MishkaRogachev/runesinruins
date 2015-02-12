@@ -14,8 +14,6 @@ namespace core
         Point(T x, T y);
         Point(T x, T y, T z);
 
-        ~Point();
-
         T& operator[](int i);
         const T& operator[](int i) const;
 

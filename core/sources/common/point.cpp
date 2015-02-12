@@ -24,10 +24,6 @@ Point<T, dim>::Point(T x, T y, T z):
 {}
 
 template< typename T, int dim >
-Point<T, dim>::~Point()
-{}
-
-template< typename T, int dim >
 T& Point<T, dim>::operator[](const int i)
 {
     return data[i];
