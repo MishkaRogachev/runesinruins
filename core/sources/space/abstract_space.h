@@ -11,14 +11,10 @@ namespace core
         AbstractSpace();
         virtual ~AbstractSpace();
 
-        virtual VolumePtr volumeAt(const SpacePoint& point) = 0;
-        virtual bool hasVolume(const SpacePoint& point) const= 0;
+        virtual VolumePtr volumeAt(const Vec3i& point) = 0;
+        virtual bool hasVolume(const Vec3i& point) const= 0;
 
         virtual bool hasVolume(int x, int y, int z) const;
-
-    private:
-        class AbstractSpacePrivate;
-        AbstractSpacePrivate* d;
     };
 }
 #endif // ABSTRACTSPACE_H

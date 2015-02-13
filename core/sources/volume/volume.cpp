@@ -42,7 +42,12 @@ Volume::~Volume()
 
 Node* Volume::nodeAt(unsigned x, unsigned y, unsigned z) const
 {
-    return d->nodes.at(this->indexFromPosition(x, y, z));
+    return this->nodeAt(Vec3u(x, y, z));
+}
+
+Node*Volume::nodeAt(const Vec3u& point) const
+{
+    return d->nodes.at(this->indexFromPoint(point));
 }
 
 unsigned Volume::width() const
@@ -67,9 +72,7 @@ void Volume::chainTo(Volume* other, Node::Direction direction)
          it.increasePositionPerpendicularDirection(direction))
     {
         const VolumeIterator& invIt = it.invIterator(direction);
-        it.node()->chainTo(other->nodeAt(invIt.x(),
-                                        invIt.y(),
-                                        invIt.z()), direction);
+        it.node()->chainTo(other->nodeAt(invIt.position()), direction);
     }
 }
 
@@ -131,7 +134,7 @@ void Volume::chainInnerNodes() const
     }
 }
 
-unsigned Volume::indexFromPosition(unsigned x, unsigned y, unsigned z) const
+unsigned Volume::indexFromPoint(const Vec3u& point) const
 {
-    return x + y * d->width + z * d->width * d->height;
+    return point.x() + point.y() * d->width + point.z() * d->width * d->height;
 }

@@ -1,19 +1,18 @@
 #ifndef VOLUME_ITERATOR_H
 #define VOLUME_ITERATOR_H
 
+#include "core_traits.h"
 #include "node.h"
 
 namespace core
 {
-    class Volume;
-
     class VolumeIterator
     {
     public:
-        explicit VolumeIterator(const Volume* volume,
-                       unsigned x = 0,
-                       unsigned y = 0,
-                       unsigned z = 0);
+        VolumeIterator(const Volume* volume,
+                       const Vec3u& position = Vec3u());
+        VolumeIterator(const Volume* volume,
+                       unsigned x, unsigned y, unsigned z);
         VolumeIterator(const VolumeIterator& other);
         ~VolumeIterator();
 
@@ -23,7 +22,9 @@ namespace core
         unsigned x() const;
         unsigned y() const;
         unsigned z() const;
-        void setPosition(unsigned x, unsigned y, unsigned z);
+        Vec3u position() const;
+        void setPoint(unsigned x, unsigned y, unsigned z);
+        void setPoint(const Vec3u& position);
 
         VolumeIterator up() const;
         VolumeIterator down() const;
