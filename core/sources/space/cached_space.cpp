@@ -7,7 +7,7 @@ using namespace core;
 class CachedSpace::CachedSpacePrivate
 {
 public:
-    std::unordered_map<SpacePoint, VolumePtr> map;
+    std::unordered_map<SpacePoint, VolumePtr> cache;
 };
 
 CachedSpace::CachedSpace():
@@ -22,11 +22,11 @@ CachedSpace::~CachedSpace()
 
 bool CachedSpace::hasVolume(const SpacePoint& point) const
 {
-    return d->map.count(point) > 0;
+    return d->cache.count(point) > 0;
 }
 
-//VolumePtr CachedSpace::volumeAt(const SpacePoint& point)
-//{
-//     return d->map.at(point);
-//}
+VolumePtr CachedSpace::volumeAt(const SpacePoint& point)
+{
+     return d->cache.at(point);
+}
 

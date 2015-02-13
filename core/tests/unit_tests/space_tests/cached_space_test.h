@@ -1,7 +1,7 @@
 #ifndef CACHED_SPACE_TEST_H
 #define CACHED_SPACE_TEST_H
 
-#include <QObject>
+#include <QtTest/QtTest>
 
 class CachedSpaceTest : public QObject
 {

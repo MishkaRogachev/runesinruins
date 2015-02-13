@@ -10,9 +10,9 @@ namespace core
     {
     public:
         Point() {}
-        Point(T x) : data( { x } ) {}
-        Point(T x, T y) : data( { x, y } ) {}
-        Point(T x, T y, T z) : data( { x, y, z } ) {}
+        explicit Point(T x) : data( { x } ) { static_assert(dim == 1, "this constructor for 1-dim Point class only"); }
+        explicit Point(T x, T y) : data( { x, y } ) { static_assert(dim == 2, "this constructor for 2-dim Point class only"); }
+        explicit Point(T x, T y, T z) : data( { x, y, z } ) { static_assert(dim == 3, "this constructor for 3-dim Point class only"); }
 
         T& operator[](int i) { return data[i]; }
         const T& operator[](int i) const  { return data[i]; }

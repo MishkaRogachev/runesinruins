@@ -12,7 +12,7 @@ namespace core
 
     typedef std::shared_ptr<Volume> VolumePtr;
 
-//    typedef Point<unsigned, 3> VolumePoint;
+    typedef Point<unsigned, 3> VolumePoint;
     typedef Point<int, 3> SpacePoint;
 }
 

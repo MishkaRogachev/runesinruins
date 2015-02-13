@@ -11,8 +11,10 @@ namespace core
         CachedSpace();
         ~CachedSpace();
 
-//        virtual VolumePtr volumeAt(const SpacePoint& point) override;
+        virtual VolumePtr volumeAt(const SpacePoint& point) override;
         virtual bool hasVolume(const SpacePoint& point) const override;
+
+        using AbstractSpace::hasVolume;
 
     private:
         class CachedSpacePrivate;

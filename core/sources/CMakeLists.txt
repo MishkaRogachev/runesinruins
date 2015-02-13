@@ -12,7 +12,6 @@ include_directories(
 
 # Sources
 set(SOURCES
-    common/point.cpp
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp
