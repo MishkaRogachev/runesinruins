@@ -3,8 +3,6 @@
 
 #include <QtTest/QtTest>
 
-#include "node.h"
-
 class NodeTest: public QObject
 {
     Q_OBJECT

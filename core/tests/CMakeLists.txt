@@ -12,6 +12,7 @@ include_directories(
 
 # Sources
 set(TEST_SOURCES
+    unit_tests/common_tests/vec_test.cpp
     unit_tests/node_tests/node_test.cpp
     unit_tests/volume_tests/volume_test.cpp
     unit_tests/space_tests/cached_space_test.cpp

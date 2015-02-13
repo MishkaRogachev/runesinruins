@@ -4,7 +4,7 @@
 #include <array>
 
 using namespace core;
-using namespace object_layer;
+using namespace core;
 
 class Node::NodePrivate
 {

@@ -29,6 +29,7 @@ namespace core
         void setZ(T z) { STATIC_ASSERT(dim > 2); d[2] = z; }
 
         bool operator==(const Vec<T, dim>& other) const { return d == other.d; }
+        bool operator!=(const Vec<T, dim>& other) const { return d != other.d; }
 
         Vec offset(T x) const { return Vec(d[0] + x); }
         Vec offset(T x, T y) const { return Vec(d[0] + x, d[1] + y); }

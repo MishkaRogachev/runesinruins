@@ -7,6 +7,7 @@
 
 namespace core
 {
+    class ObjectInterface;
     class Node;
     class Volume;
 

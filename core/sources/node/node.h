@@ -1,10 +1,7 @@
 #ifndef NODE_H
 #define NODE_H
 
-namespace object_layer
-{
-    class ObjectInterface;
-}
+#include "core_traits.h"
 
 namespace core
 {
@@ -22,13 +19,13 @@ namespace core
             directionCount
         };
 
-        Node(object_layer::ObjectInterface* object = nullptr);
+        Node(core::ObjectInterface* object = nullptr);
         ~Node();
 
         Node* neighbour(Direction direction) const;
 
-        void setObject(object_layer::ObjectInterface* object);
-        object_layer::ObjectInterface* object() const;
+        void setObject(core::ObjectInterface* object);
+        core::ObjectInterface* object() const;
 
         void chainTo(Node *other, Direction direction);
         void breakChain(Direction direction);
