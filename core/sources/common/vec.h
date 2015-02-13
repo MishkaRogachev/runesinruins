@@ -1,5 +1,5 @@
-#ifndef POINT_H
-#define POINT_H
+#ifndef VEC_H
+#define VEC_H
 
 #include <array>
 
@@ -30,16 +30,18 @@ namespace core
 
         bool operator==(const Vec<T, dim>& other) const { return d == other.d; }
 
-        Vec offset(T x) { return Vec(d[0] + x); }
-        Vec offset(T x, T y) { return Vec(d[0] + x, d[1] + y); }
-        Vec offset(T x, T y, T z) { return Vec(d[0] + x, d[1] + y, d[2] + z); }
+        Vec offset(T x) const { return Vec(d[0] + x); }
+        Vec offset(T x, T y) const { return Vec(d[0] + x, d[1] + y); }
+        Vec offset(T x, T y, T z) const { return Vec(d[0] + x, d[1] + y, d[2] + z); }
 
-        Vec up() { return offset(0, 0, 1); }
-        Vec down() { return offset(0, 0, -1); }
-        Vec right() { return offset(0, 1, 0); }
-        Vec left() { return offset(0, -1, 0); }
-        Vec forward() { return offset(1, 0, 0); }
-        Vec backward() { return offset(-1, 0, 0); } // TODO: for not 3-dim points
+        Vec up() const { return offset(0, 0, 1); }
+        Vec down() const { return offset(0, 0, -1); }
+        Vec right() const { return offset(0, 1, 0); }
+        Vec left() const { return offset(0, -1, 0); }
+        Vec forward() const { return offset(1, 0, 0); }
+        Vec backward() const { return offset(-1, 0, 0); } // TODO: for not 3-dim points
+
+        T product() const { T ret = 1; for (T v: d) { ret *= v; } return ret; }
 
     private:
         std::array< T, dim > d;
@@ -65,4 +67,4 @@ namespace std // Hash function templete for Point class
 
 }
 
-#endif // POINT_H
+#endif // VEC_H

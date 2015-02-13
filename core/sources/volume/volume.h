@@ -9,12 +9,14 @@ namespace core
     class Volume
     {
     public:
-        Volume(unsigned width, unsigned height, unsigned depth);
+        Volume(const Vec3u& size);
+        Volume(unsigned x, unsigned y, unsigned z);
         virtual ~Volume();
 
         Node* nodeAt(unsigned x, unsigned y, unsigned z) const;
         Node* nodeAt(const Vec3u& point) const;
 
+        Vec3u size() const;
         unsigned width() const;
         unsigned height() const;
         unsigned depth() const;
@@ -35,8 +37,8 @@ namespace core
         class VolumePrivate;
         VolumePrivate* d;
 
-        Volume(const Volume& other);
-        const Volume& operator = (const Volume& vol) {return vol;}
+        Volume(const Volume& other) = delete;
+        const Volume& operator = (const Volume& vol) = delete;
     };
 }
 #endif // VOLUME_H

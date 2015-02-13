@@ -23,8 +23,8 @@ namespace core
         unsigned y() const;
         unsigned z() const;
         Vec3u position() const;
-        void setPoint(unsigned x, unsigned y, unsigned z);
-        void setPoint(const Vec3u& position);
+        void setPosition(unsigned x, unsigned y, unsigned z);
+        void setPosition(const Vec3u& position);
 
         VolumeIterator up() const;
         VolumeIterator down() const;

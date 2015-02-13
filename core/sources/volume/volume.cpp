@@ -10,23 +10,25 @@ using namespace core;
 class Volume::VolumePrivate
 {
 public:
-    unsigned width;
-    unsigned height;
-    unsigned depth;
+    Vec3u size;
     std::vector< Node* > nodes;
 
-    VolumePrivate(unsigned width, unsigned height, unsigned depth):
-        width(width),
-        height(height),
-        depth(depth),
-        nodes(width * height * depth, nullptr)
+    VolumePrivate(const Vec3u& size):
+        size(size),
+        nodes(size.product(), nullptr)
     {
         std::generate(nodes.begin(), nodes.end(), [](){ return new Node(); });
     }
 };
 
-Volume::Volume(unsigned width, unsigned height, unsigned depth):
-    d(new VolumePrivate(width, height, depth))
+Volume::Volume(const Vec3u& size):
+    d(new VolumePrivate(size))
+{
+    this->chainInnerNodes();
+}
+
+Volume::Volume(unsigned x, unsigned y, unsigned z):
+    d(new VolumePrivate(Vec3u(x, y, z)))
 {
     this->chainInnerNodes();
 }
@@ -45,24 +47,29 @@ Node* Volume::nodeAt(unsigned x, unsigned y, unsigned z) const
     return this->nodeAt(Vec3u(x, y, z));
 }
 
-Node*Volume::nodeAt(const Vec3u& point) const
+Node* Volume::nodeAt(const Vec3u& point) const
 {
     return d->nodes.at(this->indexFromPoint(point));
 }
 
+Vec3u Volume::size() const
+{
+    return d->size;
+}
+
 unsigned Volume::width() const
 {
-    return d->width;
+    return d->size.x();
 }
 
 unsigned Volume::height() const
 {
-    return d->height;
+    return d->size.y();
 }
 
 unsigned Volume::depth() const
 {
-    return d->depth;
+    return d->size.z();
 }
 
 void Volume::chainTo(Volume* other, Node::Direction direction)
@@ -98,15 +105,15 @@ VolumeIterator Volume::begin() const
 
 VolumeIterator Volume::end() const
 {
-    return VolumeIterator(this, d->width, d->height, d->depth);
+    return VolumeIterator(this, d->size);
 }
 
 VolumeIterator Volume::cornerBegin(Node::Direction direction) const
 {
     return VolumeIterator(this,
-                         direction == Node::directionForward ? d->width - 1 : 0,
-                         direction == Node::directionRight ? d->height - 1 : 0,
-                         direction == Node::directionUp ? d->depth - 1 : 0);
+                         direction == Node::directionForward ? d->size.x() - 1 : 0,
+                         direction == Node::directionRight ? d->size.y() - 1 : 0,
+                         direction == Node::directionUp ? d->size.z() - 1 : 0);
 }
 
 void Volume::chainInnerNodes() const
@@ -117,17 +124,17 @@ void Volume::chainInnerNodes() const
         const VolumeIterator& right = it.right();
         const VolumeIterator& forward = it.forward();
 
-        if (up.z() < d->depth)
+        if (up.z() < d->size.z())
         {
             it.node()->chainTo(up.node(), Node::directionUp);
         }
 
-        if (right.y() < d->height)
+        if (right.y() < d->size.y())
         {
             it.node()->chainTo(right.node(), Node::directionRight);
         }
 
-        if (forward.x() < d->width )
+        if (forward.x() < d->size.x())
         {
             it.node()->chainTo(forward.node(), Node::directionForward);
         }
@@ -136,5 +143,7 @@ void Volume::chainInnerNodes() const
 
 unsigned Volume::indexFromPoint(const Vec3u& point) const
 {
-    return point.x() + point.y() * d->width + point.z() * d->width * d->height;
+    return point.x() +
+           point.y() * d->size.x() +
+           point.z() * d->size.x() * d->size.y();
 }

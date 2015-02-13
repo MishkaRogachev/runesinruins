@@ -47,17 +47,17 @@ const Volume* VolumeIterator::volume() const
 
 unsigned VolumeIterator::x() const
 {
-    return d->position.at(0);
+    return d->position.x();
 }
 
 unsigned VolumeIterator::y() const
 {
-    return d->position.at(1);
+    return d->position.y();
 }
 
 unsigned VolumeIterator::z() const
 {
-    return d->position.at(2);
+    return d->position.z();
 }
 
 Vec3u VolumeIterator::position() const
@@ -65,12 +65,12 @@ Vec3u VolumeIterator::position() const
     return d->position;
 }
 
-void VolumeIterator::setPoint(unsigned x, unsigned y, unsigned z)
+void VolumeIterator::setPosition(unsigned x, unsigned y, unsigned z)
 {
-    this->setPoint(Vec3u(x, y, z));
+    this->setPosition(Vec3u(x, y, z));
 }
 
-void VolumeIterator::setPoint(const Vec3u& point)
+void VolumeIterator::setPosition(const Vec3u& point)
 {
     d->position = point;
 }
@@ -131,19 +131,17 @@ void VolumeIterator::increasePosition()
 {
     if (this->forward().x() < d->volume->width())
     {
-        this->setPoint(Vec3u(d->position.x() + 1, d->position.y(), d->position.z()));
+        this->setPosition(Vec3u(d->position.x() + 1, d->position.y(), d->position.z()));
     }
     else if (this->right().y() < d->volume->height())
     {
-        this->setPoint(Vec3u(0, d->position.y() + 1, d->position.z()));
+        this->setPosition(Vec3u(0, d->position.y() + 1, d->position.z()));
     }
     else if (this->up().z() < d->volume->depth())
     {
-        this->setPoint(Vec3u(0, 0, d->position.z() + 1));
+        this->setPosition(Vec3u(0, 0, d->position.z() + 1));
     }
-    else this->setPoint(d->volume->width(),
-                           d->volume->height(),
-                           d->volume->depth());
+    else this->setPosition(d->volume->size());
 }
 
 void VolumeIterator::
@@ -158,17 +156,17 @@ void VolumeIterator::
 
     if (!xAxis && this->forward().x() < d->volume->width())
     {
-        this->setPoint(Vec3u(d->position.x() + 1, d->position.y(), d->position.z()));
+        this->setPosition(Vec3u(d->position.x() + 1, d->position.y(), d->position.z()));
     }
     else if (!yAxis && this->right().y() < d->volume->height())
     {
-        this->setPoint(Vec3u(xAxis ? d->position.x() : 0, d->position.y() + 1, d->position.z()));
+        this->setPosition(Vec3u(xAxis ? d->position.x() : 0, d->position.y() + 1, d->position.z()));
     }
     else if (!zAxis && this->up().z() < d->volume->depth())
     {
-        this->setPoint(Vec3u(xAxis ? d->position.x() : 0, yAxis ? d->position.y() : 0, d->position.z() + 1));
+        this->setPosition(Vec3u(xAxis ? d->position.x() : 0, yAxis ? d->position.y() : 0, d->position.z() + 1));
     }
-    else this->setPoint(d->volume->width(), d->volume->height(), d->volume->depth());
+    else this->setPosition(d->volume->size());
 }
 
 const VolumeIterator& VolumeIterator::operator ++()

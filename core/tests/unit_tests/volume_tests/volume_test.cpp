@@ -6,11 +6,11 @@ using namespace core;
 
 void VolumeTest::testInnerLinking()
 {
-    this->testVolume(1, 1, 1);
-    this->testVolume(8, 1, 1);
-    this->testVolume(1, 16, 32);
+//    this->testVolume(1, 1, 1);
+//    this->testVolume(8, 1, 1);
+//    this->testVolume(1, 16, 32);
     this->testVolume(16, 24, 32);
-    this->testVolume(16, 16, 256);
+//    this->testVolume(16, 16, 256);
 }
 
 void VolumeTest::testLinkingVolumes()

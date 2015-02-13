@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "point.h"
+#include "vec.h"
 
 namespace core
 {
