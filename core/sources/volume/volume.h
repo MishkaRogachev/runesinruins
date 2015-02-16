@@ -31,7 +31,7 @@ namespace core
 
     protected:
         void chainInnerNodes() const;
-        unsigned indexFromPoint(const Vec3u& point) const;
+        unsigned indexFromPosition(const Vec3u& position) const;
 
     private:
         class VolumePrivate;

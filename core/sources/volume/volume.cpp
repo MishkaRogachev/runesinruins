@@ -49,7 +49,7 @@ Node* Volume::nodeAt(unsigned x, unsigned y, unsigned z) const
 
 Node* Volume::nodeAt(const Vec3u& point) const
 {
-    return d->nodes.at(this->indexFromPoint(point));
+    return d->nodes.at(this->indexFromPosition(point));
 }
 
 Vec3u Volume::size() const
@@ -141,9 +141,9 @@ void Volume::chainInnerNodes() const
     }
 }
 
-unsigned Volume::indexFromPoint(const Vec3u& point) const
+unsigned Volume::indexFromPosition(const Vec3u& position) const
 {
-    return point.x() +
-           point.y() * d->size.x() +
-           point.z() * d->size.x() * d->size.y();
+    return position.x() +
+           position.y() * d->size.x() +
+           position.z() * d->size.x() * d->size.y();
 }

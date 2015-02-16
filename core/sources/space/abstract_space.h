@@ -11,9 +11,12 @@ namespace core
         AbstractSpace();
         virtual ~AbstractSpace();
 
-        virtual VolumePtr volumeAt(const Vec3i& point) = 0;
-        virtual bool hasVolume(const Vec3i& point) const= 0;
+        virtual Vec3iVec positions() const = 0;
+        virtual VolumePtrVec volumes() const = 0;
+        virtual VolumePtr volumeAt(const Vec3i& position) = 0;
+        virtual bool hasVolume(const Vec3i& position) const= 0;
 
+        virtual VolumePtr volumeAt(int x, int y, int z);
         virtual bool hasVolume(int x, int y, int z) const;
     };
 }

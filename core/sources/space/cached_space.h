@@ -8,13 +8,19 @@ namespace core
     class CachedSpace : public AbstractSpace
     {
     public:
-        CachedSpace();
+        CachedSpace(AbstractSpace* proxySpace);
         ~CachedSpace();
 
-        virtual VolumePtr volumeAt(const Vec3i& point) override;
-        virtual bool hasVolume(const Vec3i& point) const override;
+        virtual Vec3iVec positions() const override;
+        virtual VolumePtrVec volumes() const override;
+        virtual VolumePtr volumeAt(const Vec3i& position) override;
+        virtual bool hasVolume(const Vec3i& position) const override;
 
+        using AbstractSpace::volumeAt;
         using AbstractSpace::hasVolume;
+
+        void load(const Vec3i& position);
+        void unload(const Vec3i& position);
 
     private:
         class CachedSpacePrivate;
