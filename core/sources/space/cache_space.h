@@ -21,6 +21,7 @@ namespace core
 
         void load(const Point3i& position);
         void unload(const Point3i& position);
+        bool isLoaded(const Point3i& position) const;
 
     private:
         class CacheSpacePrivate;

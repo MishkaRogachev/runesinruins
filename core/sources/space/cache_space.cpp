@@ -43,7 +43,7 @@ VolumePtrVec CacheSpace::volumes() const
 
 bool CacheSpace::hasVolume(const Point3i& position) const
 {
-    return d->cache.count(position) > 0;
+    return this->isLoaded(position);
 }
 
 VolumePtr CacheSpace::volumeAt(const Point3i& position)
@@ -66,5 +66,10 @@ void CacheSpace::load(const Point3i& position)
 void CacheSpace::unload(const Point3i& position)
 {
     d->cache.erase(position);
+}
+
+bool CacheSpace::isLoaded(const Point3i& position) const
+{
+     return d->cache.count(position) > 0;
 }
 
