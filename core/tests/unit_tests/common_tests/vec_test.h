@@ -11,7 +11,9 @@ private slots:
     void testConstructors();
     void testGetterFunctions();
     void testSetterFunctions();
-    void compareTest();
+    void testComparation();
+    void testOffsets();
+    void testProduct();
 };
 
 #endif // VECTEST_H

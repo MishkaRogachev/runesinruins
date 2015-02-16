@@ -70,9 +70,46 @@ void VecTest::testSetterFunctions()
     Q_ASSERT(qFuzzyCompare(vd3.z(), 0));
 }
 
-void VecTest::compareTest()
+void VecTest::testComparation()
 {
     Q_ASSERT((Vec<int, 2>(4, 5) != Vec<int, 2>(5, 5)));
     Q_ASSERT((Vec<double, 3>(434.34, 56.435, 23.88) ==
               Vec<double, 3>(434.34, 56.435, 23.88)));
+    Q_ASSERT((Vec<char, 2>('a', 'c') == Vec<char, 2>('a', 'c')));
+    Q_ASSERT((Vec<char, 2>('a', 'c') != Vec<char, 2>('a', 'd')));
+}
+
+void VecTest::testOffsets()
+{
+    Vec<int, 2> vi(4, 4);
+
+    QCOMPARE(vi.offset(1, 1), (Vec<int, 2>(5, 5)));
+    QCOMPARE(vi.offset(0, -1), (Vec<int, 2>(4, 3)));
+    QCOMPARE(vi.offset(-1, 2), (Vec<int, 2>(3, 6)));
+    QCOMPARE(vi.offset(-3, -4), (Vec<int, 2>(1, 0)));
+
+    Vec<float, 3> vf(3.5, -0.5, 1.5);
+
+    QCOMPARE(vf.up(), (Vec<float, 3>(3.5, -0.5, 2.5)));
+    QCOMPARE(vf.down(), (Vec<float, 3>(3.5, -0.5, 0.5)));
+    QCOMPARE(vf.right(), (Vec<float, 3>(3.5, 0.5, 1.5)));
+    QCOMPARE(vf.left(), (Vec<float, 3>(3.5, -1.5, 1.5)));
+    QCOMPARE(vf.forward(), (Vec<float, 3>(4.5, -0.5, 1.5)));
+    QCOMPARE(vf.backward(), (Vec<float, 3>(2.5, -0.5, 1.5)));
+
+    QCOMPARE(vf.up(0), (Vec<float, 3>(3.5, -0.5, 1.5)));
+    QCOMPARE(vf.down(1), (Vec<float, 3>(3.5, -0.5, 0.5)));
+    QCOMPARE(vf.right(5), (Vec<float, 3>(3.5, 4.5, 1.5)));
+    QCOMPARE(vf.left(10), (Vec<float, 3>(3.5, -10.5, 1.5)));
+
+    QCOMPARE(vf.up().left().down().right(), vf);
+    QCOMPARE(vf.up().right(), vf.right().up());
+}
+
+void VecTest::testProduct()
+{
+    QCOMPARE((Vec<int, 2>(1, 0).product()), 0);
+    QCOMPARE((Vec<int, 2>(6, 4).product()), 24);
+
+    Q_ASSERT(qFuzzyCompare(Vec<double, 3>(3.34, 6.35, 3.88).product(), 82.29092));
 }
