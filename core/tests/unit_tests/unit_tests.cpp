@@ -1,13 +1,13 @@
  #include <QtTest/QtTest>
 
-#include "common_tests/vec_test.h"
+#include "common_tests/point_test.h"
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
-#include "space_tests/cached_space_test.h"
+#include "space_tests/cache_space_test.h"
 
 int main()
 {
-    VecTest vecTest;
+    PointTest vecTest;
     QTest::qExec(&vecTest);
 
     NodeTest nodeTest;
@@ -16,7 +16,7 @@ int main()
     VolumeTest volumeTest;
     QTest::qExec(&volumeTest);
 
-    CachedSpaceTest cachedSpaceTest;
+    CacheSpaceTest cachedSpaceTest;
     QTest::qExec(&cachedSpaceTest);
 
     return 0;

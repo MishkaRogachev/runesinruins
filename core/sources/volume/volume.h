@@ -9,14 +9,14 @@ namespace core
     class Volume
     {
     public:
-        Volume(const Vec3u& size);
+        Volume(const Point3u& size);
         Volume(unsigned x, unsigned y, unsigned z);
         virtual ~Volume();
 
         Node* nodeAt(unsigned x, unsigned y, unsigned z) const;
-        Node* nodeAt(const Vec3u& point) const;
+        Node* nodeAt(const Point3u& point) const;
 
-        Vec3u size() const;
+        Point3u size() const;
         unsigned width() const;
         unsigned height() const;
         unsigned depth() const;
@@ -31,7 +31,7 @@ namespace core
 
     protected:
         void chainInnerNodes() const;
-        unsigned indexFromPosition(const Vec3u& position) const;
+        unsigned indexFromPosition(const Point3u& position) const;
 
     private:
         class VolumePrivate;

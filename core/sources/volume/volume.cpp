@@ -10,10 +10,10 @@ using namespace core;
 class Volume::VolumePrivate
 {
 public:
-    Vec3u size;
+    Point3u size;
     std::vector< Node* > nodes;
 
-    VolumePrivate(const Vec3u& size):
+    VolumePrivate(const Point3u& size):
         size(size),
         nodes(size.product(), nullptr)
     {
@@ -21,14 +21,14 @@ public:
     }
 };
 
-Volume::Volume(const Vec3u& size):
+Volume::Volume(const Point3u& size):
     d(new VolumePrivate(size))
 {
     this->chainInnerNodes();
 }
 
 Volume::Volume(unsigned x, unsigned y, unsigned z):
-    d(new VolumePrivate(Vec3u(x, y, z)))
+    d(new VolumePrivate(Point3u(x, y, z)))
 {
     this->chainInnerNodes();
 }
@@ -44,15 +44,15 @@ Volume::~Volume()
 
 Node* Volume::nodeAt(unsigned x, unsigned y, unsigned z) const
 {
-    return this->nodeAt(Vec3u(x, y, z));
+    return this->nodeAt(Point3u(x, y, z));
 }
 
-Node* Volume::nodeAt(const Vec3u& point) const
+Node* Volume::nodeAt(const Point3u& point) const
 {
     return d->nodes.at(this->indexFromPosition(point));
 }
 
-Vec3u Volume::size() const
+Point3u Volume::size() const
 {
     return d->size;
 }
@@ -141,7 +141,7 @@ void Volume::chainInnerNodes() const
     }
 }
 
-unsigned Volume::indexFromPosition(const Vec3u& position) const
+unsigned Volume::indexFromPosition(const Point3u& position) const
 {
     return position.x() +
            position.y() * d->size.x() +

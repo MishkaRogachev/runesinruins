@@ -1,5 +1,5 @@
-#ifndef ABSTRACTSPACE_H
-#define ABSTRACTSPACE_H
+#ifndef ABSTRACT_SPACE_H
+#define ABSTRACT_SPACE_H
 
 #include "core_traits.h"
 
@@ -11,13 +11,13 @@ namespace core
         AbstractSpace();
         virtual ~AbstractSpace();
 
-        virtual Vec3iVec positions() const = 0;
+        virtual Point3iVec positions() const = 0;
         virtual VolumePtrVec volumes() const = 0;
-        virtual VolumePtr volumeAt(const Vec3i& position) = 0;
-        virtual bool hasVolume(const Vec3i& position) const= 0;
+        virtual VolumePtr volumeAt(const Point3i& position) = 0;
+        virtual bool hasVolume(const Point3i& position) const= 0;
 
         virtual VolumePtr volumeAt(int x, int y, int z);
         virtual bool hasVolume(int x, int y, int z) const;
     };
 }
-#endif // ABSTRACTSPACE_H
+#endif // ABSTRACT_SPACE_H

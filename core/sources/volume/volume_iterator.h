@@ -10,7 +10,7 @@ namespace core
     {
     public:
         VolumeIterator(const Volume* volume,
-                       const Vec3u& position = Vec3u());
+                       const Point3u& position = Point3u());
         VolumeIterator(const Volume* volume,
                        unsigned x, unsigned y, unsigned z);
         VolumeIterator(const VolumeIterator& other);
@@ -22,9 +22,9 @@ namespace core
         unsigned x() const;
         unsigned y() const;
         unsigned z() const;
-        Vec3u position() const;
+        Point3u position() const;
         void setPosition(unsigned x, unsigned y, unsigned z);
-        void setPosition(const Vec3u& position);
+        void setPosition(const Point3u& position);
 
         VolumeIterator up() const;
         VolumeIterator down() const;

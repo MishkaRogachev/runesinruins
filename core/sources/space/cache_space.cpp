@@ -1,39 +1,39 @@
-#include "cached_space.h"
+#include "cache_space.h"
 
 #include <unordered_map>
 
 using namespace core;
 
-class CachedSpace::CachedSpacePrivate
+class CacheSpace::CacheSpacePrivate
 {
 public:
-    std::unordered_map<Vec3i, VolumePtr> cache;
+    std::unordered_map<Point3i, VolumePtr> cache;
     AbstractSpace* proxySpace;
 
-    CachedSpacePrivate(AbstractSpace* proxySpace):
+    CacheSpacePrivate(AbstractSpace* proxySpace):
         proxySpace(proxySpace)
     {}
 };
 
-CachedSpace::CachedSpace(AbstractSpace* proxySpace):
+CacheSpace::CacheSpace(AbstractSpace* proxySpace):
     AbstractSpace(),
-    d(new CachedSpacePrivate(proxySpace))
+    d(new CacheSpacePrivate(proxySpace))
 {}
 
-CachedSpace::~CachedSpace()
+CacheSpace::~CacheSpace()
 {
     delete d;
 }
 
-Vec3iVec CachedSpace::positions() const
+Point3iVec CacheSpace::positions() const
 {
-    Vec3iVec vector;
+    Point3iVec vector;
     for (const auto& item: d->cache)
         vector.push_back(item.first);
     return vector;
 }
 
-VolumePtrVec CachedSpace::volumes() const
+VolumePtrVec CacheSpace::volumes() const
 {
     VolumePtrVec vector;
     for (const auto& item: d->cache)
@@ -41,12 +41,12 @@ VolumePtrVec CachedSpace::volumes() const
     return vector;
 }
 
-bool CachedSpace::hasVolume(const Vec3i& position) const
+bool CacheSpace::hasVolume(const Point3i& position) const
 {
     return d->cache.count(position) > 0;
 }
 
-VolumePtr CachedSpace::volumeAt(const Vec3i& position)
+VolumePtr CacheSpace::volumeAt(const Point3i& position)
 {
     if (!this->hasVolume(position))
     {
@@ -58,12 +58,12 @@ VolumePtr CachedSpace::volumeAt(const Vec3i& position)
     return d->cache.at(position);
 }
 
-void CachedSpace::load(const Vec3i& position)
+void CacheSpace::load(const Point3i& position)
 {
     d->cache[position] = d->proxySpace->volumeAt(position);
 }
 
-void CachedSpace::unload(const Vec3i& position)
+void CacheSpace::unload(const Point3i& position)
 {
     d->cache.erase(position);
 }

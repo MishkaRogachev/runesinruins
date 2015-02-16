@@ -3,7 +3,7 @@
 
 #include <QtTest/QtTest>
 
-class VecTest: public QObject
+class PointTest: public QObject
 {
     Q_OBJECT
 

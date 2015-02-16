@@ -3,7 +3,7 @@
 
 #include <QtTest/QtTest>
 
-class CachedSpaceTest : public QObject
+class CacheSpaceTest : public QObject
 {
     Q_OBJECT
 

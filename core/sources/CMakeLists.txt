@@ -16,7 +16,7 @@ set(SOURCES
     volume/volume.cpp
     volume/volume_iterator.cpp
     space/abstract_space.cpp
-    space/cached_space.cpp
+    space/cache_space.cpp
 )
 
 # Library target

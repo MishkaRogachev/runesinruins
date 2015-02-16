@@ -10,10 +10,10 @@ AbstractSpace::~AbstractSpace()
 
 VolumePtr AbstractSpace::volumeAt(int x, int y, int z)
 {
-     return this->volumeAt(Vec3i(x, y, z));
+     return this->volumeAt(Point3i(x, y, z));
 }
 
 bool AbstractSpace::hasVolume(int x, int y, int z) const
 {
-    return this->hasVolume(Vec3i(x, y, z));
+    return this->hasVolume(Point3i(x, y, z));
 }

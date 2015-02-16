@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "vec.h"
+#include "point.h"
 
 namespace core
 {
@@ -12,13 +12,13 @@ namespace core
     class Node;
     class Volume;
 
-    typedef Vec<unsigned, 3> Vec3u;
-    typedef Vec<int, 3> Vec3i;
+    typedef Point<unsigned, 3> Point3u;
+    typedef Point<int, 3> Point3i;
 
     typedef std::shared_ptr<Volume> VolumePtr;
 
-    typedef std::vector<Vec3u> Vec3uVec;
-    typedef std::vector<Vec3i> Vec3iVec;
+    typedef std::vector<Point3u> Point3uVec;
+    typedef std::vector<Point3i> Point3iVec;
 
     typedef std::vector<VolumePtr> VolumePtrVec;
 }
