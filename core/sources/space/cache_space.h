@@ -8,7 +8,7 @@ namespace core
     class CacheSpace : public AbstractSpace
     {
     public:
-        CacheSpace(AbstractSpace* proxySpace);
+        CacheSpace(const SpacePtr& proxySpace);
         ~CacheSpace();
 
         virtual Point3iVec positions() const override;
@@ -19,13 +19,20 @@ namespace core
         using AbstractSpace::volumeAt;
         using AbstractSpace::hasVolume;
 
-        void load(const Point3i& position);
+        bool load(const Point3i& position);
         void unload(const Point3i& position);
         bool isLoaded(const Point3i& position) const;
+
+        bool load(int x, int y, int z);
+        void unload(int x, int y, int z);
+        bool isLoaded(int x, int y, int z) const;
 
     private:
         class CacheSpacePrivate;
         CacheSpacePrivate* d;
+
+        CacheSpace(const Volume& other) = delete;
+        const CacheSpace& operator = (const CacheSpace& other) = delete;
     };
 }
 

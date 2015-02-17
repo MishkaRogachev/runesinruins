@@ -1,48 +1,82 @@
 #include "cache_space_test.h"
 
+#include <QDebug>
+#include <unordered_map>
+
 #include "cache_space.h"
+#include "volume.h"
 
 using namespace core;
 
 class SpaceMock: public AbstractSpace
 {
-    Point3iVec m_positions = { { 2, 3, 0 }, { 2, 2, 0 }, { 3, 2, 0 } };
-
 public:
+    std::unordered_map<Point3i, VolumePtr> map;
+
+    SpaceMock(const std::unordered_map<Point3i, VolumePtr>& map =
+            std::unordered_map<Point3i, VolumePtr>()):
+        AbstractSpace(),
+        map(map)
+    {}
+
     virtual Point3iVec positions() const override
     {
-        return m_positions;
+        Point3iVec vector;
+        for (const auto& item: map)
+            vector.push_back(item.first);
+        return vector;
     }
 
     virtual VolumePtrVec volumes() const override
     {
-        return { VolumePtr(), VolumePtr() , VolumePtr() };
+        VolumePtrVec vector;
+        for (const auto& item: map)
+            vector.push_back(item.second);
+        return vector;
     }
 
     virtual VolumePtr volumeAt(const Point3i& position) override
     {
-        return VolumePtr();
+        return map[position];
     }
 
     virtual bool hasVolume(const Point3i& position) const override
     {
-        return true;
+        return map.count(position) > 0;
     }
 };
 
-void CacheSpaceTest::creation()
+void CacheSpaceTest::testConstructors()
 {
-    SpaceMock mock;
-    CacheSpace space(&mock);
+    CacheSpace space(SpacePtr(new SpaceMock()));
+    Q_UNUSED(space)
+}
 
-    Point3i p1(0, 1, 2);
-    space.load(p1);
-    Q_ASSERT(!space.isLoaded(p1));
+void CacheSpaceTest::testAbstractInterface()
+{
 
-    Point3i p2(2, 3, 0);
-    space.load(p2);
-    Q_ASSERT(space.isLoaded(p2));
+}
 
-    QVERIFY(!space.hasVolume(Point3i(8, 2, 4)));
-    QVERIFY(!space.hasVolume(-4, -2, 5));
+void CacheSpaceTest::testLoading()
+{
+    SpacePtr mock(new SpaceMock({ { { 4, 4, -4 }, VolumePtr(new Volume(1, 1, 1)) },
+                                  { { 5, -5, 0 }, VolumePtr(new Volume(1, 1, 1)) } }));
+
+    CacheSpace space(mock);
+
+    QVERIFY(!space.load(0, 1, 2));
+    QVERIFY(space.load(4, 4, -4));
+
+    QVERIFY(!space.isLoaded(0, 1, 2));
+    QVERIFY(space.isLoaded(4, 4, -4));
+
+    QVERIFY(!space.volumes().empty());
+
+    QCOMPARE(space.volumeAt(0, 1, 2), VolumePtr());
+    QVERIFY(space.volumeAt(4, 4, -4) != VolumePtr());
+
+    space.unload(4, 4, -4);
+
+    QVERIFY(space.volumes().empty());
+    QVERIFY(!space.isLoaded(4, 4, -4));
 }

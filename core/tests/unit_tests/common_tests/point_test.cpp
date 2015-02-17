@@ -12,11 +12,11 @@ void PointTest::testConstructors()
     Point<bool, 4> vb4;
     Point<bool, 5> vb5;
 
-    Q_ASSERT(!vb1.at(0));
-    Q_ASSERT(!vb2.at(1));
-    Q_ASSERT(!vb3.at(2));
-    Q_ASSERT(!vb4.at(3));
-    Q_ASSERT(!vb5.at(4));
+    QVERIFY(!vb1.at(0));
+    QVERIFY(!vb2.at(1));
+    QVERIFY(!vb3.at(2));
+    QVERIFY(!vb4.at(3));
+    QVERIFY(!vb5.at(4));
 
     Point<int, 1> vi1(5);
     Point<int, 2> vi2(1, 6);
@@ -33,7 +33,7 @@ void PointTest::testConstructors()
     Point<float, 3> vf31(4.23, 34.43, 43.234);
     Point<float, 3> vf32(vf31);
 
-    Q_ASSERT(qFuzzyCompare(vf31.y(), vf32.y()));
+    QVERIFY(qFuzzyCompare(vf31.y(), vf32.y()));
 }
 
 void PointTest::testGetterFunctions()
@@ -45,9 +45,9 @@ void PointTest::testGetterFunctions()
 
     Point<double, 3> vd3(5.46, 34.34, 67.765);
 
-    Q_ASSERT(qFuzzyCompare(vd3.at(0), 5.46));
-    Q_ASSERT(qFuzzyCompare(vd3[1], 34.34));
-    Q_ASSERT(qFuzzyCompare(vd3.z(), 67.765));
+    QVERIFY(qFuzzyCompare(vd3.at(0), 5.46));
+    QVERIFY(qFuzzyCompare(vd3[1], 34.34));
+    QVERIFY(qFuzzyCompare(vd3.z(), 67.765));
 }
 
 void PointTest::testSetterFunctions()
@@ -65,18 +65,18 @@ void PointTest::testSetterFunctions()
     vd3[0] = 5.46;
     vd3.setY(34.34);
 
-    Q_ASSERT(qFuzzyCompare(vd3.at(0), 5.46));
-    Q_ASSERT(qFuzzyCompare(vd3[1], 34.34));
-    Q_ASSERT(qFuzzyCompare(vd3.z(), 0));
+    QVERIFY(qFuzzyCompare(vd3.at(0), 5.46));
+    QVERIFY(qFuzzyCompare(vd3[1], 34.34));
+    QVERIFY(qFuzzyCompare(vd3.z(), 0));
 }
 
 void PointTest::testComparation()
 {
-    Q_ASSERT((Point<int, 2>(4, 5) != Point<int, 2>(5, 5)));
-    Q_ASSERT((Point<double, 3>(434.34, 56.435, 23.88) ==
+    QVERIFY((Point<int, 2>(4, 5) != Point<int, 2>(5, 5)));
+    QVERIFY((Point<double, 3>(434.34, 56.435, 23.88) ==
               Point<double, 3>(434.34, 56.435, 23.88)));
-    Q_ASSERT((Point<char, 2>('a', 'c') == Point<char, 2>('a', 'c')));
-    Q_ASSERT((Point<char, 2>('a', 'c') != Point<char, 2>('a', 'd')));
+    QVERIFY((Point<char, 2>('a', 'c') == Point<char, 2>('a', 'c')));
+    QVERIFY((Point<char, 2>('a', 'c') != Point<char, 2>('a', 'd')));
 }
 
 void PointTest::testOffsets()
@@ -111,5 +111,5 @@ void PointTest::testProduct()
     QCOMPARE((Point<int, 2>(1, 0).product()), 0);
     QCOMPARE((Point<int, 2>(6, 4).product()), 24);
 
-    Q_ASSERT(qFuzzyCompare(Point<double, 3>(3.34, 6.35, 3.88).product(), 82.29092));
+    QVERIFY(qFuzzyCompare(Point<double, 3>(3.34, 6.35, 3.88).product(), 82.29092));
 }

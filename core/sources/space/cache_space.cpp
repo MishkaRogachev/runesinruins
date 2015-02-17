@@ -8,14 +8,14 @@ class CacheSpace::CacheSpacePrivate
 {
 public:
     std::unordered_map<Point3i, VolumePtr> cache;
-    AbstractSpace* proxySpace;
+    SpacePtr proxySpace;
 
-    CacheSpacePrivate(AbstractSpace* proxySpace):
+    CacheSpacePrivate(const SpacePtr& proxySpace):
         proxySpace(proxySpace)
     {}
 };
 
-CacheSpace::CacheSpace(AbstractSpace* proxySpace):
+CacheSpace::CacheSpace(const SpacePtr& proxySpace):
     AbstractSpace(),
     d(new CacheSpacePrivate(proxySpace))
 {}
@@ -50,17 +50,16 @@ VolumePtr CacheSpace::volumeAt(const Point3i& position)
 {
     if (!this->hasVolume(position))
     {
-        if (d->proxySpace->hasVolume(position))
-            this->load(position);
-        else
+        if (!this->load(position))
             return VolumePtr();
     }
     return d->cache.at(position);
 }
 
-void CacheSpace::load(const Point3i& position)
+bool CacheSpace::load(const Point3i& position)
 {
-    d->cache[position] = d->proxySpace->volumeAt(position);
+    if (!d->proxySpace->hasVolume(position)) return false;
+    return (d->cache[position] = d->proxySpace->volumeAt(position)) != nullptr;
 }
 
 void CacheSpace::unload(const Point3i& position)
@@ -70,6 +69,20 @@ void CacheSpace::unload(const Point3i& position)
 
 bool CacheSpace::isLoaded(const Point3i& position) const
 {
-     return d->cache.count(position) > 0;
+    return d->cache.count(position) > 0;
 }
 
+bool CacheSpace::load(int x, int y, int z)
+{
+    return this->load(Point3i(x, y, z));
+}
+
+void CacheSpace::unload(int x, int y, int z)
+{
+    this->unload(Point3i(x, y, z));
+}
+
+bool CacheSpace::isLoaded(int x, int y, int z) const
+{
+    return this->isLoaded(Point3i(x, y, z));
+}

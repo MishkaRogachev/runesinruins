@@ -57,7 +57,7 @@ namespace std // Hash function templete for Point class
         std::size_t operator()(const core::Point< T, dim >& point) const
         {
             std::hash<T> typeHasher;
-            std::size_t size;
+            std::size_t size = 0;
             for (int i = 0; i < dim; ++i)
             {
                 size ^= typeHasher(point.at(i));

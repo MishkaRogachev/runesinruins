@@ -38,7 +38,7 @@ namespace core
         VolumePrivate* d;
 
         Volume(const Volume& other) = delete;
-        const Volume& operator = (const Volume& vol) = delete;
+        const Volume& operator = (const Volume& other) = delete;
     };
 }
 #endif // VOLUME_H

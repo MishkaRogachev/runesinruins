@@ -8,7 +8,9 @@ class CacheSpaceTest : public QObject
     Q_OBJECT
 
 private slots:
-    void creation();
+    void testConstructors();
+    void testAbstractInterface();
+    void testLoading();
 };
 
 #endif // CACHED_SPACE_TEST_H
