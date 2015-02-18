@@ -12,7 +12,7 @@ include_directories(
 
 # Sources
 set(SOURCES
-    common/core_traits.cpp
+    common/direction.cpp
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp

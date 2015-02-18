@@ -45,15 +45,13 @@ namespace core
 
         Point neighbour(Direction dir, int distance = 1) const
         {
-            switch (dir)
-            {
-            case Direction::forward: return this->forward(distance);
-            case Direction::backward: return this->backward(distance);
-            case Direction::right: return this->right(distance);
-            case Direction::left: return this->left(distance);
-            case Direction::up: return this->up(distance);
-            case Direction::down: return this->down(distance);
-            }
+            if (dir == Direction::forward) return this->forward(distance);
+            if (dir == Direction::backward) return this->backward(distance);
+            if (dir == Direction::right) return this->right(distance);
+            if (dir == Direction::left) return this->left(distance);
+            if (dir == Direction::up) return this->up(distance);
+            if (dir == Direction::down) return this->down(distance);
+            return Point();
         }
 
         T product() const { T ret = 1; for (T v: d) { ret *= v; } return ret; }
@@ -79,7 +77,6 @@ namespace std // Hash function templete for Point class
             return size;
         }
     };
-
 }
 
 #endif // POINT_H

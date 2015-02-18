@@ -8,8 +8,7 @@ class NodeTest: public QObject
     Q_OBJECT
     
 private slots:
-    void directions();
-    void linkAndBreak();
-    void autoCleaningLinks();
+    void testChaining();
+    void testCleaningChains();
 };
 #endif // NODE_TEST_H

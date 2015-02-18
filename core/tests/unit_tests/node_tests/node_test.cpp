@@ -4,34 +4,26 @@
 
 using namespace core;
 
-void NodeTest::directions()
-{
-    for (unsigned i = 0; i < directionCount; ++i)
-    {
-        QCOMPARE(Direction(i), invDirection(invDirection(Direction(i))));
-    }
-}
-
-void NodeTest::linkAndBreak()
+void NodeTest::testChaining()
 {
     Node first;
     Node second;
 
-    for (unsigned i = 0; i < directionCount; ++i)
+    for (Direction dir: Direction::allDirections())
     {
-        first.chainTo(&second, Direction(i));
-        QVERIFY(first.neighbour(Direction(i)) == &second);
-        QVERIFY(second.neighbour(invDirection(Direction(i))) ==
+        first.chainTo(&second, dir);
+        QVERIFY(first.neighbour(dir) == &second);
+        QVERIFY(second.neighbour(Direction::invDirection(dir)) ==
                  &first);
 
-        first.breakChain(Direction(i));
-        QVERIFY(first.neighbour(Direction(i)) == nullptr);
-        QVERIFY(second.neighbour(invDirection(Direction(i))) ==
+        first.breakChain(dir);
+        QVERIFY(first.neighbour(dir) == nullptr);
+        QVERIFY(second.neighbour(Direction::invDirection(dir)) ==
                  nullptr);
     }
 }
 
-void NodeTest::autoCleaningLinks()
+void NodeTest::testCleaningChains()
 {
     Node* first = new Node();
     Node* second = new Node();

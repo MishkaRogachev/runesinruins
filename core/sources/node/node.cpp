@@ -1,7 +1,7 @@
 #include "node.h"
 
 #include <memory>
-#include <array>
+#include <unordered_map>
 
 using namespace core;
 using namespace core;
@@ -10,14 +10,14 @@ class Node::NodePrivate
 {
 public:
     std::auto_ptr<ObjectInterface> object;
-    std::array< Node*, directionCount > neighbours;
+    std::unordered_map<Direction, Node*> neighbours;
 
     NodePrivate(ObjectInterface* object):
         object(object)
     {
-        for (auto& node: neighbours)
+        for (Direction dir: Direction::allDirections())
         {
-            node = nullptr;
+            neighbours[dir] = nullptr;
         }
     }
 };
@@ -28,7 +28,7 @@ Node::Node(ObjectInterface* object):
 
 Node::~Node()
 {
-    for (unsigned direction = 0; direction < directionCount; ++direction)
+    for (Direction direction: Direction::allDirections())
     {
         if (this->neighbour(Direction(direction)) != nullptr)
         {
@@ -40,7 +40,7 @@ Node::~Node()
 
 Node* Node::neighbour(Direction direction) const
 {
-    return d->neighbours.at(static_cast<unsigned>(direction));
+    return d->neighbours.at(direction);
 }
 
 void Node::setObject(ObjectInterface* object)
@@ -60,17 +60,18 @@ void Node::chainTo(Node* other, Direction direction)
 
 void Node::breakChain(Direction direction)
 {
-    this->neighbour(direction)->setNeighbour(nullptr, invDirection(direction));
+    this->neighbour(direction)->setNeighbour(
+                nullptr, Direction::invDirection(direction));
     this->setNeighbour(nullptr, direction);
 }
 
 void Node::chain(Node* first, Node* second, Direction direction)
 {
     first->setNeighbour(second, direction);
-    second->setNeighbour(first, invDirection(direction));
+    second->setNeighbour(first, Direction::invDirection(direction));
 }
 
 void Node::setNeighbour(Node* node, Direction direction)
 {
-    d->neighbours[static_cast<unsigned>(direction)] = node;
+    d->neighbours[direction] = node;
 }
