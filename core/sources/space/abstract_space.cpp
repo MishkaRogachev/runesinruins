@@ -24,16 +24,26 @@ void AbstractSpace::chainVolume(const Point3i& position)
 {
     VolumePtr current = this->volumeAt(position);
 
-//    for (const Point3i& neighbourPosition: position.neighbours())
-//    {
-//        if (this->hasVolume(neighbourPosition))
-//        {
-////            current->chainTo();// TODO: coomon direction
-//        }
-//    }
+    for (Direction direction: Direction::allDirections())
+    {
+        Point3i neigbour = position.neighbour(direction);
+
+        if (!current->hasChain(direction) && this->hasVolume(neigbour))
+        {
+            current->chainTo(this->volumeAt(neigbour).get(), direction);
+        }
+    }
 }
 
 void AbstractSpace::breakVolumeChain(const Point3i& position)
 {
+    VolumePtr current = this->volumeAt(position);
 
+    for (Direction direction: Direction::allDirections())
+    {
+        if (current->hasChain(direction))
+        {
+            current->breakChain(direction);
+        }
+    }
 }
