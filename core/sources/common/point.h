@@ -2,6 +2,7 @@
 #define POINT_H
 
 #include <array>
+#include "core_traits.h"
 
 #define STATIC_ASSERT( e ) static_assert( e, "!(" #e ")" ) //TODO: find a bit more beautifull solution
 
@@ -35,12 +36,25 @@ namespace core
         Point offset(T x, T y) const { return Point(d[0] + x, d[1] + y); }
         Point offset(T x, T y, T z) const { return Point(d[0] + x, d[1] + y, d[2] + z); }
 
-        Point up(int distance = 1) const { return offset(0, 0, distance); }
-        Point down(int distance = 1) const { return offset(0, 0, -distance); }
-        Point right(int distance = 1) const { return offset(0, distance, 0); }
-        Point left(int distance = 1) const { return offset(0, -distance, 0); }
-        Point forward(int distance = 1) const { return offset(distance, 0, 0); }
-        Point backward(int distance = 1) const { return offset(-distance, 0, 0); }
+        Point up(int distance = 1) const { return this->offset(0, 0, distance); }
+        Point down(int distance = 1) const { return this->offset(0, 0, -distance); }
+        Point right(int distance = 1) const { return this->offset(0, distance, 0); }
+        Point left(int distance = 1) const { return this->offset(0, -distance, 0); }
+        Point forward(int distance = 1) const { return this->offset(distance, 0, 0); }
+        Point backward(int distance = 1) const { return this->offset(-distance, 0, 0); }
+
+        Point neighbour(Direction dir, int distance = 1) const
+        {
+            switch (dir)
+            {
+            case Direction::forward: return this->forward(distance);
+            case Direction::backward: return this->backward(distance);
+            case Direction::right: return this->right(distance);
+            case Direction::left: return this->left(distance);
+            case Direction::up: return this->up(distance);
+            case Direction::down: return this->down(distance);
+            }
+        }
 
         T product() const { T ret = 1; for (T v: d) { ret *= v; } return ret; }
 

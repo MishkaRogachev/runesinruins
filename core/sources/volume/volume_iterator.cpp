@@ -105,22 +105,22 @@ VolumeIterator VolumeIterator::backward() const
     return VolumeIterator(d->volume, d->position.backward());
 }
 
-VolumeIterator VolumeIterator::invIterator(Node::Direction direction) const
+VolumeIterator VolumeIterator::invIterator(Direction direction) const
 {
     Point3u point(d->position);
 
-    if (direction == Node::directionForward ||
-        direction == Node::directionBackward)
+    if (direction == Direction::forward ||
+        direction == Direction::backward)
     {
         point.setX(d->volume->width() - d->position.x() - 1);
     }
-    else if (direction == Node::directionRight ||
-             direction == Node::directionLeft)
+    else if (direction == Direction::right ||
+             direction == Direction::left)
     {
         point.setY(d->volume->height() - d->position.y() - 1);
     }
-    else if (direction == Node::directionUp ||
-             direction == Node::directionDown)
+    else if (direction == Direction::up ||
+             direction == Direction::down)
     {
         point.setZ(d->volume->depth() - d->position.z() - 1);
     }
@@ -145,14 +145,14 @@ void VolumeIterator::increasePosition()
 }
 
 void VolumeIterator::
-    increasePositionPerpendicularDirection(Node::Direction direction)
+    increasePositionPerpendicularDirection(Direction direction)
 {
-    const bool xAxis = (direction == Node::directionForward) ||
-                       (direction == Node::directionBackward);
-    const bool yAxis = (direction == Node::directionRight) ||
-                       (direction == Node::directionLeft);
-    const bool zAxis = (direction == Node::directionUp) ||
-                       (direction == Node::directionDown);
+    const bool xAxis = (direction == Direction::forward) ||
+                       (direction == Direction::backward);
+    const bool yAxis = (direction == Direction::right) ||
+                       (direction == Direction::left);
+    const bool zAxis = (direction == Direction::up) ||
+                       (direction == Direction::down);
 
     if (!xAxis && this->forward().x() < d->volume->width())
     {

@@ -1,7 +1,8 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-#include "../common/core_traits.h"
+#include "core_traits.h"
+#include "point.h"
 #include "volume_iterator.h"
 
 namespace core
@@ -21,13 +22,13 @@ namespace core
         unsigned height() const;
         unsigned depth() const;
 
-        void chainTo(Volume* other, Node::Direction direction);
-        void breakChain(Node::Direction direction);
-        bool hasChain(Node::Direction direction) const;
+        void chainTo(Volume* other, Direction direction);
+        void breakChain(Direction direction);
+        bool hasChain(Direction direction) const;
 
         VolumeIterator begin() const;
         VolumeIterator end() const;
-        VolumeIterator cornerBegin(Node::Direction direction) const;
+        VolumeIterator cornerBegin(Direction direction) const;
 
     protected:
         void chainInnerNodes() const;

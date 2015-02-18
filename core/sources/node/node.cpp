@@ -10,7 +10,7 @@ class Node::NodePrivate
 {
 public:
     std::auto_ptr<ObjectInterface> object;
-    std::array< Node*, Node::directionCount > neighbours;
+    std::array< Node*, directionCount > neighbours;
 
     NodePrivate(ObjectInterface* object):
         object(object)
@@ -28,9 +28,7 @@ Node::Node(ObjectInterface* object):
 
 Node::~Node()
 {
-    for (int direction = directionForward;
-         direction < directionCount;
-         ++direction)
+    for (unsigned direction = 0; direction < directionCount; ++direction)
     {
         if (this->neighbour(Direction(direction)) != nullptr)
         {
@@ -40,9 +38,9 @@ Node::~Node()
     delete d;
 }
 
-Node* Node::neighbour(Node::Direction direction) const
+Node* Node::neighbour(Direction direction) const
 {
-    return d->neighbours.at(direction);
+    return d->neighbours.at(static_cast<unsigned>(direction));
 }
 
 void Node::setObject(ObjectInterface* object)
@@ -62,23 +60,17 @@ void Node::chainTo(Node* other, Direction direction)
 
 void Node::breakChain(Direction direction)
 {
-    this->neighbour(direction)->setNeighbour(nullptr,
-                                             Node::invDirection(direction));
+    this->neighbour(direction)->setNeighbour(nullptr, invDirection(direction));
     this->setNeighbour(nullptr, direction);
-}
-
-Node::Direction Node::invDirection(Direction direction)
-{
-    return Direction(directionCount - direction - 1);
 }
 
 void Node::chain(Node* first, Node* second, Direction direction)
 {
     first->setNeighbour(second, direction);
-    second->setNeighbour(first, Node::invDirection(direction));
+    second->setNeighbour(first, invDirection(direction));
 }
 
-void Node::setNeighbour(Node* node, Node::Direction direction)
+void Node::setNeighbour(Node* node, Direction direction)
 {
-    d->neighbours[direction] = node;
+    d->neighbours[static_cast<unsigned>(direction)] = node;
 }

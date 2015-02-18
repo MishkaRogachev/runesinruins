@@ -2,6 +2,7 @@
 #define VOLUME_ITERATOR_H
 
 #include "core_traits.h"
+#include "point.h"
 #include "node.h"
 
 namespace core
@@ -33,10 +34,10 @@ namespace core
         VolumeIterator forward() const;
         VolumeIterator backward() const;
 
-        VolumeIterator invIterator(Node::Direction direction) const;
+        VolumeIterator invIterator(Direction direction) const;
 
         void increasePosition();
-        void increasePositionPerpendicularDirection(Node::Direction direction);
+        void increasePositionPerpendicularDirection(Direction direction);
 
         const VolumeIterator& operator ++();
 

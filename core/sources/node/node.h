@@ -8,16 +8,6 @@ namespace core
     class Node
     {
     public:
-        enum Direction
-        {
-            directionForward,
-            directionRight,
-            directionUp,
-            directionDown,
-            directionLeft,
-            directionBackward,
-            directionCount
-        };
 
         Node(core::ObjectInterface* object = nullptr);
         ~Node();
@@ -30,7 +20,6 @@ namespace core
         void chainTo(Node *other, Direction direction);
         void breakChain(Direction direction);
 
-        static Direction invDirection(Direction direction);
         static void chain(Node* first, Node* second, Direction direction);
 
     private:

@@ -4,10 +4,24 @@
 #include <memory>
 #include <vector>
 
-#include "point.h"
-
 namespace core
 {
+    enum class Direction
+    {
+        forward,
+        backward,
+        right,
+        left,
+        up,
+        down
+    };
+
+    const unsigned directionCount = static_cast<unsigned>(Direction::down) + 1;
+
+    Direction invDirection(Direction dir);
+
+    template< typename T, int dim >
+    class Point;
     class ObjectInterface;
     class Node;
     class Volume;

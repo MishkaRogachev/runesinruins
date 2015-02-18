@@ -2,6 +2,7 @@
 #define ABSTRACT_SPACE_H
 
 #include "core_traits.h"
+#include "point.h"
 
 namespace core
 {
@@ -18,6 +19,10 @@ namespace core
 
         virtual VolumePtr volumeAt(int x, int y, int z);
         virtual bool hasVolume(int x, int y, int z) const;
+
+    protected:
+        void chainVolume(const Point3i& position);
+        void breakVolumeChain(const Point3i& position);
     };
 }
 #endif // ABSTRACT_SPACE_H

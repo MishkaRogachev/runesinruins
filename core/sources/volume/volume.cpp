@@ -72,7 +72,7 @@ unsigned Volume::depth() const
     return d->size.z();
 }
 
-void Volume::chainTo(Volume* other, Node::Direction direction)
+void Volume::chainTo(Volume* other, Direction direction)
 {
     for (VolumeIterator it = this->cornerBegin(direction);
          it != this->end();
@@ -83,7 +83,7 @@ void Volume::chainTo(Volume* other, Node::Direction direction)
     }
 }
 
-void Volume::breakChain(Node::Direction direction)
+void Volume::breakChain(Direction direction)
 {
     for (VolumeIterator it = this->cornerBegin(direction);
          it != this->end();
@@ -93,7 +93,7 @@ void Volume::breakChain(Node::Direction direction)
     }
 }
 
-bool Volume::hasChain(Node::Direction direction) const
+bool Volume::hasChain(Direction direction) const
 {
     return this->cornerBegin(direction).node()->neighbour(direction) != nullptr;
 }
@@ -108,12 +108,12 @@ VolumeIterator Volume::end() const
     return VolumeIterator(this, d->size);
 }
 
-VolumeIterator Volume::cornerBegin(Node::Direction direction) const
+VolumeIterator Volume::cornerBegin(Direction direction) const
 {
     return VolumeIterator(this,
-                         direction == Node::directionForward ? d->size.x() - 1 : 0,
-                         direction == Node::directionRight ? d->size.y() - 1 : 0,
-                         direction == Node::directionUp ? d->size.z() - 1 : 0);
+                         direction == Direction::forward ? d->size.x() - 1 : 0,
+                         direction == Direction::right ? d->size.y() - 1 : 0,
+                         direction == Direction::up ? d->size.z() - 1 : 0);
 }
 
 void Volume::chainInnerNodes() const
@@ -126,17 +126,17 @@ void Volume::chainInnerNodes() const
 
         if (up.z() < d->size.z())
         {
-            it.node()->chainTo(up.node(), Node::directionUp);
+            it.node()->chainTo(up.node(), Direction::up);
         }
 
         if (right.y() < d->size.y())
         {
-            it.node()->chainTo(right.node(), Node::directionRight);
+            it.node()->chainTo(right.node(), Direction::right);
         }
 
         if (forward.x() < d->size.x())
         {
-            it.node()->chainTo(forward.node(), Node::directionForward);
+            it.node()->chainTo(forward.node(), Direction::forward);
         }
     }
 }

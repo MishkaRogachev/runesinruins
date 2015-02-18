@@ -6,10 +6,9 @@ using namespace core;
 
 void NodeTest::directions()
 {
-    for (int i = Node::directionForward; i < Node::directionCount; ++i)
+    for (unsigned i = 0; i < directionCount; ++i)
     {
-        QCOMPARE(Node::Direction(i),
-                 Node::invDirection(Node::invDirection(Node::Direction(i))));
+        QCOMPARE(Direction(i), invDirection(invDirection(Direction(i))));
     }
 }
 
@@ -18,16 +17,16 @@ void NodeTest::linkAndBreak()
     Node first;
     Node second;
 
-    for (int i = Node::directionForward; i < Node::directionCount; ++i)
+    for (unsigned i = 0; i < directionCount; ++i)
     {
-        first.chainTo(&second, Node::Direction(i));
-        QVERIFY(first.neighbour(Node::Direction(i)) == &second);
-        QVERIFY(second.neighbour(Node::invDirection(Node::Direction(i))) ==
+        first.chainTo(&second, Direction(i));
+        QVERIFY(first.neighbour(Direction(i)) == &second);
+        QVERIFY(second.neighbour(invDirection(Direction(i))) ==
                  &first);
 
-        first.breakChain(Node::Direction(i));
-        QVERIFY(first.neighbour(Node::Direction(i)) == nullptr);
-        QVERIFY(second.neighbour(Node::invDirection(Node::Direction(i))) ==
+        first.breakChain(Direction(i));
+        QVERIFY(first.neighbour(Direction(i)) == nullptr);
+        QVERIFY(second.neighbour(invDirection(Direction(i))) ==
                  nullptr);
     }
 }
@@ -37,11 +36,11 @@ void NodeTest::autoCleaningLinks()
     Node* first = new Node();
     Node* second = new Node();
 
-    first->chainTo(second, Node::directionForward);
+    first->chainTo(second, Direction::forward);
 
     delete second;
 
-    QVERIFY(first->neighbour(Node::directionForward) == nullptr);
+    QVERIFY(first->neighbour(Direction::forward) == nullptr);
 
     delete first;
 }

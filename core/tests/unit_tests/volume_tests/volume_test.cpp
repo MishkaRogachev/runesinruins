@@ -18,27 +18,27 @@ void VolumeTest::testLinkingVolumes()
     Volume vol1(8, 8, 8);
     Volume vol2(8, 8, 8);
 
-    QVERIFY(vol1.hasChain(Node::directionForward) == false);
+    QVERIFY(vol1.hasChain(Direction::forward) == false);
 
-    vol1.chainTo(&vol2, Node::directionForward);
+    vol1.chainTo(&vol2, Direction::forward);
 
-    QVERIFY(vol1.hasChain(Node::directionForward) == true);
-    QVERIFY(vol2.hasChain(Node::directionBackward) == true);
+    QVERIFY(vol1.hasChain(Direction::forward) == true);
+    QVERIFY(vol2.hasChain(Direction::backward) == true);
 
     Node* node = vol1.begin().node();
     unsigned i = 1;
 
-    while (node->neighbour(Node::directionForward))
+    while (node->neighbour(Direction::forward))
     {
-        node = node->neighbour(Node::directionForward);
+        node = node->neighbour(Direction::forward);
         ++i;
     }
     QVERIFY(i == vol1.width() + vol2.width());
 
-    vol1.breakChain(Node::directionForward);
+    vol1.breakChain(Direction::forward);
 
-    QVERIFY(vol1.hasChain(Node::directionForward) == false);
-    QVERIFY(vol2.hasChain(Node::directionBackward) == false);
+    QVERIFY(vol1.hasChain(Direction::forward) == false);
+    QVERIFY(vol2.hasChain(Direction::backward) == false);
 }
 
 void VolumeTest::testLinkingVolumesWithDifferentSizes()
@@ -46,17 +46,17 @@ void VolumeTest::testLinkingVolumesWithDifferentSizes()
     Volume vol1(16, 32, 64);
     Volume vol2(16, 32, 64);
 
-    vol1.chainTo(&vol2, Node::directionRight);
+    vol1.chainTo(&vol2, Direction::right);
 
-    QVERIFY(vol1.hasChain(Node::directionRight) == true);
-    QVERIFY(vol2.hasChain(Node::directionLeft) == true);
+    QVERIFY(vol1.hasChain(Direction::right) == true);
+    QVERIFY(vol2.hasChain(Direction::left) == true);
 
     Node* node = vol1.begin().node();
     unsigned i = 1;
 
-    while (node->neighbour(Node::directionRight))
+    while (node->neighbour(Direction::right))
     {
-        node = node->neighbour(Node::directionRight);
+        node = node->neighbour(Direction::right);
         ++i;
     }
     QVERIFY(i == vol1.height() + vol2.height());
