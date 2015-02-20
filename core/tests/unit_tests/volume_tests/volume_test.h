@@ -9,8 +9,8 @@ class VolumeTest: public QObject
 
 private slots:
     void testInnerLinking();
-    void testLinkingVolumes();
-    void testLinkingVolumesWithDifferentSizes();
+    void testChaining();
+    void testChainingWithDifferentSizes();
 
 private:
     void testVolume(int i, int j, int k);

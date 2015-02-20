@@ -1,50 +1,10 @@
 #include "cache_space_test.h"
 
-#include <QDebug>
-#include <unordered_map>
-
 #include "cache_space.h"
 #include "volume.h"
+#include "space_mock.h"
 
 using namespace core;
-
-class SpaceMock: public AbstractSpace
-{
-public:
-    std::unordered_map<Point3i, VolumePtr> map;
-
-    SpaceMock(const std::unordered_map<Point3i, VolumePtr>& map =
-            std::unordered_map<Point3i, VolumePtr>()):
-        AbstractSpace(),
-        map(map)
-    {}
-
-    virtual Point3iVec positions() const override
-    {
-        Point3iVec vector;
-        for (const auto& item: map)
-            vector.push_back(item.first);
-        return vector;
-    }
-
-    virtual VolumePtrVec volumes() const override
-    {
-        VolumePtrVec vector;
-        for (const auto& item: map)
-            vector.push_back(item.second);
-        return vector;
-    }
-
-    virtual VolumePtr volumeAt(const Point3i& position) override
-    {
-        return map[position];
-    }
-
-    virtual bool hasVolume(const Point3i& position) const override
-    {
-        return map.count(position) > 0;
-    }
-};
 
 void CacheSpaceTest::testConstructors()
 {

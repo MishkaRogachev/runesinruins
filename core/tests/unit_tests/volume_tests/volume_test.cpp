@@ -6,14 +6,14 @@ using namespace core;
 
 void VolumeTest::testInnerLinking()
 {
-//    this->testVolume(1, 1, 1);
-//    this->testVolume(8, 1, 1);
-//    this->testVolume(1, 16, 32);
+    this->testVolume(1, 1, 1);
+    this->testVolume(8, 1, 1);
+    this->testVolume(1, 16, 32);
     this->testVolume(16, 24, 32);
-//    this->testVolume(16, 16, 256);
+    this->testVolume(16, 16, 256);
 }
 
-void VolumeTest::testLinkingVolumes()
+void VolumeTest::testChaining()
 {
     Volume vol1(8, 8, 8);
     Volume vol2(8, 8, 8);
@@ -41,7 +41,7 @@ void VolumeTest::testLinkingVolumes()
     QVERIFY(vol2.hasChain(Direction::backward) == false);
 }
 
-void VolumeTest::testLinkingVolumesWithDifferentSizes()
+void VolumeTest::testChainingWithDifferentSizes()
 {
     Volume vol1(16, 32, 64);
     Volume vol2(16, 32, 64);
