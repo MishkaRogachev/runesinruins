@@ -13,7 +13,7 @@ namespace core
         virtual ~AbstractVolumeRepository();
 
         virtual Point3iVec allPositions() const = 0;
-        virtual VolumePtrVec allVolumes() const = 0;
+        virtual VolumePtrVec allVolumes() = 0;
         virtual VolumePtr load(const Point3i& position) = 0;
         virtual void save(const VolumePtr& volume, const Point3i& position) = 0;
         virtual bool canLoad(const Point3i& position) const = 0;

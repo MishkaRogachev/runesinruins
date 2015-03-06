@@ -1,89 +1,71 @@
 #include "cache_volume_repository.h"
 
-#include <unordered_map>
-
 using namespace core;
 
-class CacheVolumeRepository::CacheSpacePrivate
-{
-public:
-    std::unordered_map<Point3i, VolumePtr> cache;
-    VolumeRepositoryPtr proxySpace;
-
-    CacheSpacePrivate(const VolumeRepositoryPtr& proxySpace):
-        proxySpace(proxySpace)
-    {}
-};
-
-CacheVolumeRepository::CacheVolumeRepository(const VolumeRepositoryPtr& proxySpace):
-    AbstractVolumeRepository(),
-    d(new CacheSpacePrivate(proxySpace))
+CacheVolumeRepository::CacheVolumeRepository():
+    AbstractVolumeRepository()
 {}
 
 CacheVolumeRepository::~CacheVolumeRepository()
-{
-    delete d;
-}
+{}
 
 Point3iVec CacheVolumeRepository::allPositions() const
 {
-    Point3iVec vector;
-    for (const auto& item: d->cache)
-        vector.push_back(item.first);
-    return vector;
+    return this->loadedPositions();
 }
 
-VolumePtrVec CacheVolumeRepository::allVolumes() const
+VolumePtrVec CacheVolumeRepository::allVolumes()
 {
-    VolumePtrVec vector;
-    for (const auto& item: d->cache)
-        vector.push_back(item.second);
-    return vector;
+    return this->loadedVolumes();
 }
 
 bool CacheVolumeRepository::canLoad(const Point3i& position) const
 {
-    return this->isLoaded(position) || d->proxySpace->canLoad(position);
+    return this->isLoaded(position);
+}
+
+Point3iVec CacheVolumeRepository::loadedPositions() const
+{
+    Point3iVec vector;
+    for (const auto& item: m_cache)
+        vector.push_back(item.first);
+    return vector;
+}
+
+VolumePtrVec CacheVolumeRepository::loadedVolumes() const
+{
+    VolumePtrVec vector;
+    for (const auto& item: m_cache)
+        vector.push_back(item.second);
+    return vector;
 }
 
 VolumePtr CacheVolumeRepository::load(const Point3i& position)
 {
     if (this->isLoaded(position))
     {
-        return d->cache[position];
+        return m_cache[position];
     }
     else
     {
-        return this->reload(position);
+        return VolumePtr();
     }
 }
 
-void CacheVolumeRepository::save(const VolumePtr& volume, const Point3i& position)
+void CacheVolumeRepository::save(const VolumePtr& volume,
+                                 const Point3i& position)
 {
-    d->cache[position] = volume;
-    d->proxySpace->save(volume, position);
-}
-
-VolumePtr CacheVolumeRepository::reload(const Point3i& position)
-{
-    if (!d->proxySpace->canLoad(position)) return VolumePtr();
-    d->cache[position] = d->proxySpace->load(position);
-    return d->cache[position];
+    m_cache[position] = volume;
 }
 
 void CacheVolumeRepository::unload(const Point3i& position)
 {
-    d->cache.erase(position);
+    m_cache.erase(position);
 }
 
 bool CacheVolumeRepository::isLoaded(const Point3i& position) const
 {
-    return d->cache.count(position) > 0;
-}
-
-VolumePtr CacheVolumeRepository::reload(int x, int y, int z)
-{
-    return this->reload(Point3i(x, y, z));
+    return m_cache.count(position) > 0;
 }
 
 void CacheVolumeRepository::unload(int x, int y, int z)

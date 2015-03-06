@@ -18,6 +18,7 @@ set(SOURCES
     volume/volume_iterator.cpp
     volume_repository/abstract_volume_repository.cpp
     volume_repository/cache_volume_repository.cpp
+    volume_repository/proxy_volume_repository.cpp
     volume_repository/volume_repository.cpp
 )
 

@@ -11,7 +11,7 @@ Point3iVec VolumeRepository::allPositions() const
 
 }
 
-VolumePtrVec VolumeRepository::allVolumes() const
+VolumePtrVec VolumeRepository::allVolumes()
 {
 
 }

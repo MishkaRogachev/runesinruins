@@ -11,7 +11,7 @@ namespace core
         VolumeRepository();
 
         virtual Point3iVec allPositions() const override;
-        virtual VolumePtrVec allVolumes() const override;
+        virtual VolumePtrVec allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
         virtual void save(const VolumePtr& volume, const Point3i& position) override;
         virtual bool canLoad(const Point3i& position) const override;
