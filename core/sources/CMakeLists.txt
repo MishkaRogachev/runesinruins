@@ -16,8 +16,9 @@ set(SOURCES
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp
-    space/abstract_space.cpp
-    space/cache_space.cpp
+    volume_repository/abstract_volume_repository.cpp
+    volume_repository/cache_volume_repository.cpp
+    volume_repository/volume_repository.cpp
 )
 
 # Library target

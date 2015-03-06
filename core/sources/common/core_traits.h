@@ -12,13 +12,13 @@ namespace core
     class ObjectInterface;
     class Node;
     class Volume;
-    class AbstractSpace;
+    class AbstractVolumeRepository;
 
     typedef Point<unsigned, 3> Point3u;
     typedef Point<int, 3> Point3i;
 
     typedef std::shared_ptr<Volume> VolumePtr;
-    typedef std::shared_ptr<AbstractSpace> SpacePtr;
+    typedef std::shared_ptr<AbstractVolumeRepository> VolumeRepositoryPtr;
 
     typedef std::vector<Point3u> Point3uVec;
     typedef std::vector<Point3i> Point3iVec;

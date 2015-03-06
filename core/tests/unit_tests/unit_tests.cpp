@@ -4,8 +4,8 @@
 #include "common_tests/point_test.h"
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
-#include "space_tests/abstract_space_test.h"
-#include "space_tests/cache_space_test.h"
+#include "volume_repository_tests/abstract_volume_repository_test.h"
+#include "volume_repository_tests/cache_volume_repository_test.h"
 
 int main()
 {
@@ -21,11 +21,11 @@ int main()
     VolumeTest volumeTest;
     QTest::qExec(&volumeTest);
 
-    AbstractSpaceTest abstractSpaceTest;
-    QTest::qExec(&abstractSpaceTest);
+    AbstractVolumeRepositoryTest abstractVolumeRepositoryTest;
+    QTest::qExec(&abstractVolumeRepositoryTest);
 
-    CacheSpaceTest cachedSpaceTest;
-    QTest::qExec(&cachedSpaceTest);
+    CacheVolumeRepositoryTest cachedVolumeRepositoryTest;
+    QTest::qExec(&cachedVolumeRepositoryTest);
 
     return 0;
 }
