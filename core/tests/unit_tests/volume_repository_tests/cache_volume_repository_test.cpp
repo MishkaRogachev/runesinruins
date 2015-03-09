@@ -3,47 +3,55 @@
 #include "cache_volume_repository.h"
 #include "volume.h"
 
+#include <QDebug>
+
 using namespace core;
 
-void CacheVolumeRepositoryTest::testConstructors()
+
+VolumeRepositoryPtr CacheVolumeRepositoryTest::volumeRepository() const
 {
-//    CacheVolumeRepository space(SpacePtr(new SpaceMock()));
-//    Q_UNUSED(space)
+    return VolumeRepositoryPtr(new CacheVolumeRepository());
 }
 
-void CacheVolumeRepositoryTest::testAbstractInterface()
-{
-//    SpacePtr mock(new SpaceMock({ { { 12, 34, 1 }, VolumePtr(new Volume(1, 1, 1)) },
-//                                  { { 43, -5, 0 }, VolumePtr(new Volume(1, 1, 1)) },
-//                                  { { -7, 69, 7 }, VolumePtr(new Volume(1, 1, 1)) }}));
-//    CacheVolumeRepository space(mock);
+//void CacheVolumeRepositoryTest::testConstructors()
+//{
+////    CacheVolumeRepository space(SpacePtr(new SpaceMock()));
+////    Q_UNUSED(space)
+//}
 
-//    QVERIFY(space.allPositions().empty());
-//    QVERIFY(space.allVolumes().empty());
+//void CacheVolumeRepositoryTest::testAbstractInterface()
+//{
+////    SpacePtr mock(new SpaceMock({ { { 12, 34, 1 }, VolumePtr(new Volume(1, 1, 1)) },
+////                                  { { 43, -5, 0 }, VolumePtr(new Volume(1, 1, 1)) },
+////                                  { { -7, 69, 7 }, VolumePtr(new Volume(1, 1, 1)) }}));
+////    CacheVolumeRepository space(mock);
 
-//    QCOMPARE(space.load(32, 11, 4), VolumePtr());
-//    QVERIFY(space.load(12, 34, 1) != VolumePtr());
-}
+////    QVERIFY(space.allPositions().empty());
+////    QVERIFY(space.allVolumes().empty());
 
-void CacheVolumeRepositoryTest::testLoading()
-{
-//    SpacePtr mock(new SpaceMock({ { { 4, 4, -4 }, VolumePtr(new Volume(1, 1, 1)) },
-//                                  { { 5, -5, 0 }, VolumePtr(new Volume(1, 1, 1)) } }));
-//    CacheVolumeRepository space(mock);
+////    QCOMPARE(space.load(32, 11, 4), VolumePtr());
+////    QVERIFY(space.load(12, 34, 1) != VolumePtr());
+//}
 
-//    QVERIFY(!space.load(0, 1, 2).get());
-//    QVERIFY(space.load(4, 4, -4).get());
+//void CacheVolumeRepositoryTest::testLoading()
+//{
+////    SpacePtr mock(new SpaceMock({ { { 4, 4, -4 }, VolumePtr(new Volume(1, 1, 1)) },
+////                                  { { 5, -5, 0 }, VolumePtr(new Volume(1, 1, 1)) } }));
+////    CacheVolumeRepository space(mock);
 
-//    QVERIFY(!space.isLoaded(0, 1, 2));
-//    QVERIFY(space.isLoaded(4, 4, -4));
+////    QVERIFY(!space.load(0, 1, 2).get());
+////    QVERIFY(space.load(4, 4, -4).get());
 
-//    QVERIFY(!space.allVolumes().empty());
+////    QVERIFY(!space.isLoaded(0, 1, 2));
+////    QVERIFY(space.isLoaded(4, 4, -4));
 
-//    QCOMPARE(space.load(0, 1, 2), VolumePtr());
-//    QVERIFY(space.load(4, 4, -4) != VolumePtr());
+////    QVERIFY(!space.allVolumes().empty());
 
-//    space.unload(4, 4, -4);
+////    QCOMPARE(space.load(0, 1, 2), VolumePtr());
+////    QVERIFY(space.load(4, 4, -4) != VolumePtr());
 
-//    QVERIFY(space.allVolumes().empty());
-//    QVERIFY(!space.isLoaded(4, 4, -4));
-}
+////    space.unload(4, 4, -4);
+
+////    QVERIFY(space.allVolumes().empty());
+////    QVERIFY(!space.isLoaded(4, 4, -4));
+//}

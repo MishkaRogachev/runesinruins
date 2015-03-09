@@ -21,10 +21,6 @@ namespace core
         VolumePtr load(int x, int y, int z);
         void save(const VolumePtr& volume, int x, int y, int z);
         bool canLoad(int x, int y, int z) const;
-
-    protected:
-        void chainVolume(const Point3i& position);
-        void breakVolumeChain(const Point3i& position);
     };
 }
 #endif // ABSTRACT_VOLUME_REPOSITORY_H

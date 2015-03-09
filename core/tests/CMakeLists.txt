@@ -18,6 +18,7 @@ set(TEST_SOURCES
     unit_tests/volume_tests/volume_test.cpp
     unit_tests/volume_repository_tests/abstract_volume_repository_test.cpp
     unit_tests/volume_repository_tests/cache_volume_repository_test.cpp
+    unit_tests/volume_repository_tests/proxy_volume_repository_test.cpp
     unit_tests/unit_tests.cpp
 )
 

@@ -15,24 +15,22 @@ ProxyVolumeRepository::~ProxyVolumeRepository()
 
 Point3iVec ProxyVolumeRepository::allPositions() const
 {
-    Point3iVec v1 = this->loadedPositions();
-    if (!m_sourceRepository) return v1;
+    Point3iVec loaded = this->loadedPositions();
+    if (!m_sourceRepository) return loaded;
 
-    Point3iVec v2 = m_sourceRepository->allPositions();
+    Point3iVec unloaded = m_sourceRepository->allPositions();
 
-    std::sort(v1.begin(), v1.end());
-    std::sort(v2.begin(), v2.end());
+    std::sort(loaded.begin(), loaded.end());
+    std::sort(unloaded.begin(), unloaded.end());
 
-    Point3iVec mergeTarget;
+    Point3iVec all;
 
-    std::merge(v1.begin(), v1.end(), v2.begin(), v2.end(),
-        std::insert_iterator<Point3iVec>(mergeTarget, mergeTarget.end()));
+    std::merge(loaded.begin(), loaded.end(), unloaded.begin(), unloaded.end(),
+        std::insert_iterator<Point3iVec>(all, all.end()));
 
-    mergeTarget.erase(
-        std::unique(mergeTarget.begin(), mergeTarget.end()),
-        mergeTarget.end());
+    all.erase(std::unique(all.begin(), all.end()), all.end());
 
-    return mergeTarget;
+    return all;
 }
 
 VolumePtrVec ProxyVolumeRepository::allVolumes()
@@ -63,7 +61,11 @@ void ProxyVolumeRepository::save(const VolumePtr& volume,
                                  const Point3i& position)
 {
     CacheVolumeRepository::save(volume, position);
-    m_sourceRepository->save(volume, position);
+
+    if (m_sourceRepository)
+    {
+        m_sourceRepository->save(volume, position);
+    }
 }
 
 bool ProxyVolumeRepository::canLoad(const Point3i& position) const
@@ -76,7 +78,7 @@ bool ProxyVolumeRepository::canLoad(const Point3i& position) const
 
 VolumePtr ProxyVolumeRepository::reload(const Point3i& position)
 {
-    if (m_sourceRepository->canLoad(position))
+    if (m_sourceRepository && m_sourceRepository->canLoad(position))
     {
         CacheVolumeRepository::save(m_sourceRepository->load(position),
                                     position);
@@ -93,5 +95,3 @@ VolumePtr ProxyVolumeRepository::reload(int x, int y, int z)
 {
     return this->reload(Point3i(x, y, z));
 }
-
-

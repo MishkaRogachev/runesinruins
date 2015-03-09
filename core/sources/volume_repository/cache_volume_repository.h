@@ -32,7 +32,7 @@ namespace core
         void unload(int x, int y, int z);
         bool isLoaded(int x, int y, int z) const;
 
-    protected:
+    private:
         std::unordered_map<Point3i, VolumePtr> m_cache;
     };
 }

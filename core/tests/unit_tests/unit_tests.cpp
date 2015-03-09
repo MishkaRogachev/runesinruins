@@ -6,6 +6,7 @@
 #include "volume_tests/volume_test.h"
 #include "volume_repository_tests/abstract_volume_repository_test.h"
 #include "volume_repository_tests/cache_volume_repository_test.h"
+#include "volume_repository_tests/proxy_volume_repository_test.h"
 
 int main()
 {
@@ -26,6 +27,9 @@ int main()
 
     CacheVolumeRepositoryTest cachedVolumeRepositoryTest;
     QTest::qExec(&cachedVolumeRepositoryTest);
+
+    ProxyVolumeRepositoryTest proxyVolumeRepositoryTest;
+    QTest::qExec(&proxyVolumeRepositoryTest);
 
     return 0;
 }

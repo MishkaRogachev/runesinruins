@@ -1,5 +1,7 @@
 #include "cache_volume_repository.h"
 
+#include "volume.h"
+
 using namespace core;
 
 CacheVolumeRepository::CacheVolumeRepository():
@@ -42,14 +44,21 @@ VolumePtrVec CacheVolumeRepository::loadedVolumes() const
 
 VolumePtr CacheVolumeRepository::load(const Point3i& position)
 {
-    if (this->isLoaded(position))
+    VolumePtr current = m_cache[position];
+
+    if (current)
     {
-        return m_cache[position];
+        for (Direction direction: Direction::allDirections())
+        {
+            Point3i neigbour = position.neighbour(direction);
+
+            if (!current->hasChain(direction) && this->isLoaded(neigbour))
+            {
+                current->chainTo(m_cache[neigbour].get(), direction);
+            }
+        }
     }
-    else
-    {
-        return VolumePtr();
-    }
+    return current;
 }
 
 void CacheVolumeRepository::save(const VolumePtr& volume,
@@ -60,6 +69,18 @@ void CacheVolumeRepository::save(const VolumePtr& volume,
 
 void CacheVolumeRepository::unload(const Point3i& position)
 {
+    VolumePtr current = m_cache[position];
+
+    if (!current) return;
+
+    for (Direction direction: Direction::allDirections())
+    {
+        if (current->hasChain(direction))
+        {
+            current->breakChain(direction);
+        }
+    }
+
     m_cache.erase(position);
 }
 

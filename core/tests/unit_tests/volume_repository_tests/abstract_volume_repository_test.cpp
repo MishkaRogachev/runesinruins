@@ -5,87 +5,33 @@
 
 using namespace core;
 
-
-void AbstractVolumeRepositoryTest::testIntegrity()
+class AbstractVolumeRepositoryMock: public AbstractVolumeRepository
 {
-//    VolumePtr v1(new Volume(5, 5, 5));
-//    VolumePtr v2(new Volume(5, 5, 5));
-//    VolumePtr v3(new Volume(5, 5, 5));
+public:
+    virtual Point3iVec allPositions() const override { return Point3iVec(); }
+    virtual VolumePtrVec allVolumes() override { return VolumePtrVec(); }
+    virtual VolumePtr load(const Point3i&) override { return VolumePtr(); }
+    virtual void save(const VolumePtr&, const Point3i&) override {}
+    virtual bool canLoad(const Point3i&) const override { return false; }
+};
 
-//    SpacePtr mock(new SpaceMock({ { { 1, 1, 1 }, v1 },
-//                                  { { 2, 1, 1 }, v2 },
-//                                  { { 1, 2, 1 }, v3 } }));
-
-//    QVERIFY(mock->canLoad(1, 1, 1));
-//    QVERIFY(mock->canLoad(2, 1, 1));
-//    QVERIFY(mock->canLoad(1, 2, 1));
-//    QVERIFY(!mock->canLoad(2, 2, 1));
-
-//    QCOMPARE(v1, mock->load(1, 1, 1));
-//    QCOMPARE(v2, mock->load(2, 1, 1));
-//    QCOMPARE(v3, mock->load(1, 2, 1));
+VolumeRepositoryPtr AbstractVolumeRepositoryTest::volumeRepository() const
+{
+    return VolumeRepositoryPtr(new AbstractVolumeRepositoryMock());
 }
 
-void AbstractVolumeRepositoryTest::testChaning2D()
+void AbstractVolumeRepositoryTest::testAbstractVolumeRepositoryInterface()
 {
-//    VolumePtr v1(new Volume(5, 5, 5));
-//    VolumePtr v2(new Volume(5, 5, 5));
-//    VolumePtr v3(new Volume(5, 5, 5));
-//    VolumePtr v4(new Volume(5, 5, 5));
-//    VolumePtr v5(new Volume(5, 5, 5));
-//    VolumePtr v6(new Volume(5, 5, 5));
-//    VolumePtr v7(new Volume(5, 5, 5));
-//    VolumePtr v8(new Volume(5, 5, 5));
-//    VolumePtr v9(new Volume(5, 5, 5));
+    VolumeRepositoryPtr volumeRepository = this->volumeRepository();
 
-//    SpaceMock mock({ { { 0, 0, 0 }, v1 }, { { 0, 1, 0 }, v2 }, { { 0, 2, 0 }, v3 },
-//                     { { 1, 0, 0 }, v4 }, { { 1, 1, 0 }, v5 }, { { 1, 2, 0 }, v6 },
-//                     { { 2, 0, 0 }, v7 }, { { 2, 1, 0 }, v8 }, { { 2, 2, 0 }, v9 } });
+    QVERIFY(volumeRepository->allPositions().empty());
+    QVERIFY(volumeRepository->allVolumes().empty());
 
-//    QVERIFY(v1->hasChain(Direction::forward));
-//    QVERIFY(!v1->hasChain(Direction::backward));
-//    QVERIFY(v1->hasChain(Direction::right));
-//    QVERIFY(!v1->hasChain(Direction::left));
+    QVERIFY(!volumeRepository->canLoad(3, 4, 3));
+    QVERIFY(!volumeRepository->canLoad(3, 3, 2));
+    QVERIFY(!volumeRepository->canLoad(4, 3, 2));
 
-//    QVERIFY(v3->hasChain(Direction::forward));
-//    QVERIFY(!v3->hasChain(Direction::backward));
-//    QVERIFY(!v3->hasChain(Direction::right));
-//    QVERIFY(v3->hasChain(Direction::left));
-
-//    QVERIFY(v5->hasChain(Direction::forward));
-//    QVERIFY(v5->hasChain(Direction::backward));
-//    QVERIFY(v5->hasChain(Direction::right));
-//    QVERIFY(v5->hasChain(Direction::left));
-
-//    QVERIFY(!v7->hasChain(Direction::forward));
-//    QVERIFY(v7->hasChain(Direction::backward));
-//    QVERIFY(v7->hasChain(Direction::right));
-//    QVERIFY(!v7->hasChain(Direction::left));
-
-//    QVERIFY(!v9->hasChain(Direction::forward));
-//    QVERIFY(v9->hasChain(Direction::backward));
-//    QVERIFY(!v9->hasChain(Direction::right));
-//    QVERIFY(v9->hasChain(Direction::left));
-
-//    QVERIFY(v2->hasChain(Direction::forward));
-//    QVERIFY(v4->hasChain(Direction::right));
-//    QVERIFY(v6->hasChain(Direction::left));
-//    QVERIFY(v8->hasChain(Direction::backward));
-
-//    QVERIFY(v5->hasChain(Direction::forward));
-//    QVERIFY(v5->hasChain(Direction::right));
-//    QVERIFY(v5->hasChain(Direction::left));
-//    QVERIFY(v5->hasChain(Direction::backward));
-
-//    mock.remove(Point3i(1, 1, 0));
-
-//    QVERIFY(!v2->hasChain(Direction::forward));
-//    QVERIFY(!v4->hasChain(Direction::right));
-//    QVERIFY(!v6->hasChain(Direction::left));
-//    QVERIFY(!v8->hasChain(Direction::backward));
-
-//    QVERIFY(!v5->hasChain(Direction::forward));
-//    QVERIFY(!v5->hasChain(Direction::right));
-//    QVERIFY(!v5->hasChain(Direction::left));
-//    QVERIFY(!v5->hasChain(Direction::backward));
+    QVERIFY(!volumeRepository->load(3, 4, 3));
+    QVERIFY(!volumeRepository->load(3, 3, 2));
+    QVERIFY(!volumeRepository->load(4, 3, 2));
 }
