@@ -25,6 +25,9 @@ namespace core
         T y() const { assert(dim > 1); return d[1]; }
         T z() const { assert(dim > 2); return d[2]; }
 
+        const std::array< T, dim >& array() const { return d; }
+        std::array< T, dim >& array() { return d; }
+
         void setX(T x) { assert(dim > 0); d[0] = x; }
         void setY(T y) { assert(dim > 1); d[1] = y; }
         void setZ(T z) { assert(dim > 2); d[2] = z; }

@@ -5,21 +5,6 @@
 
 using namespace core;
 
-class AbstractVolumeRepositoryMock: public AbstractVolumeRepository
-{
-public:
-    virtual Point3iVec allPositions() const override { return Point3iVec(); }
-    virtual VolumePtrVec allVolumes() override { return VolumePtrVec(); }
-    virtual VolumePtr load(const Point3i&) override { return VolumePtr(); }
-    virtual void save(const VolumePtr&, const Point3i&) override {}
-    virtual bool canLoad(const Point3i&) const override { return false; }
-};
-
-VolumeRepositoryPtr AbstractVolumeRepositoryTest::volumeRepository() const
-{
-    return VolumeRepositoryPtr(new AbstractVolumeRepositoryMock());
-}
-
 void AbstractVolumeRepositoryTest::testAbstractVolumeRepositoryInterface()
 {
     VolumeRepositoryPtr volumeRepository = this->volumeRepository();
@@ -29,9 +14,16 @@ void AbstractVolumeRepositoryTest::testAbstractVolumeRepositoryInterface()
 
     QVERIFY(!volumeRepository->canLoad(3, 4, 3));
     QVERIFY(!volumeRepository->canLoad(3, 3, 2));
-    QVERIFY(!volumeRepository->canLoad(4, 3, 2));
 
     QVERIFY(!volumeRepository->load(3, 4, 3));
     QVERIFY(!volumeRepository->load(3, 3, 2));
-    QVERIFY(!volumeRepository->load(4, 3, 2));
+
+    VolumePtr volume(new Volume(1, 1, 1));
+    volumeRepository->save(volume, 3, 4, 3);
+
+    QVERIFY(volumeRepository->canLoad(3, 4, 3));
+    QVERIFY(!volumeRepository->canLoad(3, 3, 2));
+
+    QCOMPARE(volume, volumeRepository->load(3, 4, 3));
+    QVERIFY(!volumeRepository->load(3, 3, 2));
 }

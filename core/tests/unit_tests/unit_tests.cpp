@@ -22,9 +22,6 @@ int main()
     VolumeTest volumeTest;
     QTest::qExec(&volumeTest);
 
-    AbstractVolumeRepositoryTest abstractVolumeRepositoryTest;
-    QTest::qExec(&abstractVolumeRepositoryTest);
-
     CacheVolumeRepositoryTest cachedVolumeRepositoryTest;
     QTest::qExec(&cachedVolumeRepositoryTest);
 

@@ -10,7 +10,7 @@ class AbstractVolumeRepositoryTest : public QObject
     Q_OBJECT
 
 protected:
-    virtual core::VolumeRepositoryPtr volumeRepository() const;
+    virtual core::VolumeRepositoryPtr volumeRepository() const = 0;
 
 private slots:
     void testAbstractVolumeRepositoryInterface();

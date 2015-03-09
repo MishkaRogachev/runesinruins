@@ -13,6 +13,36 @@ VolumeRepositoryPtr CacheVolumeRepositoryTest::volumeRepository() const
     return VolumeRepositoryPtr(new CacheVolumeRepository());
 }
 
+void CacheVolumeRepositoryTest::unloadTest()
+{
+    CacheVolumeRepository volumeRepository;
+
+    VolumePtr volume(new Volume(1, 1, 1));
+    volumeRepository.save(volume, -2, 3, 1);
+    volumeRepository.save(volume, 0, 1, 2);
+
+    QVERIFY(volumeRepository.isLoaded(-2, 3, 1));
+    QVERIFY(volumeRepository.isLoaded(0, 1, 2));
+
+    volumeRepository.unload(-2, 3, 1);
+
+    QVERIFY(!volumeRepository.isLoaded(-2, 3, 1));
+    QVERIFY(volumeRepository.isLoaded(0, 1, 2));
+
+    volumeRepository.unload(0, 1, 2);
+
+    QVERIFY(!volumeRepository.isLoaded(-2, 3, 1));
+    QVERIFY(!volumeRepository.isLoaded(0, 1, 2));
+
+    QVERIFY(volumeRepository.allVolumes().empty());
+
+}
+
+void CacheVolumeRepositoryTest::chainingTest()
+{
+
+}
+
 //void CacheVolumeRepositoryTest::testConstructors()
 //{
 ////    CacheVolumeRepository space(SpacePtr(new SpaceMock()));

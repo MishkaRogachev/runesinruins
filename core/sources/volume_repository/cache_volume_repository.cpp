@@ -44,7 +44,8 @@ VolumePtrVec CacheVolumeRepository::loadedVolumes() const
 
 VolumePtr CacheVolumeRepository::load(const Point3i& position)
 {
-    VolumePtr current = m_cache[position];
+    VolumePtr current;
+    if (m_cache.count(position) > 0) current = m_cache[position];
 
     if (current)
     {
@@ -69,7 +70,8 @@ void CacheVolumeRepository::save(const VolumePtr& volume,
 
 void CacheVolumeRepository::unload(const Point3i& position)
 {
-    VolumePtr current = m_cache[position];
+    VolumePtr current;
+    if (m_cache.count(position) > 0) current = m_cache[position];
 
     if (!current) return;
 

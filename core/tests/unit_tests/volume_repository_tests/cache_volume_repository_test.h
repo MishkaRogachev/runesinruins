@@ -11,9 +11,8 @@ protected:
     virtual core::VolumeRepositoryPtr volumeRepository() const override;
 
 private slots:
-//    void testConstructors();
-//    void testAbstractInterface();
-//    void testLoading();
+    void unloadTest();
+    void chainingTest();
 };
 
 #endif // CACHE_VOLUME_REPOSITORY_TEST_H
