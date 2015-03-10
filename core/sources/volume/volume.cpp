@@ -93,6 +93,14 @@ void Volume::breakChain(Direction direction)
     }
 }
 
+void Volume::breakAllChains()
+{
+    for (Direction direction: Direction::allDirections())
+    {
+        if (this->hasChain(direction)) this->breakChain(direction);
+    }
+}
+
 bool Volume::hasChain(Direction direction) const
 {
     return this->cornerBegin(direction).node()->neighbour(direction) != nullptr;

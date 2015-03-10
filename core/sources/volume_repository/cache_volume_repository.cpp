@@ -47,18 +47,7 @@ VolumePtr CacheVolumeRepository::load(const Point3i& position)
     VolumePtr current;
     if (m_cache.count(position) > 0) current = m_cache[position];
 
-    if (current)
-    {
-        for (Direction direction: Direction::allDirections())
-        {
-            Point3i neigbour = position.neighbour(direction);
-
-            if (!current->hasChain(direction) && this->isLoaded(neigbour))
-            {
-                current->chainTo(m_cache[neigbour].get(), direction);
-            }
-        }
-    }
+    if (current) this->chain(current, position);
     return current;
 }
 
@@ -66,6 +55,7 @@ void CacheVolumeRepository::save(const VolumePtr& volume,
                                  const Point3i& position)
 {
     m_cache[position] = volume;
+    this->chain(volume, position);
 }
 
 void CacheVolumeRepository::unload(const Point3i& position)
@@ -75,13 +65,7 @@ void CacheVolumeRepository::unload(const Point3i& position)
 
     if (!current) return;
 
-    for (Direction direction: Direction::allDirections())
-    {
-        if (current->hasChain(direction))
-        {
-            current->breakChain(direction);
-        }
-    }
+    this->breakChain(current);
 
     m_cache.erase(position);
 }
@@ -99,4 +83,28 @@ void CacheVolumeRepository::unload(int x, int y, int z)
 bool CacheVolumeRepository::isLoaded(int x, int y, int z) const
 {
     return this->isLoaded(Point3i(x, y, z));
+}
+
+void CacheVolumeRepository::chain(const VolumePtr& volume, const Point3i& position)
+{
+    for (Direction direction: Direction::allDirections())
+    {
+        Point3i neigbour = position.neighbour(direction);
+
+        if (!volume->hasChain(direction) && this->isLoaded(neigbour))
+        {
+            volume->chainTo(m_cache[neigbour].get(), direction);
+        }
+    }
+}
+
+void CacheVolumeRepository::breakChain(const VolumePtr& volume)
+{
+    for (Direction direction: Direction::allDirections())
+    {
+        if (volume->hasChain(direction))
+        {
+            volume->breakChain(direction);
+        }
+    }
 }

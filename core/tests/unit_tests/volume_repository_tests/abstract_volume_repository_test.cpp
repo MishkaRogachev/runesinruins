@@ -5,7 +5,7 @@
 
 using namespace core;
 
-void AbstractVolumeRepositoryTest::testAbstractVolumeRepositoryInterface()
+void AbstractVolumeRepositoryTest::loadTest()
 {
     VolumeRepositoryPtr volumeRepository = this->volumeRepository();
 

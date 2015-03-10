@@ -24,6 +24,7 @@ namespace core
 
         void chainTo(Volume* other, Direction direction);
         void breakChain(Direction direction);
+        void breakAllChains();
         bool hasChain(Direction direction) const;
 
         VolumeIterator begin() const;

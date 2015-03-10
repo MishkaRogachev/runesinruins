@@ -32,6 +32,10 @@ namespace core
         void unload(int x, int y, int z);
         bool isLoaded(int x, int y, int z) const;
 
+    protected:
+        void chain(const VolumePtr& volume, const Point3i& position);
+        void breakChain(const VolumePtr& volume);
+
     private:
         std::unordered_map<Point3i, VolumePtr> m_cache;
     };

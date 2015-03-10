@@ -13,7 +13,7 @@ protected:
     virtual core::VolumeRepositoryPtr volumeRepository() const = 0;
 
 private slots:
-    void testAbstractVolumeRepositoryInterface();
+    void loadTest();
 
 };
 
