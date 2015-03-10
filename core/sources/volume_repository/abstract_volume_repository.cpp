@@ -19,6 +19,11 @@ void AbstractVolumeRepository::save(const VolumePtr& volume,
     this->save(volume, Point3i(x, y, z));
 }
 
+void AbstractVolumeRepository::remove(int x, int y, int z)
+{
+    this->remove(Point3i(x, y, z));
+}
+
 bool AbstractVolumeRepository::canLoad(int x, int y, int z) const
 {
     return this->canLoad(Point3i(x, y, z));

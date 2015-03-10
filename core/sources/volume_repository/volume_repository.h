@@ -18,6 +18,7 @@ namespace core
 
         using AbstractVolumeRepository::load;
         using AbstractVolumeRepository::save;
+        using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
     };
 }

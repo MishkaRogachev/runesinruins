@@ -12,6 +12,7 @@ protected:
 
 private slots:
     void unloadTest();
+    void unloadAllTest();
     void chainingTest();
 };
 

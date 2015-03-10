@@ -11,6 +11,9 @@ protected:
     virtual core::VolumeRepositoryPtr volumeRepository() const override;
 
 private slots:
+    void canLoadisLoadedTest();
+    void proxySaveTest();
+    void reloadTest();
 
 };
 

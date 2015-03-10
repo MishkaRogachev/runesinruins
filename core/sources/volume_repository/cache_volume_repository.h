@@ -11,22 +11,25 @@ namespace core
     {
     public:
         CacheVolumeRepository();
-        ~CacheVolumeRepository();
+        ~CacheVolumeRepository() override;
 
         virtual Point3iVec allPositions() const override;
         virtual VolumePtrVec allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
         virtual void save(const VolumePtr& volume,
                           const Point3i& position) override;
+        virtual void remove(const Point3i& position) override;
         virtual bool canLoad(const Point3i& position) const override;
 
         using AbstractVolumeRepository::load;
         using AbstractVolumeRepository::save;
+        using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
 
         Point3iVec loadedPositions() const;
         VolumePtrVec loadedVolumes() const;
         void unload(const Point3i& position);
+        void unloadAll();
         bool isLoaded(const Point3i& position) const;
 
         void unload(int x, int y, int z);

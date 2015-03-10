@@ -68,6 +68,12 @@ void ProxyVolumeRepository::save(const VolumePtr& volume,
     }
 }
 
+void ProxyVolumeRepository::remove(const Point3i& position)
+{
+    this->unload(position);
+    if (m_sourceRepository) m_sourceRepository->remove(position);
+}
+
 bool ProxyVolumeRepository::canLoad(const Point3i& position) const
 {
     return CacheVolumeRepository::canLoad(position) || (
@@ -89,6 +95,12 @@ VolumePtr ProxyVolumeRepository::reload(const Point3i& position)
         if (this->isLoaded(position)) CacheVolumeRepository::unload(position);
         return VolumePtr();
     }
+}
+
+void ProxyVolumeRepository::setSourceRepository(const VolumeRepositoryPtr& sourceRepository)
+{
+    this->unloadAll();
+    m_sourceRepository = sourceRepository;
 }
 
 VolumePtr ProxyVolumeRepository::reload(int x, int y, int z)

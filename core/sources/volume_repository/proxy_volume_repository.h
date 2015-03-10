@@ -17,13 +17,16 @@ namespace core
         virtual VolumePtr load(const Point3i& position) override;
         virtual void save(const VolumePtr& volume,
                           const Point3i& position) override;
+        virtual void remove(const Point3i& position) override;
         virtual bool canLoad(const Point3i& position) const override;
 
         using AbstractVolumeRepository::load;
         using AbstractVolumeRepository::save;
+        using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
 
         VolumePtr reload(const Point3i& position);
+        void setSourceRepository(const VolumeRepositoryPtr& sourceRepository);
 
         VolumePtr reload(int x, int y, int z);
 

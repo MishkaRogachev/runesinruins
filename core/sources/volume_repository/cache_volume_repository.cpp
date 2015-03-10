@@ -58,6 +58,11 @@ void CacheVolumeRepository::save(const VolumePtr& volume,
     this->chain(volume, position);
 }
 
+void CacheVolumeRepository::remove(const Point3i& position)
+{
+    this->unload(position);
+}
+
 void CacheVolumeRepository::unload(const Point3i& position)
 {
     VolumePtr current;
@@ -68,6 +73,14 @@ void CacheVolumeRepository::unload(const Point3i& position)
     this->breakChain(current);
 
     m_cache.erase(position);
+}
+
+void CacheVolumeRepository::unloadAll()
+{
+    for (const Point3i& position: this->loadedPositions())
+    {
+        this->unload(position);
+    }
 }
 
 bool CacheVolumeRepository::isLoaded(const Point3i& position) const

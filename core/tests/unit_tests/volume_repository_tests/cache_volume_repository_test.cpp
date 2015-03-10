@@ -35,6 +35,22 @@ void CacheVolumeRepositoryTest::unloadTest()
 
 }
 
+void CacheVolumeRepositoryTest::unloadAllTest()
+{
+    CacheVolumeRepository volumeRepository;
+
+    VolumePtr volume(new Volume(1, 1, 1));
+    volumeRepository.save(volume, -2, 3, 1);
+    volumeRepository.save(volume, 0, 1, 2);
+    volumeRepository.save(volume, 4, 3, 1);
+
+    QVERIFY(!volumeRepository.allVolumes().empty());
+
+    volumeRepository.unloadAll();
+
+    QVERIFY(volumeRepository.allVolumes().empty());
+}
+
 void CacheVolumeRepositoryTest::chainingTest()
 {
     CacheVolumeRepository volumeRepository;
