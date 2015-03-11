@@ -16,16 +16,14 @@ void FsPersisterTest::testPath()
     FsPersister persister;
 
     for (const QString& extention:
-         QStringList({ "", "vol", "tar.gz", "very.many.dots", ".wrong_ext"}))
+         QStringList({ "vol", "abc", "", "tar.gz", "very.many.dots", ".wrong"}))
     {
         persister.setExtension(extention);
 
-        persister.save("test_path_" + extention, QByteArray("test"));
-        QCOMPARE(persister.load("test_path_" + extention), QByteArray("test"));
+        persister.save("test_path", QByteArray("test"));
+        QCOMPARE(persister.load("test_path"), QByteArray("test"));
 
         persister.clear();
-
-        qDebug() << persister.avalibleEntries();
 
         QVERIFY(persister.avalibleEntries().empty());
     }

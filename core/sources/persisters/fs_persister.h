@@ -27,7 +27,8 @@ namespace core
         void setPath(const QString& path);
 
     protected:
-        QString filepathFromEntry(const QString& entry) const;
+        virtual QString filenameFromEntry(const QString& entry) const;
+        virtual QString entryFromFilename(const QString& filename) const;
 
     private:
         QDir m_dir;

@@ -23,24 +23,21 @@ FsPersister::~FsPersister()
 #include <QDebug>
 QStringList FsPersister::avalibleEntries() const
 {
-    QStringList result =
-            m_dir.entryList(QStringList() << QString("*.%1").arg(m_extension),
-                            QDir::Files | QDir::NoDotAndDotDot);
-
-    qDebug() << result;
-    for (QString& entry: result)
+    QStringList entries;
+    for (QString& filename: m_dir.entryList(QDir::Files |
+                                            QDir::NoDotAndDotDot))
     {
-       QStringList splitted = entry.split(".",QString::SkipEmptyParts);
-       if (splitted.empty()) continue;
-       entry = splitted.first();
-    }
 
-    return result;
+       QString entry  = this->entryFromFilename(filename);
+       if (entry.isEmpty()) continue;
+       entries.append(entry);
+    }
+    return entries;
 }
 
 QByteArray FsPersister::load(const QString& entry)
 {
-    QFile file(this->filepathFromEntry(entry));
+    QFile file(m_dir.absoluteFilePath(this->filenameFromEntry(entry)));
 
     if (!file.open(QFile::ReadOnly)) return QByteArray();
     return this->decode(file.readAll());
@@ -48,7 +45,7 @@ QByteArray FsPersister::load(const QString& entry)
 
 void FsPersister::save(const QString& entry, const QByteArray& data)
 {
-    QFile file(this->filepathFromEntry(entry));
+    QFile file(m_dir.absoluteFilePath(this->filenameFromEntry(entry)));
 
     if (!file.open(QFile::WriteOnly)) return;
     file.write(this->encode(data));
@@ -56,20 +53,13 @@ void FsPersister::save(const QString& entry, const QByteArray& data)
 
 void FsPersister::remove(const QString& entry)
 {
-    QFile::remove(this->filepathFromEntry(entry));
+    QFile::remove(m_dir.absoluteFilePath(this->filenameFromEntry(entry)));
 }
 
 bool FsPersister::hasEntry(const QString& entry) const
 {
-    QFile file(this->filepathFromEntry(entry));
+    QFile file(m_dir.absoluteFilePath(this->filenameFromEntry(entry)));
     return file.exists();
-}
-
-QString FsPersister::filepathFromEntry(const QString& entry) const
-{
-    QString filepath = m_dir.absoluteFilePath(entry);
-    return m_extension.isEmpty() ? filepath :
-                filepath + QString(".%1").arg(m_extension);
 }
 
 QString FsPersister::path() const
@@ -92,4 +82,20 @@ void FsPersister::setExtension(const QString& extension)
     m_extension = extension;
 }
 
+QString FsPersister::filenameFromEntry(const QString& entry) const
+{
+    return m_extension.isEmpty() ? entry : entry + QString(".") + m_extension;
+}
+
+QString FsPersister::entryFromFilename(const QString& filename) const
+{
+    if (m_extension.isEmpty())
+    {
+        return filename.contains(".") ? QString() : filename;
+    }
+
+    int index = filename.lastIndexOf("." + m_extension);
+    if (index == -1) return QString();
+    return filename.left(index);
+}
 
