@@ -21,6 +21,7 @@ set(SOURCES
     volume_repository/proxy_volume_repository.cpp
     volume_repository/persistent_volume_repository.cpp
     persisters/abstract_persister.cpp
+    persisters/fs_persister.cpp
 )
 
 # Library target

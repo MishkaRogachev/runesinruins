@@ -8,6 +8,11 @@ AbstractVolumeRepository::AbstractVolumeRepository()
 AbstractVolumeRepository::~AbstractVolumeRepository()
 {}
 
+bool AbstractVolumeRepository::isEmpty() const
+{
+    return this->allPositions().isEmpty();
+}
+
 void AbstractVolumeRepository::clear()
 {
     for (const Point3i& position: this->allPositions())

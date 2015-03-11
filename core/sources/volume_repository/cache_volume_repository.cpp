@@ -60,7 +60,7 @@ void CacheVolumeRepository::remove(const Point3i& position)
 void CacheVolumeRepository::unload(const Point3i& position)
 {
     VolumePtr current;
-    if (m_cache.count(position) > 0) current = m_cache[position];
+    if (m_cache.contains(position)) current = m_cache[position];
 
     if (!current) return;
 
