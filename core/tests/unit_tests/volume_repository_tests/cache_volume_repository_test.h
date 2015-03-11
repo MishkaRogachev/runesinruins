@@ -3,7 +3,7 @@
 
 #include "abstract_volume_repository_test.h"
 
-class CacheVolumeRepositoryTest : public AbstractVolumeRepositoryTest
+class CacheVolumeRepositoryTest: public AbstractVolumeRepositoryTest
 {
     Q_OBJECT
 

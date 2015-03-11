@@ -4,9 +4,9 @@
 #include "common_tests/point_test.h"
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
-#include "volume_repository_tests/abstract_volume_repository_test.h"
 #include "volume_repository_tests/cache_volume_repository_test.h"
 #include "volume_repository_tests/proxy_volume_repository_test.h"
+#include "persisters_tests/fs_persister_test.h"
 
 int main()
 {
@@ -27,6 +27,9 @@ int main()
 
     ProxyVolumeRepositoryTest proxyVolumeRepositoryTest;
     QTest::qExec(&proxyVolumeRepositoryTest);
+
+    FsPersisterTest fsPersisterTest;
+    QTest::qExec(&fsPersisterTest);
 
     return 0;
 }

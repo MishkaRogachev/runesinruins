@@ -1,7 +1,7 @@
 #ifndef VOLUME_TEST_H
 #define VOLUME_TEST_H
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 class VolumeTest: public QObject
 {

@@ -1,11 +1,11 @@
 #ifndef ABSTRACT_VOLUME_REPOSITORY_TEST_H
 #define ABSTRACT_VOLUME_REPOSITORY_TEST_H
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "core_traits.h"
 
-class AbstractVolumeRepositoryTest : public QObject
+class AbstractVolumeRepositoryTest: public QObject
 {
     Q_OBJECT
 
@@ -14,7 +14,6 @@ protected:
 
 private slots:
     void loadTest();
-
 };
 
 #endif // ABSTRACT_VOLUME_REPOSITORY_TEST_H

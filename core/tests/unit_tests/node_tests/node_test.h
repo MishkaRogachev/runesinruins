@@ -1,7 +1,7 @@
 #ifndef NODE_TEST_H
 #define NODE_TEST_H
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 class NodeTest: public QObject
 {

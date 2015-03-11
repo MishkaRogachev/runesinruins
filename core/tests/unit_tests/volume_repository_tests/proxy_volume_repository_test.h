@@ -14,7 +14,6 @@ private slots:
     void canLoadisLoadedTest();
     void proxySaveTest();
     void reloadTest();
-
 };
 
 #endif // PROXYVOLUMEREPOSITORYTEST_H

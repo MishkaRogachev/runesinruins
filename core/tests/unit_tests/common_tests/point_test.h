@@ -1,7 +1,7 @@
 #ifndef VECTEST_H
 #define VECTEST_H
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 class PointTest: public QObject
 {

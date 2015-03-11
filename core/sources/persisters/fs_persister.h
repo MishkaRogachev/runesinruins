@@ -11,7 +11,7 @@ namespace core
     {
     public:
         FsPersister();
-        FsPersister(const QString& path);
+        FsPersister(const QString& path, const QString& extension);
         virtual ~FsPersister() override;
 
         virtual QStringList avalibleEntries() const override;
@@ -20,8 +20,18 @@ namespace core
         virtual void remove(const QString& entry) override;
         virtual bool hasEntry(const QString& entry) const override;
 
+        QString extension() const;
+        void setExtension(const QString& extension);
+
+        QString path() const;
+        void setPath(const QString& path);
+
+    protected:
+        QString filepathFromEntry(const QString& entry) const;
+
     private:
         QDir m_dir;
+        QString m_extension;
     };
 }
 

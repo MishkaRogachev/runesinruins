@@ -8,6 +8,7 @@ include_directories(
     ../sources/node
     ../sources/volume
     ../sources/volume_repository
+    ../sources/persisters
 )
 
 # Sources
@@ -19,6 +20,8 @@ set(TEST_SOURCES
     unit_tests/volume_repository_tests/abstract_volume_repository_test.cpp
     unit_tests/volume_repository_tests/cache_volume_repository_test.cpp
     unit_tests/volume_repository_tests/proxy_volume_repository_test.cpp
+    unit_tests/persisters_tests/abstract_persister_test.cpp
+    unit_tests/persisters_tests/fs_persister_test.cpp
     unit_tests/unit_tests.cpp
 )
 
