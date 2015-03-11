@@ -1,7 +1,8 @@
 #ifndef DIRECTION_H
 #define DIRECTION_H
 
-#include <vector>
+#include <QVector>
+#include <QHash>
 
 namespace core
 {
@@ -18,30 +19,20 @@ namespace core
         static const Direction up;
         static const Direction down;
 
-        static std::vector< Direction > allDirections();
+        static QVector< Direction > allDirections();
         static Direction invDirection(Direction dir);
 
         bool operator==(Direction other) const;
         bool operator!=(Direction other) const;
 
-        friend struct std::hash<core::Direction>;
+        friend uint qHash(const core::Direction& direction)
+        {
+            return qHash(direction.index);
+        }
 
     private:
         unsigned index;
         Direction(unsigned index);
-    };
-}
-
-namespace std // Hash function for Direction class
-{
-    template<>
-    struct hash<core::Direction>
-    {
-        std::size_t operator()(const core::Direction& direction) const
-        {
-            std::hash<unsigned> unsignedHasher;
-            return unsignedHasher(direction.index);
-        }
     };
 }
 

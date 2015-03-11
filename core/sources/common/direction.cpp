@@ -13,9 +13,9 @@ Direction::Direction():
     index(0)
 {}
 
-std::vector<Direction> Direction::allDirections()
+QVector<Direction> Direction::allDirections()
 {
-    return std::vector<Direction>({ forward, backward, right, left, up, down });
+    return QVector<Direction>({ forward, backward, right, left, up, down });
 }
 
 Direction Direction::invDirection(Direction dir)

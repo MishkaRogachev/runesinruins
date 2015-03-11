@@ -12,8 +12,8 @@ namespace core
         AbstractVolumeRepository();
         virtual ~AbstractVolumeRepository();
 
-        virtual Point3iVec allPositions() const = 0;
-        virtual VolumePtrVec allVolumes() = 0;
+        virtual Point3iList allPositions() const = 0;
+        virtual VolumePtrList allVolumes() = 0;
         virtual VolumePtr load(const Point3i& position) = 0;
         virtual void save(const VolumePtr& volume, const Point3i& position) = 0;
         virtual void remove(const Point3i& position) = 0;

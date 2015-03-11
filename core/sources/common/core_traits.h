@@ -1,7 +1,7 @@
 #ifndef CORE_TRAITS
 #define CORE_TRAITS
 
-#include <memory>
+#include <QSharedPointer>
 
 #include "direction.h"
 
@@ -18,14 +18,15 @@ namespace core
     typedef Point<unsigned, 3> Point3u;
     typedef Point<int, 3> Point3i;
 
-    typedef std::shared_ptr<Volume> VolumePtr;
-    typedef std::shared_ptr<AbstractVolumeRepository> VolumeRepositoryPtr;
-    typedef std::shared_ptr<AbstractPersister> PersisterPtr;
+    typedef QSharedPointer<ObjectInterface> ObjectPtr;
+    typedef QSharedPointer<Volume> VolumePtr;
+    typedef QSharedPointer<AbstractVolumeRepository> VolumeRepositoryPtr;
+    typedef QSharedPointer<AbstractPersister> PersisterPtr;
 
-    typedef std::vector<Point3u> Point3uVec;
-    typedef std::vector<Point3i> Point3iVec;
+    typedef QList<Point3u> Point3uList;
+    typedef QList<Point3i> Point3iList;
 
-    typedef std::vector<VolumePtr> VolumePtrVec;
+    typedef QList<VolumePtr> VolumePtrList;
 }
 
 #endif // CORE_TRAITS

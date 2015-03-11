@@ -1,18 +1,14 @@
 #include "node.h"
 
-#include <memory>
-#include <unordered_map>
-
-using namespace core;
 using namespace core;
 
 class Node::NodePrivate
 {
 public:
-    std::auto_ptr<ObjectInterface> object;
-    std::unordered_map<Direction, Node*> neighbours;
+    ObjectPtr object;
+    QHash<Direction, Node*> neighbours;
 
-    NodePrivate(ObjectInterface* object):
+    NodePrivate(const ObjectPtr& object):
         object(object)
     {
         for (Direction dir: Direction::allDirections())
@@ -22,7 +18,7 @@ public:
     }
 };
 
-Node::Node(ObjectInterface* object):
+Node::Node(const ObjectPtr& object):
     d(new NodePrivate(object))
 {}
 
@@ -40,17 +36,17 @@ Node::~Node()
 
 Node* Node::neighbour(Direction direction) const
 {
-    return d->neighbours.at(direction);
+    return d->neighbours.value(direction);
 }
 
-void Node::setObject(ObjectInterface* object)
+void Node::setObject(const ObjectPtr& object)
 {
-    d->object.reset(object);
+    d->object = object;
 }
 
-ObjectInterface* Node::object() const
+ObjectPtr Node::object() const
 {
-    return d->object.get();
+    return d->object;
 }
 
 void Node::chainTo(Node* other, Direction direction)

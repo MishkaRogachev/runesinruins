@@ -9,27 +9,27 @@ PersistentVolumeRepository::PersistentVolumeRepository(const PersisterPtr& persi
     m_persister(persister)
 {}
 
-Point3iVec PersistentVolumeRepository::allPositions() const
+Point3iList PersistentVolumeRepository::allPositions() const
 {
-    Point3iVec vector;
+    Point3iList vector;
 
-    if (m_persister)
-    {
-        for (const std::string& entry: m_persister->avalibleEntries())
-            vector.push_back(this->entryToPosition(entry));
-    }
+//    if (m_persister)
+//    {
+//        for (const std::string& entry: m_persister->avalibleEntries())
+//            vector.push_back(this->entryToPosition(entry));
+//    }
     return vector;
 }
 
-VolumePtrVec PersistentVolumeRepository::allVolumes()
+VolumePtrList PersistentVolumeRepository::allVolumes()
 {
-    VolumePtrVec vector;
+    VolumePtrList vector;
 
-    if (m_persister)
-    {
-        for (const std::string& entry: m_persister->avalibleEntries())
-            vector.push_back(this->load(this->entryToPosition(entry)));
-    }
+//    if (m_persister)
+//    {
+//        for (const std::string& entry: m_persister->avalibleEntries())
+//            vector.push_back(this->load(this->entryToPosition(entry)));
+//    }
     return vector;
 }
 
@@ -52,17 +52,15 @@ void PersistentVolumeRepository::remove(const Point3i& position)
 
 bool PersistentVolumeRepository::canLoad(const Point3i& position) const
 {
-     return m_persister && m_persister->hasEntry(this->positionToEntry(position));
+    //return m_persister && m_persister->hasEntry(this->positionToEntry(position));
 }
 
-std::string PersistentVolumeRepository::positionToEntry(const Point3i& position) const
+QString PersistentVolumeRepository::positionToEntry(const Point3i& position) const
 {
-    return std::to_string(position.x()) +
-           std::to_string(position.y()) +
-           std::to_string(position.z());
+    // TODO:
 }
 
-Point3i PersistentVolumeRepository::entryToPosition(const std::string& string) const
+Point3i PersistentVolumeRepository::entryToPosition(const QString& string) const
 {
     return Point3i();
     // TODO:

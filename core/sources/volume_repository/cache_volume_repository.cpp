@@ -11,12 +11,12 @@ CacheVolumeRepository::CacheVolumeRepository():
 CacheVolumeRepository::~CacheVolumeRepository()
 {}
 
-Point3iVec CacheVolumeRepository::allPositions() const
+Point3iList CacheVolumeRepository::allPositions() const
 {
     return this->loadedPositions();
 }
 
-VolumePtrVec CacheVolumeRepository::allVolumes()
+VolumePtrList CacheVolumeRepository::allVolumes()
 {
     return this->loadedVolumes();
 }
@@ -26,26 +26,20 @@ bool CacheVolumeRepository::canLoad(const Point3i& position) const
     return this->isLoaded(position);
 }
 
-Point3iVec CacheVolumeRepository::loadedPositions() const
+Point3iList CacheVolumeRepository::loadedPositions() const
 {
-    Point3iVec vector;
-    for (const auto& item: m_cache)
-        vector.push_back(item.first);
-    return vector;
+    return m_cache.keys();
 }
 
-VolumePtrVec CacheVolumeRepository::loadedVolumes() const
+VolumePtrList CacheVolumeRepository::loadedVolumes() const
 {
-    VolumePtrVec vector;
-    for (const auto& item: m_cache)
-        vector.push_back(item.second);
-    return vector;
+    return m_cache.values();
 }
 
 VolumePtr CacheVolumeRepository::load(const Point3i& position)
 {
     VolumePtr current;
-    if (m_cache.count(position) > 0) current = m_cache[position];
+    if (m_cache.contains(position)) current = m_cache[position];
 
     if (current) this->chain(current, position);
     return current;
@@ -72,7 +66,7 @@ void CacheVolumeRepository::unload(const Point3i& position)
 
     this->breakChain(current);
 
-    m_cache.erase(position);
+    m_cache.remove(position);
 }
 
 void CacheVolumeRepository::unloadAll()
@@ -85,7 +79,7 @@ void CacheVolumeRepository::unloadAll()
 
 bool CacheVolumeRepository::isLoaded(const Point3i& position) const
 {
-    return m_cache.count(position) > 0;
+    return m_cache.contains(position);
 }
 
 void CacheVolumeRepository::unload(int x, int y, int z)
@@ -106,7 +100,7 @@ void CacheVolumeRepository::chain(const VolumePtr& volume, const Point3i& positi
 
         if (!volume->hasChain(direction) && this->isLoaded(neigbour))
         {
-            volume->chainTo(m_cache[neigbour].get(), direction);
+            volume->chainTo(m_cache[neigbour].data(), direction);
         }
     }
 }

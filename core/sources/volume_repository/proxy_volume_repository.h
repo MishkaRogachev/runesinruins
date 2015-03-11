@@ -12,8 +12,8 @@ namespace core
                 VolumeRepositoryPtr());
         ~ProxyVolumeRepository() override;
 
-        virtual Point3iVec allPositions() const override;
-        virtual VolumePtrVec allVolumes() override;
+        virtual Point3iList allPositions() const override;
+        virtual VolumePtrList allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
         virtual void save(const VolumePtr& volume,
                           const Point3i& position) override;

@@ -10,8 +10,8 @@ namespace core
     public:
         PersistentVolumeRepository(const PersisterPtr& persister);
 
-        virtual Point3iVec allPositions() const override;
-        virtual VolumePtrVec allVolumes() override;
+        virtual Point3iList allPositions() const override;
+        virtual VolumePtrList allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
         virtual void save(const VolumePtr& volume, const Point3i& position) override;
         virtual void remove(const Point3i& position) override;
@@ -23,8 +23,8 @@ namespace core
         using AbstractVolumeRepository::canLoad;
 
     protected:
-        virtual std::string positionToEntry(const Point3i& position) const;
-        virtual Point3i entryToPosition(const std::string& string) const;
+        virtual QString positionToEntry(const Point3i& position) const;
+        virtual Point3i entryToPosition(const QString& string) const;
 
     private:
         PersisterPtr m_persister;

@@ -1,7 +1,7 @@
 #ifndef POINT_H
 #define POINT_H
 
-#include <cassert>
+#include <QHash>
 #include <array>
 
 #include "core_traits.h"
@@ -13,24 +13,24 @@ namespace core
     {
     public:
         Point() { d.fill(0); }
-        explicit Point(T x) : d( { x } ) { assert(dim == 1); }
-        Point(T x, T y) : d( { x, y } ) { assert(dim == 2); }
-        Point(T x, T y, T z) : d( { x, y, z } ) { assert(dim == 3); }
+        explicit Point(T x) : d( { x } ) { Q_ASSERT(dim == 1); }
+        Point(T x, T y) : d( { x, y } ) { Q_ASSERT(dim == 2); }
+        Point(T x, T y, T z) : d( { x, y, z } ) { Q_ASSERT(dim == 3); }
 
         T& operator[](int i) { return d[i]; }
         T operator[](int i) const { return d[i]; }
 
         T at(int i) const { return d.at(i); }
-        T x() const { assert(dim > 0); return d[0]; }
-        T y() const { assert(dim > 1); return d[1]; }
-        T z() const { assert(dim > 2); return d[2]; }
+        T x() const { Q_ASSERT(dim > 0); return d[0]; }
+        T y() const { Q_ASSERT(dim > 1); return d[1]; }
+        T z() const { Q_ASSERT(dim > 2); return d[2]; }
 
         const std::array< T, dim >& array() const { return d; }
         std::array< T, dim >& array() { return d; }
 
-        void setX(T x) { assert(dim > 0); d[0] = x; }
-        void setY(T y) { assert(dim > 1); d[1] = y; }
-        void setZ(T z) { assert(dim > 2); d[2] = z; }
+        void setX(T x) { Q_ASSERT(dim > 0); d[0] = x; }
+        void setY(T y) { Q_ASSERT(dim > 1); d[1] = y; }
+        void setZ(T z) { Q_ASSERT(dim > 2); d[2] = z; }
 
         bool operator==(const Point<T, dim>& other) const
         {
@@ -120,26 +120,18 @@ namespace core
 
         T product() const { T ret = 1; for (T v: d) { ret *= v; } return ret; }
 
-    private:
-        std::array< T, dim > d;
-    };
-}
-
-namespace std // Hash function templete for Point class
-{
-    template< typename T, int dim >
-    struct hash<core::Point< T, dim > >
-    {
-        std::size_t operator()(const core::Point< T, dim >& point) const
+        friend uint qHash(const Point& point)
         {
-            std::hash<T> typeHasher;
-            std::size_t size = 0;
+            uint result = 0;
             for (int i = 0; i < dim; ++i)
             {
-                size ^= typeHasher(point.at(i));
+                result ^= qHash(point.at(i));
             }
-            return size;
+            return result;
         }
+
+    private:
+        std::array< T, dim > d;
     };
 }
 

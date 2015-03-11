@@ -1,6 +1,5 @@
 #include "volume.h"
 
-#include <vector>
 #include <algorithm>
 
 #include "node.h"
@@ -11,7 +10,7 @@ class Volume::VolumePrivate
 {
 public:
     Point3u size;
-    std::vector< Node* > nodes;
+    QVector<Node*> nodes;
 
     VolumePrivate(const Point3u& size):
         size(size),

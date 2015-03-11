@@ -13,29 +13,29 @@ ProxyVolumeRepository::ProxyVolumeRepository(
 ProxyVolumeRepository::~ProxyVolumeRepository()
 {}
 
-Point3iVec ProxyVolumeRepository::allPositions() const
+Point3iList ProxyVolumeRepository::allPositions() const
 {
-    Point3iVec loaded = this->loadedPositions();
+    Point3iList loaded = this->loadedPositions();
     if (!m_sourceRepository) return loaded;
 
-    Point3iVec unloaded = m_sourceRepository->allPositions();
+    Point3iList unloaded = m_sourceRepository->allPositions();
 
     std::sort(loaded.begin(), loaded.end());
     std::sort(unloaded.begin(), unloaded.end());
 
-    Point3iVec all;
+    Point3iList all;
 
     std::merge(loaded.begin(), loaded.end(), unloaded.begin(), unloaded.end(),
-        std::insert_iterator<Point3iVec>(all, all.end()));
+        std::insert_iterator<Point3iList>(all, all.end()));
 
     all.erase(std::unique(all.begin(), all.end()), all.end());
 
     return all;
 }
 
-VolumePtrVec ProxyVolumeRepository::allVolumes()
+VolumePtrList ProxyVolumeRepository::allVolumes()
 {
-    VolumePtrVec vector;
+    VolumePtrList vector;
 
     for (const Point3i& position: this->allPositions())
     {
@@ -76,10 +76,9 @@ void ProxyVolumeRepository::remove(const Point3i& position)
 
 bool ProxyVolumeRepository::canLoad(const Point3i& position) const
 {
-    return CacheVolumeRepository::canLoad(position) || (
-                m_sourceRepository ?
-                    m_sourceRepository->canLoad(position) :
-                    false);
+    return CacheVolumeRepository::canLoad(position) ||
+            (m_sourceRepository ?
+                 m_sourceRepository->canLoad(position) : false);
 }
 
 VolumePtr ProxyVolumeRepository::reload(const Point3i& position)
@@ -97,7 +96,8 @@ VolumePtr ProxyVolumeRepository::reload(const Point3i& position)
     }
 }
 
-void ProxyVolumeRepository::setSourceRepository(const VolumeRepositoryPtr& sourceRepository)
+void ProxyVolumeRepository::setSourceRepository(
+        const VolumeRepositoryPtr& sourceRepository)
 {
     this->unloadAll();
     m_sourceRepository = sourceRepository;

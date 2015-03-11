@@ -3,8 +3,6 @@
 
 #include "abstract_volume_repository.h"
 
-#include <unordered_map>
-
 namespace core
 {
     class CacheVolumeRepository: public AbstractVolumeRepository
@@ -13,8 +11,8 @@ namespace core
         CacheVolumeRepository();
         ~CacheVolumeRepository() override;
 
-        virtual Point3iVec allPositions() const override;
-        virtual VolumePtrVec allVolumes() override;
+        virtual Point3iList allPositions() const override;
+        virtual VolumePtrList allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
         virtual void save(const VolumePtr& volume,
                           const Point3i& position) override;
@@ -26,8 +24,8 @@ namespace core
         using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
 
-        Point3iVec loadedPositions() const;
-        VolumePtrVec loadedVolumes() const;
+        Point3iList loadedPositions() const;
+        VolumePtrList loadedVolumes() const;
         void unload(const Point3i& position);
         void unloadAll();
         bool isLoaded(const Point3i& position) const;
@@ -40,7 +38,7 @@ namespace core
         void breakChain(const VolumePtr& volume);
 
     private:
-        std::unordered_map<Point3i, VolumePtr> m_cache;
+        QHash<Point3i, VolumePtr> m_cache;
     };
 }
 

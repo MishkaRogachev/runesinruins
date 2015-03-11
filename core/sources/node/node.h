@@ -8,14 +8,13 @@ namespace core
     class Node
     {
     public:
-
-        Node(core::ObjectInterface* object = nullptr);
+        Node(const ObjectPtr& object = ObjectPtr());
         ~Node();
 
         Node* neighbour(Direction direction) const;
 
-        void setObject(core::ObjectInterface* object);
-        core::ObjectInterface* object() const;
+        void setObject(const ObjectPtr& object);
+        ObjectPtr object() const;
 
         void chainTo(Node *other, Direction direction);
         void breakChain(Direction direction);
