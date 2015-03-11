@@ -19,6 +19,8 @@ namespace core
         virtual void remove(const Point3i& position) = 0;
         virtual bool canLoad(const Point3i& position) const = 0;
 
+        void clear();
+
         VolumePtr load(int x, int y, int z);
         void save(const VolumePtr& volume, int x, int y, int z);
         void remove(int x, int y, int z);

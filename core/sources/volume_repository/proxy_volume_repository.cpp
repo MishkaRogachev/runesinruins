@@ -39,7 +39,7 @@ VolumePtrList ProxyVolumeRepository::allVolumes()
 
     for (const Point3i& position: this->allPositions())
     {
-        vector.push_back(this->load(position));
+        vector.append(this->load(position));
     }
 
     return vector;

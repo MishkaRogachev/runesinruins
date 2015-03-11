@@ -8,3 +8,11 @@ AbstractPersister::AbstractPersister()
 AbstractPersister::~AbstractPersister()
 {}
 
+void AbstractPersister::clear()
+{
+    for (const QString& entry: this->avalibleEntries())
+    {
+        this->remove(entry);
+    }
+}
+

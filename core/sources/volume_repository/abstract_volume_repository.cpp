@@ -8,6 +8,14 @@ AbstractVolumeRepository::AbstractVolumeRepository()
 AbstractVolumeRepository::~AbstractVolumeRepository()
 {}
 
+void AbstractVolumeRepository::clear()
+{
+    for (const Point3i& position: this->allPositions())
+    {
+        this->remove(position);
+    }
+}
+
 VolumePtr AbstractVolumeRepository::load(int x, int y, int z)
 {
     return this->load(Point3i(x, y, z));

@@ -8,15 +8,20 @@
 
 namespace core
 {
-        class AbstractPersister
-        {
-        public:
-            AbstractPersister();
-            virtual ~AbstractPersister();
+    class AbstractPersister
+    {
+    public:
+        AbstractPersister();
+        virtual ~AbstractPersister();
 
-            virtual bool hasEntry(const QString& entry) const = 0;
-            virtual const QStringList& avalibleEntries() const = 0;
-        };
+        virtual QStringList avalibleEntries() const = 0;
+        virtual QByteArray load(const QString& entry) = 0;
+        virtual void save(const QString& entry, const QByteArray& data) = 0;
+        virtual void remove(const QString& entry) = 0;
+        virtual bool hasEntry(const QString& entry) const = 0;
+
+        void clear();
+    };
 }
 
 #endif // ABSTRACTPERSISTER_H
