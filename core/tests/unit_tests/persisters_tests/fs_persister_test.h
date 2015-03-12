@@ -12,6 +12,7 @@ protected:
 
 private slots:
     void testPath();
+    void testFolders();
 };
 
 #endif // FSPERSISTERTEST_H

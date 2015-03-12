@@ -45,6 +45,8 @@ QByteArray FsPersister::load(const QString& entry)
 
 void FsPersister::save(const QString& entry, const QByteArray& data)
 {
+    if (!m_dir.exists()) m_dir.mkpath(".");
+
     QFile file(m_dir.absoluteFilePath(this->filenameFromEntry(entry)));
 
     if (!file.open(QFile::WriteOnly)) return;
