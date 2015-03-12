@@ -10,8 +10,8 @@ namespace core
     class FsPersister: public AbstractPersister
     {
     public:
-        FsPersister();
-        FsPersister(const QString& path, const QString& extension);
+        FsPersister(const QString& extension = "txt",
+                    const QString& path = QDir::currentPath());
         virtual ~FsPersister() override;
 
         virtual QStringList avalibleEntries() const override;
@@ -31,8 +31,8 @@ namespace core
         virtual QString entryFromFilename(const QString& filename) const;
 
     private:
-        QDir m_dir;
         QString m_extension;
+        QDir m_dir;
     };
 }
 

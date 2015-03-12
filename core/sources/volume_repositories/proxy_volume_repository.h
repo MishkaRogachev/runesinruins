@@ -10,7 +10,7 @@ namespace core
     public:
         ProxyVolumeRepository(const VolumeRepositoryPtr& sourceRepository =
                 VolumeRepositoryPtr());
-        ~ProxyVolumeRepository() override;
+        virtual ~ProxyVolumeRepository() override;
 
         virtual Point3iList allPositions() const override;
         virtual VolumePtrList allVolumes() override;

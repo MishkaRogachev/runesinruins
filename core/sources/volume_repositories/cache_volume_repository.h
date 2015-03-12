@@ -9,7 +9,7 @@ namespace core
     {
     public:
         CacheVolumeRepository();
-        ~CacheVolumeRepository() override;
+        virtual ~CacheVolumeRepository() override;
 
         virtual Point3iList allPositions() const override;
         virtual VolumePtrList allVolumes() override;

@@ -2,18 +2,25 @@
 #define PERSISTENT_VOLUME_REPOSITORY_H
 
 #include "abstract_volume_repository.h"
+#include "fs_persister.h"
+#include "standart_volume_serializer.h"
 
 namespace core
 {
     class PersistentVolumeRepository: public AbstractVolumeRepository
     {
     public:
-        PersistentVolumeRepository(const PersisterPtr& persister);
+        PersistentVolumeRepository(const PersisterPtr& persister =
+                PersisterPtr(new FsPersister("vol")),
+                                   const VolumeSerializerPtr& serilalizer =
+                VolumeSerializerPtr(new StandartVolumeSerializer()));
+        virtual ~PersistentVolumeRepository() override;
 
         virtual Point3iList allPositions() const override;
         virtual VolumePtrList allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
-        virtual void save(const VolumePtr& volume, const Point3i& position) override;
+        virtual void save(const VolumePtr& volume,
+                          const Point3i& position) override;
         virtual void remove(const Point3i& position) override;
         virtual bool canLoad(const Point3i& position) const override;
 
@@ -28,6 +35,7 @@ namespace core
 
     private:
         PersisterPtr m_persister;
+        VolumeSerializerPtr m_serilalizer;
     };
 }
 

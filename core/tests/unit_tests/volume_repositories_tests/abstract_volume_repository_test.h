@@ -14,6 +14,7 @@ protected:
 
 private slots:
     void loadTest();
+    void removeTest();
 };
 
 #endif // ABSTRACT_VOLUME_REPOSITORY_TEST_H

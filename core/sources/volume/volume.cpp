@@ -120,7 +120,7 @@ VolumeIterator Volume::cornerBegin(Direction direction) const
     return VolumeIterator(this,
                          direction == Direction::forward ? d->size.x() - 1 : 0,
                          direction == Direction::right ? d->size.y() - 1 : 0,
-                         direction == Direction::up ? d->size.z() - 1 : 0);
+                          direction == Direction::up ? d->size.z() - 1 : 0);
 }
 
 void Volume::chainInnerNodes() const

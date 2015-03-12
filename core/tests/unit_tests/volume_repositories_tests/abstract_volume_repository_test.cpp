@@ -24,6 +24,41 @@ void AbstractVolumeRepositoryTest::loadTest()
     QVERIFY(volumeRepository->canLoad(3, 4, 3));
     QVERIFY(!volumeRepository->canLoad(3, 3, 2));
 
-    QCOMPARE(volume, volumeRepository->load(3, 4, 3));
+    VolumePtr cmpVolume = volumeRepository->load(3, 4, 3);
+    QVERIFY(cmpVolume);
+    QCOMPARE(volume->size(), cmpVolume->size());
     QVERIFY(!volumeRepository->load(3, 3, 2));
+
+    volumeRepository->clear();
+
+    QVERIFY(!volumeRepository->canLoad(3, 4, 3));
+    QVERIFY(!volumeRepository->canLoad(3, 3, 2));
+}
+
+void AbstractVolumeRepositoryTest::removeTest()
+{
+    VolumeRepositoryPtr volumeRepository = this->volumeRepository();
+
+    QVERIFY(!volumeRepository->canLoad(2, 3, 1));
+    QVERIFY(!volumeRepository->canLoad(2, 2, 1));
+
+    volumeRepository->save(VolumePtr(new Volume(5, 5, 5)), 2, 3, 1);
+
+    QVERIFY(volumeRepository->canLoad(2, 3, 1));
+    QVERIFY(!volumeRepository->canLoad(2, 2, 1));
+
+    volumeRepository->save(VolumePtr(new Volume(5, 5, 5)), 2, 2, 1);
+
+    QVERIFY(volumeRepository->canLoad(2, 3, 1));
+    QVERIFY(volumeRepository->canLoad(2, 2, 1));
+
+    volumeRepository->remove(2, 3, 1);
+
+    QVERIFY(!volumeRepository->canLoad(2, 3, 1));
+    QVERIFY(volumeRepository->canLoad(2, 2, 1));
+
+    volumeRepository->remove(2, 2, 1);
+
+    QVERIFY(!volumeRepository->canLoad(2, 3, 1));
+    QVERIFY(!volumeRepository->canLoad(2, 2, 1));
 }

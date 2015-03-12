@@ -9,9 +9,14 @@ namespace
 
 using namespace core;
 
-PersistentVolumeRepository::PersistentVolumeRepository(const PersisterPtr& persister):
+PersistentVolumeRepository::PersistentVolumeRepository(
+        const PersisterPtr& persister, const VolumeSerializerPtr& serilalizer):
     AbstractVolumeRepository(),
-    m_persister(persister)
+    m_persister(persister),
+    m_serilalizer(serilalizer)
+{}
+
+PersistentVolumeRepository::~PersistentVolumeRepository()
 {}
 
 Point3iList PersistentVolumeRepository::allPositions() const
@@ -34,9 +39,9 @@ VolumePtrList PersistentVolumeRepository::allVolumes()
     {
         for (const QString& entry: m_persister->avalibleEntries())
         {
-            QByteArray data = m_persister->load(entry);
-            VolumePtr volume; // = VolumeSerializer::deserialise(data) TODO: deserialize
-            vector.append(volume);
+            VolumePtr volume = m_serilalizer->unserialize(
+                                   m_persister->load(entry));
+            if (volume) vector.append(volume);
         }
     }
     return vector;
@@ -44,14 +49,15 @@ VolumePtrList PersistentVolumeRepository::allVolumes()
 
 VolumePtr PersistentVolumeRepository::load(const Point3i& position)
 {
-    QByteArray data = m_persister->load(this->positionToEntry(position));
-    return VolumePtr(/*VolumeSerializer::deserialise(data)*/); // TODO: deserialize
+    return m_serilalizer->unserialize(
+                m_persister->load(this->positionToEntry(position)));
 }
 
-void PersistentVolumeRepository::save(const VolumePtr& volume, const Point3i& position)
+void PersistentVolumeRepository::save(const VolumePtr& volume,
+                                      const Point3i& position)
 {
-    QByteArray data; // = VolumeSerializer::serialise(volume); TODO: serialize
-    m_persister->save(this->positionToEntry(position), data);
+    m_persister->save(this->positionToEntry(position),
+                      m_serilalizer->serialize(volume));
 }
 
 void PersistentVolumeRepository::remove(const Point3i& position)
@@ -61,10 +67,12 @@ void PersistentVolumeRepository::remove(const Point3i& position)
 
 bool PersistentVolumeRepository::canLoad(const Point3i& position) const
 {
-    return m_persister && m_persister->hasEntry(this->positionToEntry(position));
+    return m_persister &&
+            m_persister->hasEntry(this->positionToEntry(position));
 }
 
-QString PersistentVolumeRepository::positionToEntry(const Point3i& position) const
+QString PersistentVolumeRepository::positionToEntry(
+        const Point3i& position) const
 {
     QStringList list;
 

@@ -22,6 +22,16 @@ QByteArray StandartVolumeSerializer::serialize(const VolumePtr& volume) const
 
     stream << volume->width() << volume->height() << volume->depth();
 
+    for (const auto& it: *volume)
+    {
+        if (it.node()->object())
+        {
+            stream << it.x() << it.y() << it.z();
+
+            //TODO: serialize node's object
+        }
+    }
+
     return data;
 }
 
@@ -34,6 +44,14 @@ VolumePtr StandartVolumeSerializer::unserialize(const QByteArray& data) const
     stream >> size[0] >> size[1] >> size[2];
 
     VolumePtr volume(new Volume(size));
+
+    while (!stream.atEnd())
+    {
+        Point3u position;
+        stream >> position[0] >> position[1] >> position[2];
+
+        //TODO: unserialize node's object
+    }
 
     return volume;
 }

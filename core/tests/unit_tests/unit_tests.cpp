@@ -1,5 +1,6 @@
 #include <QtTest/QtTest>
 
+#include "persisters_tests/fs_persister_test.h"
 #include "common_tests/direction_test.h"
 #include "common_tests/point_test.h"
 #include "node_tests/node_test.h"
@@ -7,7 +8,8 @@
 #include "volume_serializers_tests/standart_volume_serializer_test.h"
 #include "volume_repositories_tests/cache_volume_repository_test.h"
 #include "volume_repositories_tests/proxy_volume_repository_test.h"
-#include "persisters_tests/fs_persister_test.h"
+#include "volume_repositories_tests/persistent_volume_repository_test.h"
+
 
 int main()
 {
@@ -35,7 +37,8 @@ int main()
     ProxyVolumeRepositoryTest proxyVolumeRepositoryTest;
     QTest::qExec(&proxyVolumeRepositoryTest);
 
-
+    PersistentVolumeRepositoryTest persistentVolumeRepositoryTest;
+    QTest::qExec(&persistentVolumeRepositoryTest);
 
     return 0;
 }

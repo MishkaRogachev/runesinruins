@@ -12,7 +12,7 @@ namespace core
     public:
         Volume(const Point3u& size);
         Volume(unsigned x, unsigned y, unsigned z);
-        virtual ~Volume();
+        ~Volume();
 
         Node* nodeAt(unsigned x, unsigned y, unsigned z) const;
         Node* nodeAt(const Point3u& point) const;

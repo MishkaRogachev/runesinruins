@@ -5,16 +5,10 @@
 
 using namespace core;
 
-FsPersister::FsPersister():
+FsPersister::FsPersister(const QString& extension, const QString& path):
     AbstractPersister(),
-    m_dir(QDir::current()),
-    m_extension("txt")
-{}
-
-FsPersister::FsPersister(const QString& path, const QString& extension):
-    AbstractPersister(),
-    m_dir(path),
-    m_extension(extension)
+    m_extension(extension),
+    m_dir(path)
 {}
 
 FsPersister::~FsPersister()
