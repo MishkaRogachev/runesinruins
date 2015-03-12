@@ -4,24 +4,27 @@ project (${PROJECT})
 
 # Includes
 include_directories(
+    ../sources/persisters
     ../sources/common
     ../sources/node
     ../sources/volume
     ../sources/volume_repositories
-    ../sources/persisters
+    ../sources/volume_serializers
 )
 
 # Sources
 set(TEST_SOURCES
+    unit_tests/persisters_tests/abstract_persister_test.cpp
+    unit_tests/persisters_tests/fs_persister_test.cpp
     unit_tests/common_tests/direction_test.cpp
     unit_tests/common_tests/point_test.cpp
     unit_tests/node_tests/node_test.cpp
     unit_tests/volume_tests/volume_test.cpp
+    unit_tests/volume_serializers_tests/abstract_volume_serializer_test.cpp
+    unit_tests/volume_serializers_tests/standart_volume_serializer_test.cpp
     unit_tests/volume_repositories_tests/abstract_volume_repository_test.cpp
     unit_tests/volume_repositories_tests/cache_volume_repository_test.cpp
     unit_tests/volume_repositories_tests/proxy_volume_repository_test.cpp
-    unit_tests/persisters_tests/abstract_persister_test.cpp
-    unit_tests/persisters_tests/fs_persister_test.cpp
     unit_tests/unit_tests.cpp
 )
 

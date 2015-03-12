@@ -1,5 +1,5 @@
-#ifndef PROXYVOLUMEREPOSITORYTEST_H
-#define PROXYVOLUMEREPOSITORYTEST_H
+#ifndef PROXY_VOLUMERE_POSITORY_TEST_H
+#define PROXY_VOLUMERE_POSITORY_TEST_H
 
 #include "cache_volume_repository_test.h"
 
@@ -16,4 +16,4 @@ private slots:
     void reloadTest();
 };
 
-#endif // PROXYVOLUMEREPOSITORYTEST_H
+#endif // PROXY_VOLUMERE_POSITORY_TEST_H

@@ -13,6 +13,7 @@ namespace core
     class Node;
     class Volume;
     class AbstractVolumeRepository;
+    class AbstractVolumeSerializer;
     class AbstractPersister;
 
     typedef Point<unsigned, 3> Point3u;
@@ -21,6 +22,7 @@ namespace core
     typedef QSharedPointer<ObjectInterface> ObjectPtr;
     typedef QSharedPointer<Volume> VolumePtr;
     typedef QSharedPointer<AbstractVolumeRepository> VolumeRepositoryPtr;
+    typedef QSharedPointer<AbstractVolumeSerializer> VolumeSerializerPtr;
     typedef QSharedPointer<AbstractPersister> PersisterPtr;
 
     typedef QList<Point3u> Point3uList;
