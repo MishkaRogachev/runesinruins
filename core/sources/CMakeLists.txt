@@ -16,10 +16,10 @@ set(SOURCES
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp
-    volume_repository/abstract_volume_repository.cpp
-    volume_repository/cache_volume_repository.cpp
-    volume_repository/proxy_volume_repository.cpp
-    volume_repository/persistent_volume_repository.cpp
+    volume_repositories/abstract_volume_repository.cpp
+    volume_repositories/cache_volume_repository.cpp
+    volume_repositories/proxy_volume_repository.cpp
+    volume_repositories/persistent_volume_repository.cpp
     persisters/abstract_persister.cpp
     persisters/fs_persister.cpp
 )

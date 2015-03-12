@@ -11,7 +11,7 @@ PersisterPtr FsPersisterTest::persister()
     return PersisterPtr(new FsPersister());
 }
 
-void FsPersisterTest::testPath()
+void FsPersisterTest::testExtention()
 {
     FsPersister persister;
 

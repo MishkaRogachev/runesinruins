@@ -11,7 +11,7 @@ protected:
     virtual core::PersisterPtr persister() override;
 
 private slots:
-    void testPath();
+    void testExtention();
     void testFolders();
 };
 
