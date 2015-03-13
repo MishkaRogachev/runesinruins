@@ -10,7 +10,11 @@ class AbstractAreaTest: public QObject
     Q_OBJECT
 
 protected:
-    virtual core::AreaPtr area() = 0;
+    virtual core::AreaPtr area(int size) = 0;
+
+private slots:
+    void testSizes();
+    void testPositions();
 };
 
 #endif // ABSTRACT_AREA_TEST_H

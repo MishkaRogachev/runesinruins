@@ -4,7 +4,7 @@
 
 using namespace core;
 
-AreaPtr SquareAreaTest::area()
+AreaPtr SquareAreaTest::area(int size)
 {
-    return AreaPtr(new SquareArea());
+    return AreaPtr(new SquareArea(size));
 }

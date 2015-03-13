@@ -4,11 +4,11 @@
 #include <QSharedPointer>
 
 #include "direction.h"
+#include "point.h"
 
 namespace core
 {
     class AbstractPersister;
-    template< typename T, int dim > class Point;
     class AbstractArea;
     class NodeObject;
     class Node;

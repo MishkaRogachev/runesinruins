@@ -2,10 +2,26 @@
 
 using namespace core;
 
-SquareArea::SquareArea():
-    AbstractArea()
-{}
+SquareArea::SquareArea(int size, const Point3i& position):
+    AbstractArea(size, position)
+{
+    this->updatePositions(); // must be called from derived class
+}
 
 SquareArea::~SquareArea()
 {}
 
+void SquareArea::updatePositions() const
+{
+    m_positions.clear();
+
+    for (int x = m_centerPosition.x() - m_size;
+         x < m_centerPosition.x() + m_size + 1; ++x)
+    {
+        for (int y = m_centerPosition.y() - m_size;
+             y < m_centerPosition.y() + m_size + 1; ++y)
+        {
+            m_positions.append(Point3i(x, y, m_centerPosition.z()));
+        }
+    }
+}

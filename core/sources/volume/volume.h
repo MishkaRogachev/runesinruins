@@ -1,8 +1,6 @@
 #ifndef VOLUME_H
 #define VOLUME_H
 
-#include "core_traits.h"
-#include "point.h"
 #include "volume_iterator.h"
 
 namespace core

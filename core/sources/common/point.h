@@ -4,7 +4,7 @@
 #include <QHash>
 #include <array>
 
-#include "core_traits.h"
+#include "direction.h"
 
 namespace core
 {
@@ -17,10 +17,10 @@ namespace core
         Point(T x, T y) : d( { x, y } ) { Q_ASSERT(dim == 2); }
         Point(T x, T y, T z) : d( { x, y, z } ) { Q_ASSERT(dim == 3); }
 
-        T& operator[](int i) { return d[i]; }
-        T operator[](int i) const { return d[i]; }
+        T& operator[](int i) { Q_ASSERT(dim > i); return d[i]; }
+        T operator[](int i) const { Q_ASSERT(dim > i); return d[i]; }
 
-        T at(int i) const { return d.at(i); }
+        T at(int i) const { Q_ASSERT(dim > i); return d.at(i); }
         T x() const { Q_ASSERT(dim > 0); return d[0]; }
         T y() const { Q_ASSERT(dim > 1); return d[1]; }
         T z() const { Q_ASSERT(dim > 2); return d[2]; }
@@ -116,6 +116,71 @@ namespace core
             if (dir == Direction::up) return this->up(distance);
             if (dir == Direction::down) return this->down(distance);
             return Point();
+        }
+
+        Point& move(T x)
+        {
+            Q_ASSERT(dim == 1);
+            d[0] = x;
+            return *this;
+        }
+
+        Point& move(T x, T y)
+        {
+            Q_ASSERT(dim == 2);
+            d[0] = x;
+            d[1] = y;
+            return *this;
+        }
+
+        Point& move(T x, T y, T z)
+        {
+            Q_ASSERT(dim == 2);
+            d[0] = x;
+            d[1] = y;
+            d[2] = z;
+            return *this;
+        }
+
+        Point& goUp(int distance = 1)
+        {
+            return this->move(0, 0, distance);
+        }
+
+        Point& goDown(int distance = 1)
+        {
+            return this->move(0, 0, -distance);
+        }
+
+        Point& goRight(int distance = 1)
+        {
+            return this->move(0, distance, 0);
+        }
+
+        Point& goLeft(int distance = 1)
+        {
+            return this->move(0, -distance, 0);
+        }
+
+        Point& goForward(int distance = 1)
+        {
+            return this->move(distance, 0, 0);
+        }
+
+        Point& goBackward(int distance = 1)
+        {
+            return this->move(-distance, 0, 0);
+        }
+
+        Point& go(Direction dir, int distance = 1)
+        {
+            if (dir == Direction::forward) return this->goForward(distance);
+            if (dir == Direction::backward) return this->goBackward(distance);
+            if (dir == Direction::right) return this->goRight(distance);
+            if (dir == Direction::left) return this->goLeft(distance);
+            if (dir == Direction::up) return this->goUp(distance);
+            if (dir == Direction::down) return this->goDown(distance);
+            return *this;
         }
 
         T product() const { T ret = 1; for (T v: d) { ret *= v; } return ret; }

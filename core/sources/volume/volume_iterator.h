@@ -2,7 +2,6 @@
 #define VOLUME_ITERATOR_H
 
 #include "core_traits.h"
-#include "point.h"
 #include "node.h"
 
 namespace core

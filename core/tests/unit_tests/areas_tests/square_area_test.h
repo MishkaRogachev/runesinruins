@@ -8,7 +8,7 @@ class SquareAreaTest: public AbstractAreaTest
     Q_OBJECT
 
 protected:
-    virtual core::AreaPtr area() override;
+    virtual core::AreaPtr area(int size) override;
 };
 
 #endif // SQUARE_AREA_TEST_H
