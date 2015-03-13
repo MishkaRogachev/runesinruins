@@ -1,7 +1,7 @@
-#ifndef ABSTRACTPERSISTERTEST_H
-#define ABSTRACTPERSISTERTEST_H
+#ifndef ABSTRACT_PERSISTER_TEST_H
+#define ABSTRACT_PERSISTER_TEST_H
 
-#include <QTest>
+#include <QtTest/QTest>
 
 #include "core_traits.h"
 
@@ -19,4 +19,4 @@ private slots:
     void testEncodeDecode();
 };
 
-#endif // ABSTRACTPERSISTERTEST_H
+#endif // ABSTRACT_PERSISTER_TEST_H

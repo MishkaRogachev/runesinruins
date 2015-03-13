@@ -1,5 +1,5 @@
-#ifndef FSPERSISTERTEST_H
-#define FSPERSISTERTEST_H
+#ifndef FS_PERSISTER_TEST_H
+#define FS_PERSISTER_TEST_H
 
 #include "abstract_persister_test.h"
 
@@ -15,4 +15,4 @@ private slots:
     void testFolders();
 };
 
-#endif // FSPERSISTERTEST_H
+#endif // FS_PERSISTER_TEST_H

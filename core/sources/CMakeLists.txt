@@ -6,6 +6,7 @@ project (${PROJECT})
 include_directories(
     common
     persisters
+    areas
     node
     volume
     volume_serializers
@@ -17,6 +18,8 @@ set(SOURCES
     common/direction.cpp
     persisters/abstract_persister.cpp
     persisters/fs_persister.cpp
+    areas/abstract_area.cpp
+    areas/square_area.cpp
     node/node.cpp
     volume/volume.cpp
     volume/volume_iterator.cpp

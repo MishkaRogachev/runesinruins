@@ -1,5 +1,5 @@
-#ifndef STANDARTVOLUMESERIALIZERTEST_H
-#define STANDARTVOLUMESERIALIZERTEST_H
+#ifndef STANDART_VOLUME_SERIALIZER_TEST_H
+#define STANDART_VOLUME_SERIALIZER_TEST_H
 
 #include "abstract_volume_serializer_test.h"
 
@@ -11,4 +11,4 @@ protected:
     virtual core::VolumeSerializerPtr serializer() const override;
 };
 
-#endif // STANDARTVOLUMESERIALIZERTEST_H
+#endif // STANDART_VOLUME_SERIALIZER_TEST_H

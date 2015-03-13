@@ -11,4 +11,4 @@ protected:
     virtual core::VolumeRepositoryPtr volumeRepository() const override;
 };
 
-#endif // PERSISTENTVOLUMEREPOSITORYTEST_H
+#endif // PERSISTENT_VOLUME_REPOSITORY_TEST_H

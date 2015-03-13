@@ -1,5 +1,5 @@
-#ifndef AREAPROXYVOLUMEREPOSITORYTEST_H
-#define AREAPROXYVOLUMEREPOSITORYTEST_H
+#ifndef AREA_PROXY_VOLUME_REPOSITORY_TEST_H
+#define AREA_PROXY_VOLUME_REPOSITORY_TEST_H
 
 #include "proxy_volume_repository_test.h"
 
@@ -11,4 +11,4 @@ protected:
     virtual core::VolumeRepositoryPtr volumeRepository() const override;
 };
 
-#endif // AREAPROXYVOLUMEREPOSITORYTEST_H
+#endif // AREA_PROXY_VOLUME_REPOSITORY_TEST_H

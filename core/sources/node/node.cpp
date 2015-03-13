@@ -5,10 +5,10 @@ using namespace core;
 class Node::NodePrivate
 {
 public:
-    ObjectPtr object;
+    NodeObjectPtr object;
     QHash<Direction, Node*> neighbours;
 
-    NodePrivate(const ObjectPtr& object):
+    NodePrivate(const NodeObjectPtr& object):
         object(object)
     {
         for (Direction dir: Direction::allDirections())
@@ -18,7 +18,7 @@ public:
     }
 };
 
-Node::Node(const ObjectPtr& object):
+Node::Node(const NodeObjectPtr& object):
     d(new NodePrivate(object))
 {}
 
@@ -39,12 +39,12 @@ Node* Node::neighbour(Direction direction) const
     return d->neighbours.value(direction);
 }
 
-void Node::setObject(const ObjectPtr& object)
+void Node::setObject(const NodeObjectPtr& object)
 {
     d->object = object;
 }
 
-ObjectPtr Node::object() const
+NodeObjectPtr Node::object() const
 {
     return d->object;
 }

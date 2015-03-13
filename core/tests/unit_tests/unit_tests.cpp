@@ -3,6 +3,7 @@
 #include "persisters_tests/fs_persister_test.h"
 #include "common_tests/direction_test.h"
 #include "common_tests/point_test.h"
+#include "areas_tests/square_area_test.h"
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
 #include "volume_serializers_tests/standart_volume_serializer_test.h"
@@ -21,6 +22,9 @@ int main()
 
     PointTest pointTest;
     QTest::qExec(&pointTest);
+
+    SquareAreaTest squareAreaTest;
+    QTest::qExec(&squareAreaTest);
 
     NodeTest nodeTest;
     QTest::qExec(&nodeTest);

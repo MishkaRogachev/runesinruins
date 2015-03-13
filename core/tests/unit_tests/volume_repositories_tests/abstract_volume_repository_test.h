@@ -1,7 +1,7 @@
 #ifndef ABSTRACT_VOLUME_REPOSITORY_TEST_H
 #define ABSTRACT_VOLUME_REPOSITORY_TEST_H
 
-#include <QtTest>
+#include <QtTest/QtTest>
 
 #include "core_traits.h"
 

@@ -1,7 +1,7 @@
 #ifndef DIRECTION_TEST_H
 #define DIRECTION_TEST_H
 
-#include <QtTest>
+#include <QtTest/QTest>
 
 class DirectionTest: public QObject
 {

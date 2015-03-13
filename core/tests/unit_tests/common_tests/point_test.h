@@ -1,7 +1,7 @@
-#ifndef VECTEST_H
-#define VECTEST_H
+#ifndef VEC_TEST_H
+#define VEC_TEST_H
 
-#include <QtTest>
+#include <QtTest/QTest>
 
 class PointTest: public QObject
 {
@@ -16,4 +16,4 @@ private slots:
     void testProduct();
 };
 
-#endif // VECTEST_H
+#endif // VEC_TEST_H

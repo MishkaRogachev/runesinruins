@@ -1,5 +1,5 @@
-#ifndef AREAPROXYVOLUMEREPOSITORY_H
-#define AREAPROXYVOLUMEREPOSITORY_H
+#ifndef AREA_PROXY_VOLUME_REPOSITORY_H
+#define AREA_PROXY_VOLUME_REPOSITORY_H
 
 #include "proxy_volume_repository.h"
 
@@ -11,7 +11,10 @@ namespace core
         AreaProxyVolumeRepository(const VolumeRepositoryPtr& sourceRepository =
                 VolumeRepositoryPtr());
         virtual ~AreaProxyVolumeRepository() override;
+
+    private:
+        AreaPtr area;
     };
 }
 
-#endif // AREAPROXYVOLUMEREPOSITORY_H
+#endif // AREA_PROXY_VOLUME_REPOSITORY_H

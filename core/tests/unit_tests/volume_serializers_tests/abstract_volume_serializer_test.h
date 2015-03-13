@@ -1,7 +1,7 @@
 #ifndef ABSTRACT_VOLUME_SARIALIZER_TEST_H
 #define ABSTRACT_VOLUME_SARIALIZER_TEST_H
 
-#include <QTest>
+#include <QtTest/QtTest>
 
 #include "core_traits.h"
 

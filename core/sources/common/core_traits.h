@@ -7,23 +7,24 @@
 
 namespace core
 {
-    template< typename T, int dim >
-    class Point;
-    class ObjectInterface;
+    class AbstractPersister;
+    template< typename T, int dim > class Point;
+    class AbstractArea;
+    class NodeObject;
     class Node;
     class Volume;
-    class AbstractVolumeRepository;
     class AbstractVolumeSerializer;
-    class AbstractPersister;
+    class AbstractVolumeRepository;
 
     typedef Point<unsigned, 3> Point3u;
     typedef Point<int, 3> Point3i;
 
-    typedef QSharedPointer<ObjectInterface> ObjectPtr;
-    typedef QSharedPointer<Volume> VolumePtr;
-    typedef QSharedPointer<AbstractVolumeRepository> VolumeRepositoryPtr;
-    typedef QSharedPointer<AbstractVolumeSerializer> VolumeSerializerPtr;
     typedef QSharedPointer<AbstractPersister> PersisterPtr;
+    typedef QSharedPointer<AbstractArea> AreaPtr;
+    typedef QSharedPointer<NodeObject> NodeObjectPtr;
+    typedef QSharedPointer<Volume> VolumePtr;
+    typedef QSharedPointer<AbstractVolumeSerializer> VolumeSerializerPtr;
+    typedef QSharedPointer<AbstractVolumeRepository> VolumeRepositoryPtr;
 
     typedef QList<Point3u> Point3uList;
     typedef QList<Point3i> Point3iList;

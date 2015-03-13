@@ -1,5 +1,5 @@
-#ifndef PROXYVOLUMEREPOSITORY_H
-#define PROXYVOLUMEREPOSITORY_H
+#ifndef PROXY_VOLUME_REPOSITORY_H
+#define PROXY_VOLUME_REPOSITORY_H
 
 #include "cache_volume_repository.h"
 
@@ -34,4 +34,4 @@ namespace core
         VolumeRepositoryPtr m_sourceRepository;
     };
 }
-#endif // PROXYVOLUMEREPOSITORY_H
+#endif // PROXY_VOLUME_REPOSITORY_H

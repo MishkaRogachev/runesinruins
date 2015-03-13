@@ -8,13 +8,13 @@ namespace core
     class Node
     {
     public:
-        Node(const ObjectPtr& object = ObjectPtr());
+        Node(const NodeObjectPtr& object = NodeObjectPtr());
         ~Node();
 
         Node* neighbour(Direction direction) const;
 
-        void setObject(const ObjectPtr& object);
-        ObjectPtr object() const;
+        void setObject(const NodeObjectPtr& object);
+        NodeObjectPtr object() const;
 
         void chainTo(Node *other, Direction direction);
         void breakChain(Direction direction);
