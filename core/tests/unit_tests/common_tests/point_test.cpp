@@ -106,6 +106,20 @@ void PointTest::testOffsets()
     QCOMPARE(vf.up().right(), vf.right().up());
 }
 
+void PointTest::testMoveAndGo()
+{
+    Point<int, 2> vi(5, 3);
+
+    QCOMPARE(vi.move(1, 0), (Point<int, 2>(6, 3)));
+    QCOMPARE(vi.move(1, 2), (Point<int, 2>(7, 5)));
+    QCOMPARE(vi.move(-6, 0).move(0, -4), (Point<int, 2>(1, 1)));
+
+    Point<float, 3> vf(3.5, -0.5, 1.5);
+
+    QCOMPARE(vf.goForward(), (Point<float, 3> (4.5, -0.5, 1.5)));
+    QCOMPARE(vf.goForward().goRight(2), (Point<float, 3> (5.5, 1.5, 1.5)));
+}
+
 void PointTest::testProduct()
 {
     QCOMPARE((Point<int, 2>(1, 0).product()), 0);

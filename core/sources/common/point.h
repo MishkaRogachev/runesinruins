@@ -121,24 +121,24 @@ namespace core
         Point& move(T x)
         {
             Q_ASSERT(dim == 1);
-            d[0] = x;
+            d[0] += x;
             return *this;
         }
 
         Point& move(T x, T y)
         {
             Q_ASSERT(dim == 2);
-            d[0] = x;
-            d[1] = y;
+            d[0] += x;
+            d[1] += y;
             return *this;
         }
 
         Point& move(T x, T y, T z)
         {
-            Q_ASSERT(dim == 2);
-            d[0] = x;
-            d[1] = y;
-            d[2] = z;
+            Q_ASSERT(dim == 3);
+            d[0] += x;
+            d[1] += y;
+            d[2] += z;
             return *this;
         }
 

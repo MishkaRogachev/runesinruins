@@ -13,6 +13,7 @@ private slots:
     void testSetterFunctions();
     void testComparation();
     void testOffsets();
+    void testMoveAndGo();
     void testProduct();
 };
 

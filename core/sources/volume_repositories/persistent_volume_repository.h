@@ -11,7 +11,7 @@ namespace core
     {
     public:
         PersistentVolumeRepository(const PersisterPtr& persister =
-                PersisterPtr(new FsPersister("vol")),
+                                   PersisterPtr(new FsPersister("vol")),
                                    const VolumeSerializerPtr& serilalizer =
                 VolumeSerializerPtr(new StandartVolumeSerializer()));
         virtual ~PersistentVolumeRepository() override;

@@ -22,12 +22,12 @@ void AbstractAreaTest::testPositions()
 
     Point3iList positions = area->positions();
 
-    area->centerPosition().goUp(3).goRight(2);
+    area->centerPosition().goForward(3).goRight(2);
 
     QCOMPARE(positions.count(), area->positions().count());
     QVERIFY(positions != area->positions());
 
-    area->centerPosition().goLeft(2).goDown(3);
+    area->centerPosition().goLeft(2).goBackward(3);
 
     QCOMPARE(positions, area->positions());
 }

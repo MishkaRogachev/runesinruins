@@ -4,9 +4,7 @@ using namespace core;
 
 SquareArea::SquareArea(int size, const Point3i& position):
     AbstractArea(size, position)
-{
-    this->updatePositions(); // must be called from derived class
-}
+{}
 
 SquareArea::~SquareArea()
 {}
