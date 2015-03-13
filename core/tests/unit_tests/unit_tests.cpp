@@ -6,10 +6,10 @@
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
 #include "volume_serializers_tests/standart_volume_serializer_test.h"
+#include "volume_repositories_tests/persistent_volume_repository_test.h"
 #include "volume_repositories_tests/cache_volume_repository_test.h"
 #include "volume_repositories_tests/proxy_volume_repository_test.h"
-#include "volume_repositories_tests/persistent_volume_repository_test.h"
-
+#include "volume_repositories_tests/area_proxy_volume_repository_test.h"
 
 int main()
 {
@@ -31,14 +31,17 @@ int main()
     StandartVolumeSerializerTest standartVolumeSerializerTest;
     QTest::qExec(&standartVolumeSerializerTest);
 
+    PersistentVolumeRepositoryTest persistentVolumeRepositoryTest;
+    QTest::qExec(&persistentVolumeRepositoryTest);
+
     CacheVolumeRepositoryTest cachedVolumeRepositoryTest;
     QTest::qExec(&cachedVolumeRepositoryTest);
 
     ProxyVolumeRepositoryTest proxyVolumeRepositoryTest;
     QTest::qExec(&proxyVolumeRepositoryTest);
 
-    PersistentVolumeRepositoryTest persistentVolumeRepositoryTest;
-    QTest::qExec(&persistentVolumeRepositoryTest);
+    AreaProxyVolumeRepositoryTest areaProxyVolumeRepositoryTest;
+    QTest::qExec(&areaProxyVolumeRepositoryTest);
 
     return 0;
 }

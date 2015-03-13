@@ -14,7 +14,10 @@ PersistentVolumeRepository::PersistentVolumeRepository(
     AbstractVolumeRepository(),
     m_persister(persister),
     m_serilalizer(serilalizer)
-{}
+{
+    Q_ASSERT(persister);
+    Q_ASSERT(serilalizer);
+}
 
 PersistentVolumeRepository::~PersistentVolumeRepository()
 {}
@@ -23,11 +26,9 @@ Point3iList PersistentVolumeRepository::allPositions() const
 {
     Point3iList vector;
 
-    if (m_persister)
-    {
-        for (const QString& entry: m_persister->avalibleEntries())
-            vector.append(this->entryToPosition(entry));
-    }
+    for (const QString& entry: m_persister->avalibleEntries())
+        vector.append(this->entryToPosition(entry));
+
     return vector;
 }
 
@@ -35,14 +36,11 @@ VolumePtrList PersistentVolumeRepository::allVolumes()
 {
     VolumePtrList vector;
 
-    if (m_persister)
+    for (const QString& entry: m_persister->avalibleEntries())
     {
-        for (const QString& entry: m_persister->avalibleEntries())
-        {
-            VolumePtr volume = m_serilalizer->unserialize(
-                                   m_persister->load(entry));
-            if (volume) vector.append(volume);
-        }
+        VolumePtr volume = m_serilalizer->unserialize(
+                               m_persister->load(entry));
+        if (volume) vector.append(volume);
     }
     return vector;
 }
