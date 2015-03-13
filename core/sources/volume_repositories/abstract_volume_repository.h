@@ -2,7 +2,6 @@
 #define ABSTRACT_VOLUME_REPOSITORY_H
 
 #include "core_traits.h"
-#include "point.h"
 
 namespace core
 {

@@ -13,6 +13,7 @@ namespace core
     class NodeObject;
     class Node;
     class Volume;
+    class AbstractVolumeGenerator;
     class AbstractVolumeSerializer;
     class AbstractVolumeRepository;
 
@@ -23,6 +24,7 @@ namespace core
     typedef QSharedPointer<AbstractArea> AreaPtr;
     typedef QSharedPointer<NodeObject> NodeObjectPtr;
     typedef QSharedPointer<Volume> VolumePtr;
+    typedef QSharedPointer<AbstractVolumeGenerator> VolumeGeneratorPtr;
     typedef QSharedPointer<AbstractVolumeSerializer> VolumeSerializerPtr;
     typedef QSharedPointer<AbstractVolumeRepository> VolumeRepositoryPtr;
 
