@@ -4,8 +4,8 @@ project (${PROJECT})
 
 # Includes
 include_directories(
-    ../sources/persisters
     ../sources/common
+    ../sources/persisters
     ../sources/areas
     ../sources/node
     ../sources/volume
@@ -16,10 +16,11 @@ include_directories(
 
 # Sources
 set(TEST_SOURCES
-    unit_tests/persisters_tests/abstract_persister_test.cpp
-    unit_tests/persisters_tests/fs_persister_test.cpp
     unit_tests/common_tests/direction_test.cpp
     unit_tests/common_tests/point_test.cpp
+    unit_tests/common_tests/core_traits_test.cpp
+    unit_tests/persisters_tests/abstract_persister_test.cpp
+    unit_tests/persisters_tests/fs_persister_test.cpp
     unit_tests/areas_tests/abstract_area_test.cpp
     unit_tests/areas_tests/square_area_test.cpp
     unit_tests/node_tests/node_test.cpp

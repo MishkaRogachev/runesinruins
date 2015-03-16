@@ -1,8 +1,9 @@
 #include <QtTest/QtTest>
 
-#include "persisters_tests/fs_persister_test.h"
 #include "common_tests/direction_test.h"
 #include "common_tests/point_test.h"
+#include "common_tests/core_traits_test.h"
+#include "persisters_tests/fs_persister_test.h"
 #include "areas_tests/square_area_test.h"
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
@@ -15,14 +16,17 @@
 
 int main()
 {
-    FsPersisterTest fsPersisterTest;
-    QTest::qExec(&fsPersisterTest);
-
     DirectionTest directionTest;
     QTest::qExec(&directionTest);
 
     PointTest pointTest;
     QTest::qExec(&pointTest);
+
+    CoreTraitsTest coreTraitsTest;
+    QTest::qExec(&coreTraitsTest);
+
+    FsPersisterTest fsPersisterTest;
+    QTest::qExec(&fsPersisterTest);
 
     SquareAreaTest squareAreaTest;
     QTest::qExec(&squareAreaTest);
