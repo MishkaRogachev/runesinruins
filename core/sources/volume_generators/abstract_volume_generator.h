@@ -8,11 +8,19 @@ namespace core
     class AbstractVolumeGenerator
     {
     public:
-        AbstractVolumeGenerator();
+        AbstractVolumeGenerator(const Point3u& volumeSize,
+                                const AreaPtr& avalibleArea = AreaPtr());
         virtual ~AbstractVolumeGenerator();
 
-        virtual VolumePtr create(const Point3i& position) = 0;
-        virtual bool canCreate(const Point3i& position) const = 0;
+        virtual VolumePtr generate(const Point3i& position) = 0;
+        virtual bool canGenerate(const Point3i& position) const;
+
+        Point3u volumeSize() const;
+        void setVolumeSize(const Point3u& volumeSize);
+
+    protected:
+        Point3u m_volumeSize;
+        AreaPtr m_avalibleArea;
     };
 }
 #endif // ABSTRACTVOLUMEGENERATOR_H

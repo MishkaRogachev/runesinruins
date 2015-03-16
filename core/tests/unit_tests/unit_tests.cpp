@@ -7,6 +7,7 @@
 #include "node_tests/node_test.h"
 #include "volume_tests/volume_test.h"
 #include "volume_serializers_tests/standart_volume_serializer_test.h"
+#include "volume_generators_tests/standart_volume_generator_test.h"
 #include "volume_repositories_tests/persistent_volume_repository_test.h"
 #include "volume_repositories_tests/cache_volume_repository_test.h"
 #include "volume_repositories_tests/proxy_volume_repository_test.h"
@@ -34,6 +35,9 @@ int main()
 
     StandartVolumeSerializerTest standartVolumeSerializerTest;
     QTest::qExec(&standartVolumeSerializerTest);
+
+    StandartVolumeGeneratorTest standartVolumeGeneratorTest;
+    QTest::qExec(&standartVolumeGeneratorTest);
 
     PersistentVolumeRepositoryTest persistentVolumeRepositoryTest;
     QTest::qExec(&persistentVolumeRepositoryTest);

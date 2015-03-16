@@ -32,6 +32,9 @@ namespace core
     typedef QList<Point3i> Point3iList;
 
     typedef QList<VolumePtr> VolumePtrList;
+
+    Point3i globalPoint(const Point3i& volumePos, const Point3u& inVolumePos,
+                        const Point3u& volumeSize);
 }
 
 #endif // CORE_TRAITS

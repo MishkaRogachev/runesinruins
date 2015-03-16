@@ -14,12 +14,12 @@ AbstractVolumeRepository::~AbstractVolumeRepository()
 
 VolumePtr AbstractVolumeRepository::create(const Point3i& position)
 {
-    return !m_generator.isNull() ? m_generator->create(position) : VolumePtr();
+    return !m_generator.isNull() ? m_generator->generate(position) : VolumePtr();
 }
 
 bool AbstractVolumeRepository::canCreate(const Point3i& position) const
 {
-    return !m_generator.isNull() && m_generator->canCreate(position);
+    return !m_generator.isNull() && m_generator->canGenerate(position);
 }
 
 bool AbstractVolumeRepository::isEmpty() const

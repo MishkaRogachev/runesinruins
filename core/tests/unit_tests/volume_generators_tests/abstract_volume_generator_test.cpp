@@ -13,9 +13,9 @@ void AbstractVolumeGeneratorTest::testCreation()
         Point3i position(25 - qrand() % 51,
                          25 - qrand() % 51,
                          25 - qrand() % 51);
-        if (generator->canCreate(position))
+        if (generator->canGenerate(position))
         {
-            generator->create(position);
+            generator->generate(position);
         }
     }
 }
