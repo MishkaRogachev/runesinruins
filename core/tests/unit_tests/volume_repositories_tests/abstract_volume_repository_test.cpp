@@ -35,6 +35,17 @@ void AbstractVolumeRepositoryTest::loadTest()
     QVERIFY(!volumeRepository->canLoad(3, 3, 2));
 }
 
+void AbstractVolumeRepositoryTest::createTest()
+{
+    VolumeRepositoryPtr volumeRepository = this->volumeRepository();
+
+    bool isNull = !volumeRepository->canCreate(1, 2, 3);
+    QCOMPARE(volumeRepository->create(1, 2, 3).isNull(), isNull);
+
+    isNull = !volumeRepository->canCreate(3, 4, 7);
+    QCOMPARE(volumeRepository->create(3, 4, 7).isNull(), isNull);
+}
+
 void AbstractVolumeRepositoryTest::removeTest()
 {
     VolumeRepositoryPtr volumeRepository = this->volumeRepository();

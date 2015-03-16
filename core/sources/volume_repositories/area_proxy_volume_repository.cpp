@@ -3,8 +3,10 @@
 using namespace core;
 
 AreaProxyVolumeRepository::AreaProxyVolumeRepository(
-        const VolumeRepositoryPtr& sourceRepository, const AreaPtr& area):
-    ProxyVolumeRepository(sourceRepository),
+        const VolumeRepositoryPtr& sourceRepository,
+        const AreaPtr& area,
+        const VolumeGeneratorPtr& generator):
+    ProxyVolumeRepository(sourceRepository, generator),
     m_area(area)
 {
     Q_ASSERT(area);

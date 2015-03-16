@@ -10,14 +10,18 @@ namespace core
     {
     public:
         AreaProxyVolumeRepository(const VolumeRepositoryPtr& sourceRepository =
-                                  VolumeRepositoryPtr(),
-                                  const AreaPtr& area = AreaPtr(new SquareArea));
+                VolumeRepositoryPtr(),
+                                  const AreaPtr& area = AreaPtr(new SquareArea),
+                                  const VolumeGeneratorPtr& generator =
+                VolumeGeneratorPtr());
         virtual ~AreaProxyVolumeRepository() override;
 
         using AbstractVolumeRepository::load;
+        using AbstractVolumeRepository::create;
         using AbstractVolumeRepository::save;
         using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
+        using AbstractVolumeRepository::canCreate;
 
         Point3i position() const;
         Point3i& position();

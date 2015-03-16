@@ -11,6 +11,7 @@ include_directories(
     ../sources/volume
     ../sources/volume_repositories
     ../sources/volume_serializers
+    ../sources/volume_generators
 )
 
 # Sources
@@ -25,6 +26,7 @@ set(TEST_SOURCES
     unit_tests/volume_tests/volume_test.cpp
     unit_tests/volume_serializers_tests/abstract_volume_serializer_test.cpp
     unit_tests/volume_serializers_tests/standart_volume_serializer_test.cpp
+    unit_tests/volume_generators_tests/abstract_volume_generator_test.cpp
     unit_tests/volume_repositories_tests/abstract_volume_repository_test.cpp
     unit_tests/volume_repositories_tests/persistent_volume_repository_test.cpp
     unit_tests/volume_repositories_tests/cache_volume_repository_test.cpp

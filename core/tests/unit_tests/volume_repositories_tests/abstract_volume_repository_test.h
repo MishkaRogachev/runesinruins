@@ -14,6 +14,7 @@ protected:
 
 private slots:
     void loadTest();
+    void createTest();
     void removeTest();
 };
 

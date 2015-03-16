@@ -10,8 +10,10 @@ namespace
 using namespace core;
 
 PersistentVolumeRepository::PersistentVolumeRepository(
-        const PersisterPtr& persister, const VolumeSerializerPtr& serilalizer):
-    AbstractVolumeRepository(),
+        const PersisterPtr& persister,
+        const VolumeSerializerPtr& serilalizer,
+        const VolumeGeneratorPtr& generator):
+    AbstractVolumeRepository(generator),
     m_persister(persister),
     m_serilalizer(serilalizer)
 {
@@ -49,6 +51,14 @@ VolumePtr PersistentVolumeRepository::load(const Point3i& position)
 {
     return m_serilalizer->unserialize(
                 m_persister->load(this->positionToEntry(position)));
+}
+
+VolumePtr PersistentVolumeRepository::create(const Point3i& position)
+{
+    VolumePtr volume = AbstractVolumeRepository::create(position);
+
+    if (volume) this->save(volume, position);
+    return volume;
 }
 
 void PersistentVolumeRepository::save(const VolumePtr& volume,

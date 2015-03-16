@@ -5,8 +5,9 @@
 using namespace core;
 
 ProxyVolumeRepository::ProxyVolumeRepository(
-        const VolumeRepositoryPtr& sourceRepository):
-    CacheVolumeRepository(),
+        const VolumeRepositoryPtr& sourceRepository,
+        const VolumeGeneratorPtr& generator):
+    CacheVolumeRepository(generator),
     m_sourceRepository(sourceRepository)
 {}
 
@@ -57,6 +58,19 @@ VolumePtr ProxyVolumeRepository::load(const Point3i& position)
     }
 }
 
+VolumePtr ProxyVolumeRepository::create(const Point3i& position)
+{
+    if (CacheVolumeRepository::canCreate(position))
+    {
+        return CacheVolumeRepository::create(position);
+    }
+    if (m_sourceRepository && m_sourceRepository->canCreate(position))
+    {
+        return m_sourceRepository->create(position);
+    }
+    return VolumePtr();
+}
+
 void ProxyVolumeRepository::save(const VolumePtr& volume,
                                  const Point3i& position)
 {
@@ -81,19 +95,30 @@ bool ProxyVolumeRepository::canLoad(const Point3i& position) const
                  m_sourceRepository->canLoad(position) : false);
 }
 
+bool ProxyVolumeRepository::canCreate(const Point3i& position) const
+{
+    return CacheVolumeRepository::canCreate(position) ||
+            (m_sourceRepository && m_sourceRepository->canCreate(position));
+}
+
 VolumePtr ProxyVolumeRepository::reload(const Point3i& position)
 {
-    if (m_sourceRepository && m_sourceRepository->canLoad(position))
+    if (m_sourceRepository)
     {
-        CacheVolumeRepository::save(m_sourceRepository->load(position),
-                                    position);
-        return CacheVolumeRepository::load(position);
+        if (m_sourceRepository->canLoad(position))
+        {
+            CacheVolumeRepository::save(m_sourceRepository->load(position),
+                                        position);
+        }
+
+        if (m_sourceRepository->canCreate(position))
+        {
+            CacheVolumeRepository::save(m_sourceRepository->create(position),
+                                        position);
+        }
     }
-    else
-    {
-        if (this->isLoaded(position)) CacheVolumeRepository::unload(position);
-        return VolumePtr();
-    }
+
+    return CacheVolumeRepository::load(position);
 }
 
 void ProxyVolumeRepository::setSourceRepository(

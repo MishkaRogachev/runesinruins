@@ -11,23 +11,28 @@ namespace core
     {
     public:
         PersistentVolumeRepository(const PersisterPtr& persister =
-                                   PersisterPtr(new FsPersister("vol")),
+                PersisterPtr(new FsPersister("vol")),
                                    const VolumeSerializerPtr& serilalizer =
-                VolumeSerializerPtr(new StandartVolumeSerializer()));
+                VolumeSerializerPtr(new StandartVolumeSerializer()),
+                                   const VolumeGeneratorPtr& generator =
+                VolumeGeneratorPtr());
         virtual ~PersistentVolumeRepository() override;
 
         virtual Point3iList allPositions() const override;
         virtual VolumePtrList allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
+        virtual VolumePtr create(const Point3i& position) override;
         virtual void save(const VolumePtr& volume,
                           const Point3i& position) override;
         virtual void remove(const Point3i& position) override;
         virtual bool canLoad(const Point3i& position) const override;
 
         using AbstractVolumeRepository::load;
+        using AbstractVolumeRepository::create;
         using AbstractVolumeRepository::save;
         using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
+        using AbstractVolumeRepository::canCreate;
 
     protected:
         virtual QString positionToEntry(const Point3i& position) const;

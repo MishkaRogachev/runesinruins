@@ -8,21 +8,25 @@ namespace core
     class CacheVolumeRepository: public AbstractVolumeRepository
     {
     public:
-        CacheVolumeRepository();
+        CacheVolumeRepository(const VolumeGeneratorPtr& generator =
+                VolumeGeneratorPtr());
         virtual ~CacheVolumeRepository() override;
 
         virtual Point3iList allPositions() const override;
         virtual VolumePtrList allVolumes() override;
         virtual VolumePtr load(const Point3i& position) override;
+        virtual VolumePtr create(const Point3i& position) override;
         virtual void save(const VolumePtr& volume,
                           const Point3i& position) override;
         virtual void remove(const Point3i& position) override;
         virtual bool canLoad(const Point3i& position) const override;
 
         using AbstractVolumeRepository::load;
+        using AbstractVolumeRepository::create;
         using AbstractVolumeRepository::save;
         using AbstractVolumeRepository::remove;
         using AbstractVolumeRepository::canLoad;
+        using AbstractVolumeRepository::canCreate;
 
         Point3iList loadedPositions() const;
         VolumePtrList loadedVolumes() const;

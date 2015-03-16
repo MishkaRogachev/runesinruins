@@ -4,8 +4,9 @@
 
 using namespace core;
 
-CacheVolumeRepository::CacheVolumeRepository():
-    AbstractVolumeRepository()
+CacheVolumeRepository::CacheVolumeRepository(
+        const VolumeGeneratorPtr& generator):
+    AbstractVolumeRepository(generator)
 {}
 
 CacheVolumeRepository::~CacheVolumeRepository()
@@ -43,6 +44,14 @@ VolumePtr CacheVolumeRepository::load(const Point3i& position)
 
     if (current) this->chain(current, position);
     return current;
+}
+
+VolumePtr CacheVolumeRepository::create(const Point3i& position)
+{
+    VolumePtr volume = AbstractVolumeRepository::create(position);
+
+    if (volume) m_cache[position] = volume;
+    return volume;
 }
 
 void CacheVolumeRepository::save(const VolumePtr& volume,
