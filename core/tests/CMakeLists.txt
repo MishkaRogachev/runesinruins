@@ -1,6 +1,6 @@
 # Project
 set (PROJECT core_test)
-project (${PROJECT}) 
+project (${PROJECT})
 
 # Includes
 include_directories(
@@ -46,10 +46,10 @@ set(EXECUTABLE_OUTPUT_PATH ${RESULT_DIR})
 add_executable(core_test ${TEST_SOURCES})
 
 # Use Qt5 modules
-qt5_use_modules(${PROJECT} Core Test)
+qt5_use_modules(${PROJECT} Core Network Test)
 
 # Libraries
-set (TEST_LIBRARIES core_lib ${QT_QTTEST_LIBRARY} ${QT_LIBRARIES})
+set (TEST_LIBRARIES core ${QT_QTTEST_LIBRARY} ${QT_LIBRARIES})
 target_link_libraries (core_test ${TEST_LIBRARIES})
 
 # Tests

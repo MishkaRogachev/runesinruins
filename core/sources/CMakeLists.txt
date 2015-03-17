@@ -1,5 +1,5 @@
 # Project
-set (PROJECT core_lib)
+set (PROJECT core)
 project (${PROJECT})
 
 # Includes
@@ -49,4 +49,4 @@ qt5_use_modules(${PROJECT} Core Network)
 
 # Libraries
 set (TEST_LIBRARIES ${QT_QTTEST_LIBRARY} ${QT_LIBRARIES})
-target_link_libraries (core_lib ${TEST_LIBRARIES})
+target_link_libraries (core ${TEST_LIBRARIES})

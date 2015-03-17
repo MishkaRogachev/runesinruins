@@ -1,5 +1,3 @@
-#include <QtTest/QtTest>
-
 #include "common_tests/direction_test.h"
 #include "common_tests/point_test.h"
 #include "common_tests/core_traits_test.h"
