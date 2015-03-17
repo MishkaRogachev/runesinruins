@@ -38,6 +38,9 @@ set(SOURCES
     node_objects/node_object.cpp
 )
 
+# Output path for library target
+set(LIBRARY_OUTPUT_PATH ${RESULT_DIR})
+
 # Library target
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 

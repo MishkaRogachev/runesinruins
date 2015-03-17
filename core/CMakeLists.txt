@@ -1,24 +1,24 @@
 # CMake
-cmake_minimum_required (VERSION 2.8.9)
+cmake_minimum_required (VERSION 2.8.11)
 
 # Project
 set (PROJECT core)
 project (${PROJECT})
 
 # Add compiler flags
-add_definitions(-std=c++11 -Wall -fPIC)
+add_definitions (-std=c++11 -Wall -fPIC)
 
 # Qt5 Packages
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Network REQUIRED)
-find_package(Qt5Test REQUIRED)
+find_package (Qt5 COMPONENTS Core Test REQUIRED)
 
 # Tell CMake to run moc when necessary:
-set(CMAKE_AUTOMOC ON)
+set (CMAKE_AUTOMOC ON)
 
 # As moc files are generated in the binary dir,
 # tell CMake to always look for includes there:
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set (CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set (RESULT_DIR ${CMAKE_SOURCE_DIR}/../result)
 
 # Testing
 enable_testing()

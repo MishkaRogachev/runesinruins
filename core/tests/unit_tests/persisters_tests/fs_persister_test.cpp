@@ -16,7 +16,7 @@ void FsPersisterTest::testExtention()
     FsPersister persister;
 
     for (const QString& extention:
-         QStringList({ "vol", "abc", "", "tar.gz", "very.many.dots", ".wrong"}))
+         QStringList({ "vol", "abc", "tar.gz", "very.many.dots", ".wrong"}))
     {
         persister.setExtension(extention);
 
@@ -36,7 +36,7 @@ void FsPersisterTest::testFolders()
     for (const QString& subdir:
          QStringList({ "1", "abc", "1/2", "foo/bar", "folder.dot", ".hidden"}))
     {
-        QDir dir(QDir::currentPath() + "/" + subdir);
+        QDir dir(QDir::currentPath() + "/test/" + subdir);
         persister.setPath(dir.path());
 
         persister.save("test_path", QByteArray("test"));
@@ -46,4 +46,7 @@ void FsPersisterTest::testFolders()
 
         QVERIFY(persister.avalibleEntries().empty());
     }
+
+    QDir dir(QDir::currentPath() + "/test/");
+    dir.removeRecursively();
 }

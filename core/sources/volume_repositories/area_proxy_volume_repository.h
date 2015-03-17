@@ -10,9 +10,8 @@ namespace core
     {
     public:
         AreaProxyVolumeRepository(const VolumeRepositoryPtr& sourceRepository =
-                VolumeRepositoryPtr(),
-                                  const AreaPtr& area = AreaPtr(new SquareArea),
-                                  const VolumeGeneratorPtr& generator =
+                VolumeRepositoryPtr(), const AreaPtr& area =
+                AreaPtr(new SquareArea()), const VolumeGeneratorPtr& generator =
                 VolumeGeneratorPtr());
         virtual ~AreaProxyVolumeRepository() override;
 

@@ -39,7 +39,10 @@ set(TEST_SOURCES
     unit_tests/unit_tests.cpp
 )
 
-# Executable
+# Output path for executable target
+set(EXECUTABLE_OUTPUT_PATH ${RESULT_DIR})
+
+# Executable target
 add_executable(core_test ${TEST_SOURCES})
 
 # Use Qt5 modules

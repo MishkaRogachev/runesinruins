@@ -1,2 +1,4 @@
+/result/core_test
+/result/libcore_lib.so
 /core/CMakeLists.txt.user
 /build
