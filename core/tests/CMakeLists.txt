@@ -45,12 +45,8 @@ set(EXECUTABLE_OUTPUT_PATH ${RESULT_DIR})
 # Executable target
 add_executable(core_test ${TEST_SOURCES})
 
-# Use Qt5 modules
-qt5_use_modules(${PROJECT} Core Network Test)
-
 # Libraries
-set (TEST_LIBRARIES core ${QT_QTTEST_LIBRARY} ${QT_LIBRARIES})
-target_link_libraries (core_test ${TEST_LIBRARIES})
+target_link_libraries (core_test core Qt5::Core Qt5::Network Qt5::Test)
 
 # Tests
 add_test (NAME core_test COMMAND core_test)

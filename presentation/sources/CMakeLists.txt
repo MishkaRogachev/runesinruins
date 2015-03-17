@@ -4,6 +4,7 @@ project (${PROJECT})
 
 # Includes
 include_directories(
+    volume_renderers
 )
 
 # Sources
@@ -17,9 +18,5 @@ set(LIBRARY_OUTPUT_PATH ${RESULT_DIR})
 # Library target
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 
-# Use Qt5 modules
-qt5_use_modules(${PROJECT} Core Gui Quick)
-
 # Libraries
-set (TEST_LIBRARIES ${QT_QTTEST_LIBRARY} ${QT_LIBRARIES})
-target_link_libraries (core ${TEST_LIBRARIES})
+target_link_libraries (presentation core Qt5::Core Qt5::Gui Qt5::Quick)
