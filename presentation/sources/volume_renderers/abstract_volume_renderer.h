@@ -1,12 +1,14 @@
-#ifndef ABSTRACTVOLUMERENDERER_H
-#define ABSTRACTVOLUMERENDERER_H
+#ifndef ABSTRACT_VOLUME_RENDERER_H
+#define ABSTRACT_VOLUME_RENDERER_H
 
-
-class AbstractVolumeRenderer
+namespace presentation
 {
-public:
-    AbstractVolumeRenderer();
-    ~AbstractVolumeRenderer();
-};
+    class AbstractVolumeRenderer
+    {
+    public:
+        AbstractVolumeRenderer();
+        ~AbstractVolumeRenderer();
+    };
+}
 
-#endif // ABSTRACTVOLUMERENDERER_H
+#endif // ABSTRACT_VOLUME_RENDERER_H

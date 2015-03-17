@@ -9,13 +9,12 @@ find_package(Qt5 COMPONENTS Core Quick REQUIRED)
 
 # Includes
 include_directories(
+    ../presentation/sources/volume_render_item/
     sources
 )
 
 # Sources
-set(SOURCES
-    sources/main.cpp
-)
+file (GLOB_RECURSE SOURCES "*.h" "*.cpp")
 
 # Resources
 set(RESOURCES

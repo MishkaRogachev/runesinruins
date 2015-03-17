@@ -8,9 +8,7 @@ include_directories(
 )
 
 # Sources
-set(TEST_SOURCES
-    unit_tests/unit_tests.cpp
-)
+file (GLOB_RECURSE TEST_SOURCES "*.h" "*.cpp")
 
 # Output path for executable target
 set(EXECUTABLE_OUTPUT_PATH ${RESULT_DIR})

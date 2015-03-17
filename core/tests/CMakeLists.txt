@@ -16,28 +16,7 @@ include_directories(
 )
 
 # Sources
-set(TEST_SOURCES
-    unit_tests/common_tests/direction_test.cpp
-    unit_tests/common_tests/point_test.cpp
-    unit_tests/common_tests/core_traits_test.cpp
-    unit_tests/persisters_tests/abstract_persister_test.cpp
-    unit_tests/persisters_tests/fs_persister_test.cpp
-    unit_tests/areas_tests/abstract_area_test.cpp
-    unit_tests/areas_tests/square_area_test.cpp
-    unit_tests/node_tests/node_test.cpp
-    unit_tests/volume_tests/volume_test.cpp
-    unit_tests/volume_serializers_tests/abstract_volume_serializer_test.cpp
-    unit_tests/volume_serializers_tests/standart_volume_serializer_test.cpp
-    unit_tests/volume_generators_tests/abstract_volume_generator_test.cpp
-    unit_tests/volume_generators_tests/standart_volume_generator_test.cpp
-    unit_tests/volume_repositories_tests/abstract_volume_repository_test.cpp
-    unit_tests/volume_repositories_tests/persistent_volume_repository_test.cpp
-    unit_tests/volume_repositories_tests/cache_volume_repository_test.cpp
-    unit_tests/volume_repositories_tests/proxy_volume_repository_test.cpp
-    unit_tests/volume_repositories_tests/area_proxy_volume_repository_test.cpp
-    unit_tests/node_objects_tests/node_object_test.cpp
-    unit_tests/unit_tests.cpp
-)
+file (GLOB_RECURSE TEST_SOURCES "*.h" "*.cpp")
 
 # Output path for executable target
 set(EXECUTABLE_OUTPUT_PATH ${RESULT_DIR})

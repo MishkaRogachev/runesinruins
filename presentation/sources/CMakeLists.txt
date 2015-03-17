@@ -10,6 +10,7 @@ include_directories(
 # Sources
 set(SOURCES
     volume_renderers/abstract_volume_renderer.cpp
+    volume_render_item/volume_render_item.cpp
 )
 
 # Output path for library target

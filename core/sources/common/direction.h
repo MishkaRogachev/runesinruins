@@ -11,7 +11,7 @@ namespace core
     public:
         Direction();
 
-        static const int count = 6; // must be visible for constant expressions
+        constexpr static int count = 6; // must be visible for constant expressions
         static const Direction forward;
         static const Direction backward;
         static const Direction right;
