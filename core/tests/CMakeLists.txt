@@ -12,6 +12,7 @@ include_directories(
     ../sources/volume_repositories
     ../sources/volume_serializers
     ../sources/volume_generators
+    ../sources/node_objects
 )
 
 # Sources
@@ -34,6 +35,7 @@ set(TEST_SOURCES
     unit_tests/volume_repositories_tests/cache_volume_repository_test.cpp
     unit_tests/volume_repositories_tests/proxy_volume_repository_test.cpp
     unit_tests/volume_repositories_tests/area_proxy_volume_repository_test.cpp
+    unit_tests/node_objects_tests/node_object_test.cpp
     unit_tests/unit_tests.cpp
 )
 

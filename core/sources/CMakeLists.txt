@@ -10,8 +10,9 @@ include_directories(
     node
     volume
     volume_serializers
-    volume_repositories
     volume_generators
+    volume_repositories
+    node_objects
 )
 
 # Sources
@@ -34,6 +35,7 @@ set(SOURCES
     volume_repositories/cache_volume_repository.cpp
     volume_repositories/proxy_volume_repository.cpp
     volume_repositories/area_proxy_volume_repository.cpp
+    node_objects/node_object.cpp
 )
 
 # Library target

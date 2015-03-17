@@ -13,6 +13,7 @@
 #include "volume_repositories_tests/cache_volume_repository_test.h"
 #include "volume_repositories_tests/proxy_volume_repository_test.h"
 #include "volume_repositories_tests/area_proxy_volume_repository_test.h"
+#include "node_objects_tests/node_object_test.h"
 
 int main()
 {
@@ -54,6 +55,9 @@ int main()
 
     AreaProxyVolumeRepositoryTest areaProxyVolumeRepositoryTest;
     QTest::qExec(&areaProxyVolumeRepositoryTest);
+
+    NodeObjectTest nodeObjectTest;
+    QTest::qExec(&nodeObjectTest);
 
     return 0;
 }

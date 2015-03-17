@@ -25,13 +25,14 @@ VolumePtr StandartVolumeGenerator::generate(const Point3i& position)
 
     for (const auto& it: *volume)
     {
-        it.node()->setObject(this->nodeForPosition(
+        it.node()->setObject(this->nodeObjectForPosition(
                         globalPoint(position, it.position(), m_volumeSize)));
     }
     return volume;
 }
 
-NodeObjectPtr StandartVolumeGenerator::nodeForPosition(const Point3i& position)
+NodeObjectPtr StandartVolumeGenerator::nodeObjectForPosition(
+        const Point3i& position)
 {
     NodeObjectPtr object;
 

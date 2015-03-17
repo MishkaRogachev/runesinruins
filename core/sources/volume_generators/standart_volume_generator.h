@@ -17,7 +17,7 @@ namespace core
         virtual VolumePtr generate(const Point3i& position) override;
 
     protected:
-        virtual NodeObjectPtr nodeForPosition(const Point3i& position);
+        virtual NodeObjectPtr nodeObjectForPosition(const Point3i& position);
     };
 }
 #endif // STANDART_VOLUME_GENERATOR_H

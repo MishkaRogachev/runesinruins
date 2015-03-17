@@ -1,5 +1,7 @@
 #include "node.h"
 
+#include "node_object.h"
+
 using namespace core;
 
 class Node::NodePrivate
@@ -42,6 +44,7 @@ Node* Node::neighbour(Direction direction) const
 void Node::setObject(const NodeObjectPtr& object)
 {
     d->object = object;
+    if (object) object->setRootNode(this);
 }
 
 NodeObjectPtr Node::object() const
